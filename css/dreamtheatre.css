@@ -1,0 +1,130 @@
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-style: normal;
+}
+header {
+    font-family: 'Pretendard';
+    background-color: darkcyan;
+}
+.hwrap {
+    width: 100%;
+    background-color: darkcyan;
+}
+.hrow1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.hrow1 h2 img {
+    width: 25px;
+}
+.hrow1 .hamburger {
+    width: 25px;
+    height: 25px;
+    position: relative;
+}
+.hrow1 .hamburger span {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background-color: white;
+    left: 0;
+    border-radius: 6px;
+}
+.hrow1 .hamburger span:nth-child(1) {
+    top: 0;
+}
+.hrow1 .hamburger span:nth-child(2) {
+    top: calc(50% - 3px);
+}
+.hrow1 .hamburger span:nth-child(3) {
+    top: calc(100% - 6px);
+}
+.hrow2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 10px;
+    border-bottom: 1px solid #ccc;
+}
+.hrow2 .glass {
+    padding: 8px 20px;
+    border: 1px solid #ccc;
+}
+.hrow2 .util {
+    display: flex;
+    justify-content: space-between;
+}
+.hrow2 .util li {
+    margin: 0 5px;
+}
+.hrow2 .logoname {
+    display: none;
+}
+.hrow3 {
+    font-weight: 900;
+    text-align: center;
+    padding: 20px 0;
+}
+.hrow3 .gnb > li {
+    padding: 10px 0;
+}
+.hrow3 .inner {
+    font-weight: normal;
+}
+.hrow3 .inner > li {
+    padding-bottom: 10px;
+}
+.hrow3 .inner > li:first-child {
+    padding-top: 10px;
+}
+.hrow3 .inner > li:last-child {
+    padding-bottom: 0;
+}
+
+@media screen and (min-width: 786px){
+    .hwrap {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .hrow1 .hamburger {
+        display: none;
+    }
+    .hrow1 {
+        justify-content: center;
+    }
+    .hrow2 .logoname {
+        display: block;
+    }
+    .hrow3 {
+        padding: 0;
+    }
+    .hrow3 .gnb {
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+        margin: 0 auto;
+        position: relative;
+    }
+    .hrow3 .inner {
+        display: none;
+        justify-content: space-around;
+        align-items: center;
+        position: absolute;
+        top: 38px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        background-color: pink;
+    }
+    .hrow3 .inner > li {
+        padding: 10px 20px;
+    }
+    .hrow3 .inner > li:last-child {
+        padding-bottom: 10px;
+    }
+    .gnb > li:hover .inner {
+        display: flex;
+    }
+}
