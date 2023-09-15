@@ -71,6 +71,7 @@ header {
     padding: 10px 0;
 }
 .hrow3 .inner {
+    display: none;
     font-weight: normal;
 }
 .hrow3 .inner > li {
@@ -84,6 +85,9 @@ header {
 }
 
 @media screen and (min-width: 786px){
+    .navBg {
+        display: none;
+    }
     .hwrap {
         width: 90%;
         margin: 0 auto;
@@ -109,14 +113,17 @@ header {
     }
     .hrow3 .inner {
         display: none;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        position: absolute;
-        top: 38px;
+        position: fixed;
+        /* top: 38px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%); */
+        top: 155px;
+        left: 0;
         width: 100%;
-        background-color: pink;
+        background-color: darkcyan;
+        border-top: 1px solid #ccc;
     }
     .hrow3 .inner > li {
         padding: 10px 20px;
@@ -124,7 +131,15 @@ header {
     .hrow3 .inner > li:last-child {
         padding-bottom: 10px;
     }
-    .gnb > li:hover .inner {
-        display: flex;
+    .gnbTit.active {
+        color: red;
+        transition: .5s;
     }
+    .inner.active {
+        display: flex !important;
+    }
+    .innerMenu {
+        display: flex !important;
+    }
+
 }

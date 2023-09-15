@@ -6,9 +6,12 @@
     <title>드림씨어터</title>
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/dreamtheatre.css" rel="stylesheet">
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/dreamtheatre.js" defer></script>
 </head>
 <body>
     <header>
+        <div class="navBg"></div>
         <div class="hwrap">
             <div class="hrow1">
                 <h2>
@@ -34,7 +37,7 @@
             <div class="hrow3">
                 <ul class="gnb">
                     <li>
-                        <a href="#">드림씨어터</a>
+                        <a class="gnbTit" href="#">드림씨어터</a>
                         <ul class="inner">
                             <li><a href="#">공간안내</a></li>
                             <li><a href="#">좌석배치도</a></li>
@@ -44,20 +47,43 @@
                         </ul><!--inner-->
                     </li>
                     <li>
-                        <a href="#">공연/예매</a>
+                        <a class="gnbTit" href="#">공연/예매</a>
+                        <ul class="inner">
+                            <li><a href="#">공연안내</a></li>
+                            <li><a href="#">공연일정</a></li>
+                            <li><a href="#">예매안내</a></li>
+                        </ul><!--inner-->
                     </li>
                     <li>
-                        <a href="#">대관</a>
+                        <a class="gnbTit" href="#">대관</a>
+                        <ul class="inner">
+                            <li><a href="#">대관절차</a></li>
+                            <li><a href="#">대관시설</a></li>
+                            <li><a href="#">대관료</a></li>
+                        </ul><!--inner-->
                     </li>
                     <li>
-                        <a href="#">멤버십</a>
+                        <a class="gnbTit" href="#">멤버십</a>
+                        <ul class="inner">
+                            <li><a href="#">멤버십안내</a></li>
+                            <li><a href="#">회원이벤트</a></li>
+                        </ul><!--inner-->
                     </li>
                     <li>
-                        <a href="#">이용안내</a>
+                        <a class="gnbTit" href="#">이용안내</a>
+                        <ul class="inner">
+                            <li><a href="#">공지사항</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">장애인이용안내</a></li>
+                            <li><a href="#">제휴할인</a></li>
+                            <li><a href="#">CONTACT US</a></li>
+                        </ul><!--inner-->
                     </li>
                 </ul>
             </div><!--hrow3-->
         </div><!--hwrap-->
     </header>
+
+    
 </body>
 </html>
