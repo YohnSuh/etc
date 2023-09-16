@@ -133,13 +133,8 @@ header {
     }
     .gnbTit.active {
         color: red;
-        transition: .5s;
     }
     .inner.active {
-        display: flex !important;
+        display: flex;
     }
-    .innerMenu {
-        display: flex !important;
-    }
-
 }
