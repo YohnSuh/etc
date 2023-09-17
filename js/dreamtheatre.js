@@ -12,3 +12,15 @@ $(window).resize(function() {
         }
     });
 }).resize();
+
+//--------------------------------
+// 메인 슬라이더
+$('.mainSlider').slick({
+    'nextArrow' : '.mainNext'
+,   'prevArrow' : '.mainPrev'
+,   'dots' : true
+});
+$('.slick-slider button').click(function() {
+    $(this).toggleClass('active');
+    $(this).parent().siblings().find('button').removeClass('active');
+});
