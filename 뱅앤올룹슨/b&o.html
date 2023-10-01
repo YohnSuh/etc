@@ -19,13 +19,13 @@
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            width: 1110px;
+            width: 57%;
             padding: 268px 0;
         }
         .img {
             position: relative;
-            width: 475px;
-            height: 545px;
+            width: 43%;
+            aspect-ratio: 0.87 / 1;
         }
         .pic {
             width: 100%;
@@ -34,12 +34,14 @@
             overflow: hidden;
         }
         .item {
-            height: 545px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
-        .item1 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill');}
+        .item1 {background-image: url('');}
         .item2 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/6esXZtaZQ68kezijmo91zS/09608aea6838c08bbd3931d08211a6d5/Beoplay-HX-Goldtone-Lifestyle.png?q=90&fm=webp&w=720&h=720&fit=fill');}
         .item3 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/16CCZvsZkHLQLWPxEfGtEp/a77f3d38c18ed1e00f8abbeb27b162cd/WoodBlackWall-MDFS-03g.tif.jpg?q=90&fm=webp&w=828&h=828&fit=fill');}
         .item4 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/2PZAKSSeu0C5w7mJ8QzGcZ/65765fd63afb10be5485252651d3b68c/Stage_Oak_SBI_1.jpg?q=90&fm=webp&w=720&h=1280&fit=fill');}
@@ -99,13 +101,50 @@
         .about .item_txt {
             border: 1px solid;
         }
+        @media screen and (max-width: 1100px) {
+            .wrap {
+                position: relative;
+                width: calc(100% - 60px);
+                margin: 0 auto;
+                display: block;
+                padding: 0;
+            }
+            .img {
+                width: 100%;
+                height: 390px;
+            }
+            .pic {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                overflow: hidden;
+            }
+            .item {
+                height: 390px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            .content {
+                position: absolute;
+                width: 100%;
+                bottom: 50px;
+                left: 30px;
+                padding-top: 0;
+                z-index: 999;
+            }
+            .content p {display: none;}
+            .about {display: none;}
+        }
     </style>
 </head>
 <body>
     <div class="wrap">
         <div class="img">
             <div class="pic">
-                <div class="item item1"></div>
+                <div class="item item1">
+                    <img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill">
+                </div>
                 <div class="item item2"></div>
                 <div class="item item3"></div>
                 <div class="item item4"></div>
