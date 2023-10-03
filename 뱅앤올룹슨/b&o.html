@@ -145,13 +145,35 @@
             .content p {display: none;}
             .about {display: none;}
         }
+
+        .testWrap {
+            margin: 0 auto;
+            width: 100%;
+        }
+        .testWrap .t_item {
+            display: flex;
+            width: 100%;
+        }
+        .testWrap .t_img {
+            width: 31.25%;
+            height: 0;
+            padding-bottom: 41.66%;
+            overflow: hidden;
+            background: url('https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill') no-repeat right center / cover;
+        }
+        .testWrap .t_img img {
+            display: none;
+        }
+        .testWrap .t_txt {
+            width: 30%;
+        }
     </style>
 </head>
 <body>
     <div class="wrap">
         <div class="img">
             <div class="pic">
-                <div class="item item1"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
+                <div class="item item1"><img src=""></div>
                 <div class="item item2"></div>
                 <div class="item item3"></div>
                 <div class="item item4"></div>
@@ -190,6 +212,38 @@
         <div class="item_img"></div>
         <div class="item_txt"></div>
     </div><!--about-->
+
+    <div class="testWrap">
+        <div class="t_item">
+            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
+            <div class="t_txt">
+                <h2>스피커</h2>
+                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
+            </div>
+        </div><!--t_item-->
+        <div class="t_item">
+            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
+            <div class="t_txt">
+                <h2>스피커</h2>
+                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
+            </div>
+        </div><!--t_item-->
+        <div class="t_item">
+            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
+            <div class="t_txt">
+                <h2>스피커</h2>
+                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
+            </div>
+        </div><!--t_item-->
+        <div class="t_item">
+            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
+            <div class="t_txt">
+                <h2>스피커</h2>
+                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
+            </div>
+        </div><!--t_item-->
+    </div><!--testWrap-->
+
     <script src="jquery-3.7.0.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
@@ -204,6 +258,7 @@
         ,   'prevArrow' : false
         ,   'fade' : true
         });
+        $('.testWrap').slick();
     </script>
 </body>
 </html>
