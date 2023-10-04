@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뱅앤올룹슨</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <style>
         @font-face {
             font-family: 'Pretendard-Regular';
@@ -15,250 +14,65 @@
         * {
             font-family: 'Pretendard-Regular';
         }
-        .wrap {
-            position: relative;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            width: 57.81%;
-            height: 45%;
-            padding: 268px 0;
-            background-color: antiquewhite;
-        }
-        .img {
-            position: relative;
-            width: 42.79%;
-            padding-bottom: 49.09%;
-            border: 1px solid ;
-        }
-        .pic {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            /* padding-top: 100%; */
-            border-radius: 400px 400px 0 0;
-            overflow: hidden;
-            border: 3px solid;
-        }
-        .item {
-            /* position: absolute; */
-            width: 100%;
-            padding-bottom: 100%;
-            background-position: center;
-            background-size: cover;
-            
-        }
-        .item1 {background-image: url('');}
-        .item2 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/6esXZtaZQ68kezijmo91zS/09608aea6838c08bbd3931d08211a6d5/Beoplay-HX-Goldtone-Lifestyle.png?q=90&fm=webp&w=720&h=720&fit=fill');}
-        .item3 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/16CCZvsZkHLQLWPxEfGtEp/a77f3d38c18ed1e00f8abbeb27b162cd/WoodBlackWall-MDFS-03g.tif.jpg?q=90&fm=webp&w=828&h=828&fit=fill');}
-        .item4 {background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/2PZAKSSeu0C5w7mJ8QzGcZ/65765fd63afb10be5485252651d3b68c/Stage_Oak_SBI_1.jpg?q=90&fm=webp&w=720&h=1280&fit=fill');}
         
-        .btn {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-        }
-        .btn button {
-            background-color: white;
-            border: 0;
-            width: 30px;
-            height: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            opacity: .4;
-        }
-        .content {
-            width: 51%;
-            padding-top: 50px;
-            /* padding-left: 95px; */
-        }
-        .content h2 {
-            font-size: 48px;
-            font-weight: bold;
-        }
-        .content p {
-            font-size: 20px;
-        }
-        .content a {
-            display: block;
-            background-color: gold;
-            width: 160px;
-            height: 45px;
-            text-align: center;
-            line-height: 45px;
-            border-radius: 45px;
-            text-decoration: none;
-        }
-        .about {
-            width: 1110px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-        .about div {
-            width: 555px;
-            height: 555px;
-        }
-        .about .item_img {
-            background-image: url('https://images.ctfassets.net/8cd2csgvqd3m/3BQRh5yu8C24EkXgjB0U5O/f807fc865738b4c5387637b26e19bf9c/BS_73_side.jpg?q=90&fm=webp&w=1440&h=1440&fit=fill');
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .about .item_txt {
-            border: 1px solid;
-        }
-        @media all and (max-width: 1110px) {
-            .wrap {
-                position: relative;
-                width: calc(100% - 60px);
-                margin: 0 auto;
-                display: block;
-                padding: 0;
-            }
-            .img {
-                width: 100%;
-                height: 390px;
-            }
-            .pic {
-                width: 100%;
-                height: 100%;
-                border-radius: 0;
-                overflow: hidden;
-            }
-            .item {
-                height: 390px;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-            }
-            .content {
-                position: absolute;
-                width: 100%;
-                bottom: 50px;
-                left: 30px;
-                padding-top: 0;
-                z-index: 999;
-            }
-            .content p {display: none;}
-            .about {display: none;}
-        }
-
-        .testWrap {
-            margin: 0 auto;
-            width: 100%;
-        }
-        .testWrap .t_item {
-            display: flex;
-            width: 100%;
-        }
-        .testWrap .t_img {
-            width: 31.25%;
-            height: 0;
-            padding-bottom: 41.66%;
+        .best {
+            background-color: blueviolet;
+            padding-left: 360px;
+            /* width: 100%; */
             overflow: hidden;
-            background: url('https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill') no-repeat right center / cover;
         }
-        .testWrap .t_img img {
-            display: none;
+        .best .goods {
         }
-        .testWrap .t_txt {
-            width: 30%;
+        .best .col {
+            width: 384px;
+            height: 384px;
+            background-color: indianred;
+            border: 1px solid white;
         }
+        
     </style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 </head>
 <body>
-    <div class="wrap">
-        <div class="img">
-            <div class="pic">
-                <div class="item item1"><img src=""></div>
-                <div class="item item2"></div>
-                <div class="item item3"></div>
-                <div class="item item4"></div>
-            </div><!--pic-->
-            <div class="btn">
-                <button class="myPrev"><span><</span></button>
-                <button class="myNext"><span>></span></button>
-            </div><!--btn-->
-        </div><!--img-->
-        <div class="content">
-            <div class="txt1">
-                <h2>스피커</h2>
-                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요. </p>
-                <a href="#">View More</a>
-            </div><!--txt-->
-            <div class="txt2">
-                <h2>헤드폰 및 이어폰</h2>
-                <p>발끝을 들썩이게 하며 나를 따라오는 음악. 무선 오버이어 블루투스 헤드폰을 사용해 운동 중, 업무 중, 다음 여행지로 향하는 비행 중, 어디든 상관없이 사운드에 몸을 맡겨보세요.</p>
-                <a href="#">View More</a>
-            </div><!--txt-->
-            <div class="txt3">
-                <h2>TV</h2>
-                <p>뛰어난 사운드와 동급 최고의 OLED 화면이 결합된 일체형 TV를 경험해보세요. 
-                    좋아하는 영화와 TV 시리즈에 몰입할 수 있는 TV와 사운드바로 
-                    홈 엔터테인먼트를 완성하세요. </p>
-                <a href="#">View More</a>
-            </div><!--txt-->
-            <div class="txt4">
-                <h2>사운드바</h2>
-                <p>Dolby Atmos 사운드바로 사운드트랙, 영화, TV 프로그램의 음향의 깊이를 한 차원 끌어올려 보세요. 다양한 TV와 함께 작동하도록 설계된 뱅앤올룹슨 무선 사운드바로 집에서 매우 몰입도 높은 사운드를 즐길 수 있습니다.</p>
-                <a href="#">View More</a>
-            </div><!--txt-->
-        </div><!--content-->
-    </div><!--wrap-->
-    <div class="about">
-        <div class="item_img"></div>
-        <div class="item_txt"></div>
-    </div><!--about-->
+    <div class="best">
+        <div class="info">
+            <h2>베스트 컬렉션</h2>
+            <p>최고의 순간을 최고의 아이템으로 즐겨보세요.<br>마법같은 순간을 선사합니다.</p>
+        </div>
+        <div class="goods">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+    </div><!--best-->
 
-    <div class="testWrap">
-        <div class="t_item">
-            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
-            <div class="t_txt">
-                <h2>스피커</h2>
-                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
-            </div>
-        </div><!--t_item-->
-        <div class="t_item">
-            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
-            <div class="t_txt">
-                <h2>스피커</h2>
-                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
-            </div>
-        </div><!--t_item-->
-        <div class="t_item">
-            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
-            <div class="t_txt">
-                <h2>스피커</h2>
-                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
-            </div>
-        </div><!--t_item-->
-        <div class="t_item">
-            <div class="t_img"><img src="https://images.ctfassets.net/8cd2csgvqd3m/3z61ZdM0BuTIuAWoxO5mq1/2be1c050aae41b9b01f2bca8fd8578b5/A9-Solo_CGI_Lifestyle_1000x1000.jpg?q=90&fm=webp&w=828&h=828&fit=fill"></div>
-            <div class="t_txt">
-                <h2>스피커</h2>
-                <p>내가 원하는 곳 어디에서나 영혼을 울리는 사운드. 모험을 함께할 포터블 스피커를 고르고 엔터테인먼트 셋업으로 집을 가득 채우거나 혹은 라이프스타일에 어울리는 플렉서블 블루투스 스피커를 찾아보세요.</p>
-            </div>
-        </div><!--t_item-->
-    </div><!--testWrap-->
 
     <script src="jquery-3.7.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="../js/plug/slick.min.js"></script>
     <script>
-        $('.pic').slick({
-            'asNavFor' : '.content'
-        ,   'nextArrow' : '.myNext'
-        ,   'prevArrow' : '.myPrev'
-        });
-        $('.content').slick({
-            'asNavFor'  : '.pic'
+        // $('.pic').slick({
+        //     'asNavFor' : '.content'
+        // ,   'nextArrow' : '.myNext'
+        // ,   'prevArrow' : '.myPrev'
+        // });
+        // $('.content').slick({
+        //     'asNavFor'  : '.pic'
+        // ,   'nextArrow' : false
+        // ,   'prevArrow' : false
+        // ,   'fade' : true
+        // });
+        $('.goods').slick({
+            'slidesToShow' : 4
         ,   'nextArrow' : false
-        ,   'prevArrow' : false
-        ,   'fade' : true
+        ,   'prevArrow' :false
         });
-        $('.testWrap').slick();
     </script>
 </body>
 </html>
