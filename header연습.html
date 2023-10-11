@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>헤더 연습</title>
+    <link href="css/reset.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/7c72cc71ff.js" crossorigin="anonymous"></script>
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ff8fa7;
+        }
+        header .headerTopBar {
+            background-color: #224289; /*#ff7c98*/
+            box-sizing: border-box;
+        }
+        header .headerTopBar > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 89.58%;
+            height: 30px;
+            margin: 0 auto;
+        }
+        .headerTopBar ul {
+            display: flex;
+            color: white;
+        }
+        .headerTopBar .sns li {
+            margin-right: 20px;
+        }
+        .headerTopBar .util li {
+            margin-left: 20px;
+        }
+        .headerLogoWrap {
+            display: flex;
+            align-items: center;
+            height: 120px;
+        }
+        .headerLogoWrap > div {
+            width: 89.58%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .headerLogoWrap img {
+            border-radius: 50%;
+            border: 5px solid #224289;
+        }
+        .headerLogoWrap div > a {display: none;}
+        nav {
+            height: 40px;
+            background-color: white;
+            border-bottom: 1px solid #e2d9d6;
+        }
+        nav .gnbWrap {
+            display: flex;
+            justify-content: space-between;
+            width: 89.58%;
+            line-height: 40px;
+            margin: 0 auto;
+        }
+        nav ul {
+            width: 100%;
+            text-align: center;
+        }
+
+        nav h2 {
+            font-size: 16px;
+        }
+        nav ul li {
+            display: none;
+            font-size: 14px;
+            background-color: white;
+        }
+        nav ul li:nth-child(2) {
+            padding-top: 10px;
+            border-top: 3px solid #e2d9d6;
+        }
+        nav ul li:last-child {padding-bottom: 10px;}
+        
+        @media all and (max-width: 678px) {
+            .headerLogoWrap {height: 50px;}
+            .headerLogoWrap > div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .headerLogoWrap h2 img {
+                width: 30px;
+                border: 2px solid #224289;
+            }
+            .headerLogoWrap > div > a {
+                display: block;
+                color: white;
+            }
+            nav {display: none;}
+            .menu-on {
+                display: block;
+                height: auto;
+            }
+            .menu-on .gnbWrap {display: block;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="headerTopBar">
+            <div>
+                <ul class="sns">
+                    <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-blogger-b"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                </ul><!--sns-->
+                <ul class="util">
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">join</a></li>
+                </ul><!--util-->
+            </div>
+        </div><!--headerTopBar-->
+        <div class="headerLogoWrap">
+            <div>
+                <h2>
+                    <a href="#"><img src="images/baskin_logo.png" width="100"></a>
+                </h2>
+                <a class="bar" href="#"><i class="fa-solid fa-bars"></i></a>
+            </div>
+        </div><!--headerLogoWrap-->
+        <nav class="gnb">
+            <div class="gnbWrap">
+                <ul class="menu">
+                    <h2>menu</h2>
+                    <li><a href="#">아이스크림</a></li>
+                    <li><a href="#">아이스크림 케이크</a></li>
+                    <li><a href="#">음료</a></li>
+                    <li><a href="#">커피</a></li>
+                    <li><a href="#">디저트</a></li>
+                </ul><!--menu-->
+                <ul class="about">
+                    <h2>about</h2>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">보도자료</a></li>
+                    <li><a href="#">채용정보</a></li>
+                    <li><a href="#">점포 개설 문의</a></li>
+                    <li><a href="#">CONTACT US</a></li>
+                </ul><!--about-->
+                <ul class="event">
+                    <h2>event</h2>
+                    <li><a href="#">진행 중 이벤트</a></li>
+                    <li><a href="#">당첨자 발표</a></li>
+                </ul><!--event-->
+                <ul class="store">
+                    <h2>store</h2>
+                    <li><a href="#">매장찾기</a></li>
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">단체주문</a></li>
+                </ul><!--store-->
+            </div>
+        </nav>
+    </header>
+
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script>
+        $('.gnbWrap h2').click(function() {
+            $(this).siblings().stop().slideToggle();
+        });
+        $('.bar').click(function() {
+            $('nav').toggleClass('menu-on');
+        });
+    </script>
+</body>
+</html>
