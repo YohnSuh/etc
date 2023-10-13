@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vh 연습하기</title>
+    <style>
+        * {margin: 0;padding: 0; list-style: none; text-decoration: none;}
+        header {
+            text-align: center;
+            background-color: rgba(0,0,0,.2);
+        }
+        section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .wrapper {
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .wrapper .item {
+            position: relative;
+            width: 20%;
+            transition: .5s;
+        }
+        .wrapper .item::after {
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+        }
+        .wrapper .image {
+            position: relative;
+            width: 100%;
+        }
+        .wrapper .image img {
+            position: absolute;
+            width: 100%;
+            z-index: 999;
+            transform: scale(.8);
+        }
+        .wrapper .text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            background-color: lightpink;
+            backdrop-filter: blur(10px);
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            /* padding: 10%; */
+            transition: transform .5s;
+        }
+        .wrapper .top1 {background-color: #DEB684;}
+        .wrapper .top2 {background-color: #DFE7DD;}
+        .wrapper .top3 {background-color: #D0A887;}
+        .wrapper .top4 {background-color: #E6DEC1;}
+        .wrapper .top5 {background-color: #D8EDEE;}
+        .wrapper .top6 {background-color: #E9DDD3;}
+        .wrapper .top7 {background-color: #FED582;}
+        .wrapper .top8 {background-color: #B5D4E1;}
+        .wrapper .top9 {background-color: #F7D9E0;}
+        .wrapper .top10 {background-color: #DCC8DE;}
+
+        .wrapper .text * {opacity: 0;transition: .5s .25s;}
+        .wrapper .text h2 {font-size: 18px;}
+        /* hover */
+        .wrapper .item:hover {
+            transform: translateY(-30%);
+            z-index: 9999;
+        }
+        .wrapper .item:hover .image {
+            animation: ice infinite 1s linear alternate backwards;
+            z-index: 9998;
+        }
+        .wrapper .item:hover .image img {transform: scale(1);}
+        .wrapper .item:hover .text {
+            transform: translateX(-50%) scale(1);
+        }
+        .wrapper .item:hover .text * {opacity: 1;}
+        @keyframes ice {
+            100% {transform: translateY(10px);}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>헤더입니다.</h2>
+    </header>
+    <section>
+        <div class="wrapper">
+            <!--item1-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top1.png">
+                </div><!--image-->
+                <div class="text top1">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item2-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top2.png">
+                </div><!--image-->
+                <div class="text top2">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item3-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top3.png">
+                </div><!--image-->
+                <div class="text top3">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item4-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top4.png">
+                </div><!--image-->
+                <div class="text top4">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item5-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top5.png">
+                </div><!--image-->
+                <div class="text top5">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item6-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top6.png">
+                </div><!--image-->
+                <div class="text top6">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item7-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top7.png">
+                </div><!--image-->
+                <div class="text top7">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item8-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top8.png">
+                </div><!--image-->
+                <div class="text top8">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item9-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top9.png">
+                </div><!--image-->
+                <div class="text top9">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+            <!--item10-->
+            <div class="item">
+                <div class="image">
+                    <img src="images/top10.png">
+                </div><!--image-->
+                <div class="text top10">
+                    <div>
+                        <h2>레인보우 샤베트</h2>
+                        <p>맛있는 레인보우 샤베트</p>
+                        <a href="#">구매하기</a>
+                    </div>
+                </div>
+            </div><!--item-->
+        </div><!--wrapper-->
+    </section>
+</body>
+</html>
