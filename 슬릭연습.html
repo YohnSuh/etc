@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    ​<style>
+        .swiper {
+            display: flex;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .swiper-wrapper {
+            /* position: relative; */
+        }
+        .item img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 200px;
+        }
+        .item .box {
+            
+            margin-top: 100px;
+            text-align: center;
+            background-color: pink;
+            padding-top: 100px;
+            padding-bottom: 150px;
+            border-radius: 30px;
+        }
+        .swiper-slide-active .item {
+            /* position: absolute; */
+            transition: transform .5s;
+        }
+        .swiper-slide-prev,
+        .swiper-slide-next {
+            height: unset;
+            background-color: aliceblue;
+        } 
+        .swiper-slide-prev .item,
+        .swiper-slide-next .item {
+            transform: translateX(-50%) scale(.85);
+            filter: grayscale(.6);
+            position: absolute;
+            width: 100%;
+            bottom: unset;
+            top: unset;
+            top: 0;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slider main container -->
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>1. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>2. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>3. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>4. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>5. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+            <div class="swiper-slide">
+                <div class="item">
+                    <img src="images/레샤.png">
+                    <div class="box">
+                        <span>rainbowsharvert</span>
+                        <h2>6. 레인보우 샤베트</h2>
+                        <p>새콤달콤한 레인보우 샤베트를 즐겨보세요</p>
+                    </div>
+                </div><!--item-->
+            </div>
+        </div>
+        <!-- 스크롤 필요시 추가 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <script>
+        new Swiper('.swiper', {
+            slidesPerView: 3
+        ,   spaceBetween: 30
+        ,   centeredSlides: true
+        ,   loop: true
+        ,   loopedSlides: 2
+        })
+    </script>
+</body>
+</html>
