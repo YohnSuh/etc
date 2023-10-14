@@ -10,14 +10,15 @@
         * {margin: 0; padding: 0; text-decoration: none; color: inherit}
         .swiper {
             position: relative;
-            width: 100%;
             height: 100vh;
         }
-        .swiper-slide {
+        .swiper-slide {position: relative;}
+        .swiper-slide > div {
             position: absolute;
             bottom: 0;
+            left: 0;
+            width: 100%;
             height: 80%;
-            border: 1px solid;
         }
         .ice-img-wrap {
             position: absolute;
@@ -38,10 +39,12 @@
             margin-top: 35%;
             padding-top: 30%;
             box-sizing: border-box;
-            background-color: lightpink;
             text-align: center;
             border-radius: 50px 50px 0 0;
         }
+        .slide1 .ice-txt-wrap {background-color: lightblue;}
+        .slide2 .ice-txt-wrap {background-color: lightgoldenrodyellow;}
+        .slide3 .ice-txt-wrap {background-color: lightpink;}
     </style>
 </head>
 <body>
@@ -50,39 +53,90 @@
         <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
             <!-- Slides -->
-            <div class="swiper-slide slide1">
-                <div class="ice-img-wrap">
-                    <img src="images/top1.png">
-                </div><!--ice-img-wrap-->
-                <div class="ice-txt-wrap">
-                    <span>RAINBOW SHERBERT</span>
-                    <h2>레인보우 샤베트</h2>
-                    <p>상큼한 파인애플, 오렌지, 라즈베리 샤베트</p>
-                    <a href="#"><p>#레인보우샤베트</p></a>
-                    <a href="#"><p>#상큼달달</p></a>
-                    <a href="#"><p>#과일샤베트</p></a>
-                    <a href="#"><p>#인기메뉴</p></a>
-                </div><!--ice-txt-wrap-->
-            </div><!--slide1-->
             <div class="swiper-slide">
-
-            </div><!--slide2-->
-            <div class="swiper-slide">
-
-            </div><!--slide3-->
+                <div class="slide1">
+                    <div class="ice-img-wrap">
+                        <img src="images/top1.png">
+                    </div><!--ice-img-wrap-->
+                    <div class="ice-txt-wrap">
+                        <span>RAINBOW SHERBERT</span>
+                        <h2>레인보우 샤베트</h2>
+                        <p>상큼한 파인애플, 오렌지, 라즈베리 샤베트</p>
+                        <a href="#"><p>#레인보우샤베트</p></a>
+                        <a href="#"><p>#상큼달달</p></a>
+                        <a href="#"><p>#과일샤베트</p></a>
+                        <a href="#"><p>#인기메뉴</p></a>
+                    </div><!--ice-txt-wrap-->
+                </div><!--slide1-->
+            </div><!--slide-wrapper-->
+            <div class="swiper-slide slide2">
+                <div class="slide2">
+                    <div class="ice-img-wrap">
+                        <img src="images/top1.png">
+                    </div><!--ice-img-wrap-->
+                    <div class="ice-txt-wrap">
+                        <span>RAINBOW SHERBERT</span>
+                        <h2>레인보우 샤베트</h2>
+                        <p>상큼한 파인애플, 오렌지, 라즈베리 샤베트</p>
+                        <a href="#"><p>#레인보우샤베트</p></a>
+                        <a href="#"><p>#상큼달달</p></a>
+                        <a href="#"><p>#과일샤베트</p></a>
+                        <a href="#"><p>#인기메뉴</p></a>
+                    </div><!--ice-txt-wrap-->
+                </div><!--slide2-->
+            </div><!--slide-wrapper-->
+            <div class="swiper-slide slide3">
+                <div class="slide3">
+                    <div class="ice-img-wrap">
+                        <img src="images/top1.png">
+                    </div><!--ice-img-wrap-->
+                    <div class="ice-txt-wrap">
+                        <span>RAINBOW SHERBERT</span>
+                        <h2>레인보우 샤베트</h2>
+                        <p>상큼한 파인애플, 오렌지, 라즈베리 샤베트</p>
+                        <a href="#"><p>#레인보우샤베트</p></a>
+                        <a href="#"><p>#상큼달달</p></a>
+                        <a href="#"><p>#과일샤베트</p></a>
+                        <a href="#"><p>#인기메뉴</p></a>
+                    </div><!--ice-txt-wrap-->
+                </div><!--slide3-->
+            </div><!--slide-wrapper-->
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
     </div>
 
     <!--swiper-->
+    <script src="js/jquery-3.7.0.min.js"></script>
     <script>
-        const swiper = new Swiper('.swiper', {
-            loop : true
-        ,   pagination : {
-                el : '.swiper-pagination'
+        // const secSwiper = new Swiper('.swiper', {
+        //     loop : true
+        // ,   pagination : {
+        //         el : '.swiper-pagination'
+        //     }
+        // });
+        var ww = $(window).width();
+        var mySwiper = undefined;
+
+        function initSwiper() {
+
+        if (ww < 768 && mySwiper == undefined) {
+            mySwiper = new Swiper(".swiper", {
+                loop: true,
+                pagination : {el : '.swiper-pagination'}
+            });
+        } else if (ww >= 768 && mySwiper != undefined) {
+                mySwiper.destroy();
+                mySwiper = undefined;
             }
-        });
+        }
+
+        initSwiper();
+
+        $(window).on('resize', function () {
+            ww = $(window).width();
+            initSwiper();
+        }); 
     </script>
 </body>
 </html>
