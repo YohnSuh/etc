@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: self-start;
+            flex-wrap: wrap;
+            width: 1300px;
+            margin: 0 auto
+        }
+        input {display: none;}
+        label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            height: 400px;
+            border: 1px solid;
+            border-radius: 20px;
+            transition: .3s;
+            transform-origin: bottom;
+            background-color: aliceblue;
+        }
+
+        #card1:checked ~ .container label[for="card1"],
+        #card2:checked ~ .container label[for="card2"],
+        #card3:checked ~ .container label[for="card3"],
+        #card4:checked ~ .container label[for="card4"] {transform: translate(20px, 10px) rotate(-10deg);}
+
+        /* on checked */
+        #card1-1:checked ~ .container label[for="card1-1"],
+        #card2-1:checked ~ .container label[for="card2-1"],
+        #card3-1:checked ~ .container label[for="card3-1"],
+        #card4-1:checked ~ .container label[for="card4-1"],
+        #card1:checked ~ #card1-1:checked ~ .container label[for="card1-1"],
+        #card2:checked ~ #card2-1:checked ~ .container label[for="card2-1"],
+        #card3:checked ~ #card3-1:checked ~ .container label[for="card3-1"],
+        #card4:checked ~ #card4-1:checked ~ .container label[for="card4-1"] {transform: translate(-20px, -10px) rotate(10deg) rotateY(180deg); background-color: antiquewhite;}
+
+        .content > div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border: 1px solid;
+            background-color: antiquewhite;
+            transition: width .2s, opacity .3s;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        #card1:checked ~ #card1-1:checked ~ .content .card1,
+        #card2:checked ~ #card2-1:checked ~ .content .card2,
+        #card3:checked ~ #card3-1:checked ~ .content .card3,
+        #card4:checked ~ #card4-1:checked ~ .content .card4 {
+            width: 80%;
+            height: 60%;
+            opacity: 1;
+            transition-delay: .3s;
+        }
+    </style>
+</head>
+<body>
+    <input type="radio" name="card" id="card1" checked>
+    <input type="radio" name="card" id="card2">
+    <input type="radio" name="card" id="card3">
+    <input type="radio" name="card" id="card4">
+    <input type="radio" name="on" id="card1-1">
+    <input type="radio" name="on" id="card2-1">
+    <input type="radio" name="on" id="card3-1">
+    <input type="radio" name="on" id="card4-1">
+    <input type="radio" name="on" id="off">
+    <div class="container">
+        <label for="card1"><h2>about</h2></label>
+        <label for="card2"><h2>introduce</h2></label>
+        <label for="card3"><h2>skill</h2></label>
+        <label for="card4"><h2>portfolio</h2></label>
+        <label for="card1-1">
+            <div class="inner"></div>
+        </label>
+        <label for="card2-1"></label>
+        <label for="card3-1"></label>
+        <label for="card4-1"></label>
+    </div>
+    <div class="content">
+        <div class="card1">내용1</div>
+        <div class="card2">내용2</div>
+        <div class="card3">내용3</div>
+        <div class="card4">내용4</div>
+    </div>
+</body>
+</html>
