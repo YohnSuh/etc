@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경 주 여 행</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/7c72cc71ff.js" crossorigin="anonymous"></script>
+    <style>
+        @font-face {
+            font-family: 'EASTARJET-Medium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/EASTARJET-Medium.woff2') format('woff2');
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-style: normal;
+        }
+        * {margin: 0;padding: 0;list-style: none; text-decoration: none; color: inherit; box-sizing: border-box;}
+        /* 배너 슬라이드 */
+        .banner .bannerWrap {width: 90%; margin: 0 auto;}
+        .banner .banner-slide {border-radius: 15px;}
+        .banner .banner-slide > div > div {position: relative;width: 100%;height: 300px;background-position: center;background-repeat: no-repeat;background-size: cover;}
+        .banner .spot1 {background-image: url('../드림씨어터/images/banner1.jpg');}
+        .banner .spot2 {background-image: url('../드림씨어터/images/banner2.jpg');}
+        .banner .spot3 {background-image: url('../드림씨어터/images/banner3.jpg');}
+        .banner .txtWrap {position: absolute;left: 0; bottom: 0;width:100%; color: white; padding-left:30px; padding-bottom: 30px;background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.7));}
+        .banner .txtWrap h2 {font-size: 32px;font-family: 'EASTARJET-Medium';letter-spacing: 2px;}
+        .banner .txtWrap p {font-size: 18px;font-family: 'Pretendard-Regular';padding: 3px 0;}
+        .banner .swiper-pagination-bullet {background-color: white;}
+
+        /* 여행 일정 */
+        .plan .planWrap {width: 90%;margin: 0 auto;}
+        .plan .plan-slide {display: flex;flex-wrap: nowrap;width: 100%; height:350px;overflow-x: auto;}
+        .plan .box {flex:0 0 auto;width: 300px;height: 300px;border: 1px solid;}
+    </style>
+</head>
+<body>
+    <section class="banner">
+        <div class="bannerWrap">
+            <div class="swiper banner-slide">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide spot1">
+                        <div class="txtWrap">
+                            <h2>대릉원</h2>
+                            <p><i class="fa-solid fa-location-dot"></i> 경북 경주시 황남동 31-1</p>
+                            <p><i class="fa-solid fa-clock"></i> 관람시간: 09:00 ~ 22:00</p>
+                        </div><!--txtWrap-->
+                    </div><!--spot1-->
+                    <div class="swiper-slide spot2">
+                        <div class="txtWrap">
+                            <h2>첨성대</h2>
+                            <p><i class="fa-solid fa-location-dot"></i> 경북 경주시 황남동 31-1</p>
+                            <p><i class="fa-solid fa-clock"></i> 관람시간: 09:00 ~ 22:00</p>
+                        </div><!--txtWrap-->
+                    </div><!--spot2-->
+                    <div class="swiper-slide spot3">
+                        <div class="txtWrap">
+                            <h2>동궁과 월지</h2>
+                            <p><i class="fa-solid fa-location-dot"></i> 경북 경주시 인왕동 839-1</p>
+                            <p><i class="fa-solid fa-clock"></i> 관람시간: 09:00 ~ 22:00</p>
+                            <p><i class="fa-solid fa-ticket"></i> 입장료: 3000원</p>
+                        </div><!--txtWrap-->
+                    </div><!--spot3-->
+                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+              </div>
+        </div><!--bannerWrap-->
+    </section><!--banner-->
+
+    <section class="plan">
+        <div class="planWrap">
+            <h1>일정</h1>
+            <div class="plan-slide">
+                <div class="box">
+                    <input type="checkbox" id="do1">
+                    <label for="do1" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do2">
+                    <label for="do2" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do3">
+                    <label for="do3" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do4">
+                    <label for="do4" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do5">
+                    <label for="do5" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do6">
+                    <label for="do6" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do7">
+                    <label for="do7" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do8">
+                    <label for="do8" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do9">
+                    <label for="do9" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do10">
+                    <label for="do10" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+                <div class="box">
+                    <input type="checkbox" id="do11">
+                    <label for="do11" class="do-it">
+                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
+                    </label>
+                    <p>* 버스 시간</p>
+                </div><!--box-->
+
+            </div><!--plan-slide-->
+        </div><!--planWrap-->
+    </section><!--plan-->
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script>
+        const bannerSlide = new Swiper('.banner-slide', {
+            loop : true,
+            autoplay : {delay: 3000},
+            pagination : {el: '.swiper-pagination', clickable: true},
+        });
+
+        // const planCheck = document.querySelector('#do1');
+        // const text = document.querySelector('.do-it');
+        // planCheck.addEventListener('change', (event) =>{ 
+        //                 if (event.currentTarget.checked)
+        //                 {
+        //                     text.style.textDecoration='line-through';
+        //                 }
+        //                 else {
+        //                     text.style.textDecoration='none'
+        //                 }
+        //             });
+
+        const checkboxes = document.querySelectorAll('[id^="do"]');
+    checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', (event) => {
+            const label = document.querySelector(`[for="${event.currentTarget.id}"]`);
+            if (event.currentTarget.checked) {
+                label.style.textDecoration = 'line-through';
+            } else {
+                label.style.textDecoration = 'none';
+            }
+        });
+    });
+    </script>
+</body>
+</html>
