@@ -20,6 +20,7 @@
         }
         * {margin: 0;padding: 0;list-style: none; text-decoration: none; color: inherit; box-sizing: border-box;box-sizing: border-box;font-family: 'Pretendard-Regular';}
         /* 배너 슬라이드 */
+        .banner {padding-top: 30px;}
         .banner .bannerWrap {width: 90%; margin: 0 auto;}
         .banner .banner-slide {border-radius: 15px;}
         .banner .banner-slide > div > div {position: relative;width: 100%;height: 300px;background-position: center;background-repeat: no-repeat;background-size: cover;}
@@ -31,7 +32,7 @@
         .banner .txtWrap p {font-size: 18px;font-family: 'Pretendard-Regular';padding: 3px 0;}
         .banner .swiper-pagination-bullet {background-color: white;}
 
-        /* 제목 */
+        /* 제목*/
         h1 {font-size: 24px; margin-top: 30px;letter-spacing: 2px;font-family: 'EASTARJET-Medium';}
         /* 여행 일정 */
         .plan .planWrap {width: 90%;margin: 0 auto;}
@@ -43,12 +44,22 @@
         .plan .box > div > span {display: inline-block; padding: 8px 12px;border-radius: 5px;font-size: 12px;margin: 5px 0 0 0;cursor: pointer;color: white;font-weight: 900;}
         .plan .box > .taxi > span {background-color: cornflowerblue;}
         .plan .box > .bus > span {background-color: rgb(237, 100, 114);}
-        .plan .box > .food > span {background-color: khaki;color: rgb(142, 121, 95);}
+        .plan .box > .food > span {background-color: rgb(240, 231, 142);color: rgb(142, 121, 95);}
         .plan .box .back {display: none;position: fixed;top:0;left: 0;z-index:999;width: 100%;height: 100%;background-color: rgba(0,0,0,.4);backdrop-filter: blur(10px);}
         .plan .box .back > div {position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);background-color: white;cursor: default;width: 280px;padding: 20px 10px;border-radius: 10px;}
         .plan .box .back.on {display: block;cursor: pointer;}
         .plan .box .taxi .back > div > p {display:inline-block;background-color: rgba(100, 148, 237, .3);padding:3px 5px;font-weight: 900;margin-bottom: 15px;}
         .plan .box .bus .back > div > p {display: inline-block;background-color: rgba(237, 100, 114, .3);padding:3px 5px;font-weight: 900;margin-bottom: 15px;}
+        .plan .box .food .back > div > p {display: inline-block;background-color: rgba(240, 231, 142, .3);padding:3px 5px;font-weight: 900;margin-bottom: 15px;}
+
+        /* 먹거리 */
+        .food .foodWrap {width: 90%;margin: 0 auto;padding-bottom: 50px;}
+        .food .swiper {margin-top: 20px;}
+        .food .swiper-slide > div {width:100%;padding-top:100%;background-position: center;background-repeat: no-repeat;background-size: cover;border-radius: 20px;}
+        .food .swiper-slide .bread {background-image: url('../10bread.jpeg');}
+        .food .swiper-slide .corn {background-image: url('../corn.jpeg');}
+        .food .swiper-slide .candy {background-image: url('../candy.jpeg');}
+        .food .swiper-slide .chicken {background-image: url('../chicken.jpeg');}
     </style>
 </head>
 <body>
@@ -81,7 +92,6 @@
                         </div><!--txtWrap-->
                     </div><!--spot3-->
                 </div>
-                <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
               </div>
         </div><!--bannerWrap-->
@@ -148,7 +158,11 @@
                         <span>대체식당 확인</span>
                         <div class="back">
                             <div>
-
+                                <p>대체식당</p><br>
+                                (1) 우직 : 돈까스, 오믈렛<br>
+                                (2) 카츠라운지 : 돈까스<br>
+                                (3) 릭버거 : 수제버거<br>
+                                (4) 황리화덕가 : 화덕피자
                             </div>
                         </div>
                     </div>
@@ -218,7 +232,11 @@
                         <span>대체식당 확인</span>
                         <div class="back">
                             <div>
-
+                                <p>대체식당</p><br>
+                                (1) 우직 : 돈까스, 오믈렛<br>
+                                (2) 카츠라운지 : 돈까스<br>
+                                (3) 릭버거 : 수제버거<br>
+                                (4) 황리화덕가 : 화덕피자
                             </div>
                         </div>
                     </div>
@@ -243,15 +261,38 @@
                     <h2>[ 6:50 ~ 7:20 ]</h2>
                     <p>자 유 시 간</p>
                 </div><!--box-->
-
             </div><!--plan-slide-->
         </div><!--planWrap-->
     </section><!--plan-->
+
+    <section class="food">
+        <div class="foodWrap">
+            <h1>먹거리</h1>
+            <div class="swiper food-slide">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="bread"></div>
+                    </div><!--slide-->
+                    <div class="swiper-slide">
+                        <div class="corn"></div>
+                    </div><!--slide-->
+                    <div class="swiper-slide">
+                        <div class="candy"></div>
+                    </div><!--slide-->
+                    <div class="swiper-slide">
+                        <div class="chicken"></div>
+                    </div><!--slide-->
+                </div>
+            </div><!--swiper food-slide-->
+        </div><!--foodWrap-->
+    </section><!--food-->
+
     <script src="js/jquery-3.7.0.min.js"></script>
     <script>
         let banner = new Swiper('.banner-slide', {
             loop : true,
-            autoplay : 3000
+            autoplay : 3000,
+            pagination : {el:'.swiper-pagination', clickable: true}
         });
 
         $('.plan .box > div > span').click(function() {
@@ -259,6 +300,13 @@
         });
         $('.back').click(function() {
             $(this).removeClass('on');
+        });
+        
+        let food = new Swiper('.food-slide', {
+            loop:true,
+            slidesPerView : 2,
+            spaceBetween : 10,
+            autoplay : 3000
         });
     </script>
 </body>
