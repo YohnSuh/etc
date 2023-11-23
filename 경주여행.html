@@ -18,7 +18,7 @@
             src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
             font-style: normal;
         }
-        * {margin: 0;padding: 0;list-style: none; text-decoration: none; color: inherit; box-sizing: border-box;}
+        * {margin: 0;padding: 0;list-style: none; text-decoration: none; color: inherit; box-sizing: border-box;box-sizing: border-box;font-family: 'Pretendard-Regular';}
         /* 배너 슬라이드 */
         .banner .bannerWrap {width: 90%; margin: 0 auto;}
         .banner .banner-slide {border-radius: 15px;}
@@ -31,10 +31,24 @@
         .banner .txtWrap p {font-size: 18px;font-family: 'Pretendard-Regular';padding: 3px 0;}
         .banner .swiper-pagination-bullet {background-color: white;}
 
+        /* 제목 */
+        h1 {font-size: 24px; margin-top: 30px;letter-spacing: 2px;font-family: 'EASTARJET-Medium';}
         /* 여행 일정 */
         .plan .planWrap {width: 90%;margin: 0 auto;}
-        .plan .plan-slide {display: flex;flex-wrap: nowrap;width: 100%; height:350px;overflow-x: auto;}
-        .plan .box {flex:0 0 auto;width: 300px;height: 300px;border: 1px solid;}
+        .plan .plan-slide {display: flex;flex-wrap: nowrap;width: 100%; height:220px;overflow-x: auto;}
+        .plan .plan-slide::-webkit-scrollbar {display: none;}
+        .plan .box {flex:0 0 auto;width: 200px;height: 170px;text-align: center;font-size:14px;padding:20px;margin-right: 10px; margin-top: 20px;border: 1px solid rgba(0,0,0,.07);border-radius: 20px; box-shadow: 10px 10px 30px rgba(0,0,0,.07), -5px -5px 30px rgba(0,0,0,.025);background-color: white;}
+        .plan .box h2 {font-size: 16px;text-align: center;margin-bottom: 10px;}
+        .plan .box > span {color: cornflowerblue;font-size: 12px;}
+        .plan .box > div > span {display: inline-block; padding: 8px 12px;border-radius: 5px;font-size: 12px;margin: 5px 0 0 0;cursor: pointer;color: white;font-weight: 900;}
+        .plan .box > .taxi > span {background-color: cornflowerblue;}
+        .plan .box > .bus > span {background-color: rgb(237, 100, 114);}
+        .plan .box > .food > span {background-color: khaki;color: rgb(142, 121, 95);}
+        .plan .box .back {display: none;position: fixed;top:0;left: 0;z-index:999;width: 100%;height: 100%;background-color: rgba(0,0,0,.4);backdrop-filter: blur(10px);}
+        .plan .box .back > div {position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);background-color: white;cursor: default;width: 280px;padding: 20px 10px;border-radius: 10px;}
+        .plan .box .back.on {display: block;cursor: pointer;}
+        .plan .box .taxi .back > div > p {display:inline-block;background-color: rgba(100, 148, 237, .3);padding:3px 5px;font-weight: 900;margin-bottom: 15px;}
+        .plan .box .bus .back > div > p {display: inline-block;background-color: rgba(237, 100, 114, .3);padding:3px 5px;font-weight: 900;margin-bottom: 15px;}
     </style>
 </head>
 <body>
@@ -78,91 +92,156 @@
             <h1>일정</h1>
             <div class="plan-slide">
                 <div class="box">
-                    <input type="checkbox" id="do1">
-                    <label for="do1" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 9:50 ~ 10:20 ]</h2>
+                    <p>경주 버스터미널에서 대릉원 가기</p>
+                    <div class="bus">
+                        <span>버스정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>경주 버스터미널에서 대릉원 가기</p><br>
+                                60, 61, 277, 710, 711<br>
+                                고속버스|시외버스터미널 정류장에서 승차<br>
+                                천마총후문|황리단길 정류장에서 하차<br>
+                                * 승차 정류장번호: 01045
+                            </div>
+                        </div>
+                    </div>
+                </div><!--box-->
+
+                <div class="box" style="background-color: cornsilk;">
+                    <h2>[ 10:20 ~ 11:40 ]</h2>
+                    <p>대릉원, 첨성대 구경하기</p>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do2">
-                    <label for="do2" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 11:40 ~ 11:50 ]</h2>
+                    <p>첨성대에서 황리단길 가기</p>
+                    <div class="taxi">
+                        <span>택시정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>첨성대에서 황리단길 가기</p><br>
+                                5~10분 소요<br>
+                                약 5000원
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bus">
+                        <span>버스정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>첨성대에서 황리단길 가기</p><br>
+                                60, 61<br>
+                                첨성대 정류장에서 승차<br>
+                                경주공고 정류장에서 하차<br>
+                                * 승차 정류장번호: 01011
+                            </div>
+                        </div>
+                    </div>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do3">
-                    <label for="do3" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 11:50 ~ 1:10 ]</h2>
+                    <p>소향목에서 점심먹기</p>
+                    <span>육회비빔밥 :  17000원<br>차돌박이삼합 : 19000원</span>
+                    <div class="food">
+                        <span>대체식당 확인</span>
+                        <div class="back">
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!--box-->
+
+                <div class="box" style="background-color: cornsilk;">
+                    <h2>[ 1:10 ~ 4:00 ]</h2>
+                    <p>황리단길 구경</p>
+                    <p>카페 이이로 가기</p>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do4">
-                    <label for="do4" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 4:00 ~ 4:10 ]</h2>
+                    <p>황리단길에서 동궁과 월지(안압지) 가기</p>
+                    <div class="taxi">
+                        <span>택시정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>황리단길에서 동궁과 월지(안압지) 가기</p><br>
+                                5~10분 소요<br>
+                                약 5000원 ~ 6000원
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bus">
+                        <span>버스정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>황리단길에서 동궁과 월지(안압지) 가기</p><br>
+                                710, 711<br>
+                                천마총후문|황리단길 정류장에서 승차<br>
+                                동궁과월지 정류장에서 하차<br>
+                                * 승차 정류장번호: 01313
+                            </div>
+                        </div>
+                    </div>
+                </div><!--box-->
+
+                <div class="box" style="background-color: cornsilk;">
+                    <h2>[ 4:10 ~ 5:20 ]</h2>
+                    <p>동궁과 월지 구경하기</p>
+                    <span>입장료 : 3000원</span>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do5">
-                    <label for="do5" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 5:50 ~ 5:50 ]</h2>
+                    <p>동궁과 월지에서 황리단길 가기</p>
+                    <div class="bus">
+                        <span>버스정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>동궁과 월지에서 황리단길 가기</p><br>
+                                60, 61, 277, 710, 711<br>
+                                동궁과월지 정류장에서 승차<br>
+                                서라벌사거리|황리단길 정류장에서 하차<br>
+                                * 승차 정류장번호: 01237
+                            </div>
+                        </div>
+                    </div>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do6">
-                    <label for="do6" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 5:50 ~ 6:40 ]</h2>
+                    <p>무궁무진에서 저녁먹기</p>
+                    <span>새우비스큐 로제 : 20000원<br>라구 크림 : 19000원</span>
+                    <div class="food">
+                        <span>대체식당 확인</span>
+                        <div class="back">
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do7">
-                    <label for="do7" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 6:40 ~ 6:50 ]</h2>
+                    <p>무궁무진에서 터미널 가기</p>
+                    <div class="taxi">
+                        <span>택시정보 확인</span>
+                        <div class="back">
+                            <div>
+                                <p>무궁무진에서 터미널 가기</p><br>
+                                5~10분 소요<br>
+                                약 5000원
+                            </div>
+                        </div>
+                    </div>
                 </div><!--box-->
 
                 <div class="box">
-                    <input type="checkbox" id="do8">
-                    <label for="do8" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
-                </div><!--box-->
-
-                <div class="box">
-                    <input type="checkbox" id="do9">
-                    <label for="do9" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
-                </div><!--box-->
-
-                <div class="box">
-                    <input type="checkbox" id="do10">
-                    <label for="do10" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
-                </div><!--box-->
-
-                <div class="box">
-                    <input type="checkbox" id="do11">
-                    <label for="do11" class="do-it">
-                        [09:50 ~ 10:20] 경주 버스터미널에서 대릉원 가기
-                    </label>
-                    <p>* 버스 시간</p>
+                    <h2>[ 6:50 ~ 7:20 ]</h2>
+                    <p>자 유 시 간</p>
                 </div><!--box-->
 
             </div><!--plan-slide-->
@@ -170,35 +249,17 @@
     </section><!--plan-->
     <script src="js/jquery-3.7.0.min.js"></script>
     <script>
-        const bannerSlide = new Swiper('.banner-slide', {
+        let banner = new Swiper('.banner-slide', {
             loop : true,
-            autoplay : {delay: 3000},
-            pagination : {el: '.swiper-pagination', clickable: true},
+            autoplay : 3000
         });
 
-        // const planCheck = document.querySelector('#do1');
-        // const text = document.querySelector('.do-it');
-        // planCheck.addEventListener('change', (event) =>{ 
-        //                 if (event.currentTarget.checked)
-        //                 {
-        //                     text.style.textDecoration='line-through';
-        //                 }
-        //                 else {
-        //                     text.style.textDecoration='none'
-        //                 }
-        //             });
-
-        const checkboxes = document.querySelectorAll('[id^="do"]');
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', (event) => {
-            const label = document.querySelector(`[for="${event.currentTarget.id}"]`);
-            if (event.currentTarget.checked) {
-                label.style.textDecoration = 'line-through';
-            } else {
-                label.style.textDecoration = 'none';
-            }
+        $('.plan .box > div > span').click(function() {
+            $(this).siblings().toggleClass('on');
         });
-    });
+        $('.back').click(function() {
+            $(this).removeClass('on');
+        });
     </script>
 </body>
 </html>
