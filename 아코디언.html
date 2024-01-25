@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아코디언</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        .content {
+            width: 150px;
+            text-align: center;
+        }
+        .content > li {
+            border: 1px solid;
+        }
+        .title {
+            display: block;
+            padding: 8px 0;
+            background: lightgray;
+            cursor: pointer;
+            transition: .5s;
+        }
+        .menu {
+            display: none;
+            background: lightgoldenrodyellow;
+        }
+        .menu li {
+            padding: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <ul class="content">
+        <li>
+            <span class="title">아코디언 메뉴1</span><!--title-->
+            <ul class="menu">
+                <li>menu1</li>
+                <li>menu2</li>
+                <li>menu3</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">아코디언 메뉴2</span><!--title-->
+            <ul class="menu">
+                <li>menu1</li>
+                <li>menu2</li>
+                <li>menu3</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">아코디언 메뉴3</span><!--title-->
+            <ul class="menu">
+                <li>menu1</li>
+                <li>menu2</li>
+                <li>menu3</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">아코디언 메뉴4</span><!--title-->
+            <ul class="menu">
+                <li>menu1</li>
+                <li>menu2</li>
+                <li>menu3</li>
+            </ul><!--menu-->
+        </li>
+    </ul><!--content-->
+    <!--script-->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $('.title').click(function() {
+            $(this).css({
+                'background' : 'lightsalmon'
+            });
+            $(this).parent().siblings().find('.title').css({
+                'background' : 'lightgray'
+            });
+            $(this).siblings().slideToggle();
+            $(this).parent().siblings().find('.menu').slideUp();
+        });
+        // 아코디언 메뉴를 모두 닫았을 때, 타이틀 배경색이 모두 회색이 되도록 하기
+    </script>
+</body>
+</html>
