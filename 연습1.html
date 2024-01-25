@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 800px;
+            height: 600px;
+            margin: 50px auto 0;
+        }
+        .tab {
+            display: flex;
+        }
+        .tab li {
+            width: calc(800px / 5);
+            text-align: center;
+            line-height: 40px;
+            background: lightgray;
+        }
+        .tab li:first-child {
+            background: lightblue;
+        }
+        .item {
+            width: 800px;
+            height: 560px;
+            display: none;
+        }
+        .item:first-child {
+            display: block;
+        }
+        .bg1 {background: lightblue;}
+        .bg2 {background: lightseagreen;}
+        .bg3 {background: lightpink;}
+        .bg4 {background: lightcyan;}
+        .bg5 {background: lightgoldenrodyellow;}
+
+        .acc {
+            width: 200px;
+            margin-top: 50px;
+            border: 1px solid;
+            text-align: center;
+        }
+        .title {
+            display: block;
+            padding: 8px 0;
+            background: lightsalmon;
+            transition: .2s;
+            cursor: pointer;
+        }
+        .title:hover {
+            background: salmon;
+            font-weight: bold;
+        }
+        .menu {
+            display: none;
+            background: lightgoldenrodyellow;
+            cursor: pointer;
+        }
+        .menu > li {
+            padding: 5px 0;
+            transition: .2s;
+        }
+        .menu > li:hover {
+            background-color: bisque;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="tab">
+            <li>menu1</li>
+            <li>menu2</li>
+            <li>menu3</li>
+            <li>menu4</li>
+            <li>menu5</li>
+        </ul>
+        <div class="content">
+            <div class="item bg1"></div>
+            <div class="item bg2"></div>
+            <div class="item bg3"></div>
+            <div class="item bg4"></div>
+            <div class="item bg5"></div>
+        </div><!--content-->
+    </div><!--container-->
+
+    <ul class="acc">
+        <li>
+            <span class="title">accordian menu1</span><!--title-->
+            <ul class="menu">
+                <li>menu</li>
+                <li>menu</li>
+                <li>menu</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">accordian menu1</span><!--title-->
+            <ul class="menu">
+                <li>menu</li>
+                <li>menu</li>
+                <li>menu</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">accordian menu2</span><!--title-->
+            <ul class="menu">
+                <li>menu</li>
+                <li>menu</li>
+                <li>menu</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">accordian menu3</span><!--title-->
+            <ul class="menu">
+                <li>menu</li>
+                <li>menu</li>
+                <li>menu</li>
+            </ul><!--menu-->
+        </li>
+        <li>
+            <span class="title">accordian menu4</span><!--title-->
+            <ul class="menu">
+                <li>menu</li>
+                <li>menu</li>
+                <li>menu</li>
+            </ul><!--menu-->
+        </li>
+    </ul><!--acc-->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $('.tab > li').click(function() {
+            let idx = $(this).index();
+            $(this).css({
+                'background' : $('.item').eq(idx).css('background')
+            });
+            $(this).siblings().css({
+                'background' : 'lightgray'
+            });
+            $('.item').eq(idx).show();
+            $('.item').eq(idx).siblings().hide();
+        });
+
+        $('.title').click(function() {
+            $(this).siblings().slideToggle();
+            $(this).css({
+                'background' : 'salmon',
+                'fontWeight' : 'bold'
+            });
+            $(this).parent().siblings().find('.menu').slideUp();
+        });
+    </script>
+</body>
+</html>
