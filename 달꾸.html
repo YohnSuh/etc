@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .top-basic {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 99999;
+            text-align: center;
+            /* 높이를 변경하고 싶을 때는 padding: 10px 0;에서 10 숫자를 키우거나 줄이면 됩니다.
+               padding: (위아래 여백) (양 옆 여백);
+               ex. padding: 10px 5px;
+                   => 위아래 여백 10px, 양 옆 여백 5px
+            */
+            padding: 10px 0;
+            /* 배경색을 넣고 싶을 때는 background: #aaa;에서 #aaa대신 바꾸고자 하는 색의 헥스코드or색상명을 적어주세요.
+               투명한 배경색은 background: 색상; 이 줄을 없애거나 색상명 위치에 transparent를 적으면 됩니다.
+               ex. background: red;
+               ex. background: #ccc;
+               ex. background: transparent;
+            */
+            background: #aaa;
+        }
+        .top-move1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 99999;
+            text-align: center;
+            padding: 10px 0;
+            background: #ccc;
+        }
+        .top-move2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 99999;
+            text-align: center;
+            padding: 10px 0;
+            background: #ccc;
+        }
+        .top-move3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 99999;
+            padding: 10px 0;
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <!--공지글-->
+    <div class="top-basic">
+        고정된 공지글입니다.
+    </div>
+
+    <div class="top-move1">
+        <marquee>오른쪽에서 왼쪽으로 흘러가는 공지입니다.</marquee>
+    </div>
+
+    <div class="top-move2">
+        <marquee behavior="alternate">좌우로 움직이는 공지입니다.</marquee>
+    </div>
+
+    <div class="top-move3">
+        <marquee direction="up" scrollamount="4" style="text-align: center;">위아래로 움직이는 공지입니다.</marquee>
+    </div>
+</body>
+</html>
