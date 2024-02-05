@@ -12,6 +12,11 @@
             font-style: normal;
         }
         * {font-family: 'Pretendard-Regular';}
+        pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+            overflow: auto;
+        }
         .hide {display:none;}
         label[for^="ex"] {
             background: yellow;
@@ -32,8 +37,8 @@
             padding: 10px;
             margin: 5px 10px;
             background: #eee;
+            white-space: inherit;
         }
-
     </style>
 </head>
 <body>
@@ -210,10 +215,19 @@ ex.
 }
 </div>
 (2) html 삽입창에 아래 코드를 입력해주세요.
-<div class="box">&lt;div class="brave"&gt;&lt;img src="https://t1.daumcdn.net/cafeattach/1XKJt/2a3d4d756f8398a8b2103b48eed5a9f1871199ab" width="50"&gt;&lt;  /div&gt;
+<div class="box">&lt;div class="brave"&gt;
+    &lt;img src="https://t1.daumcdn.net/cafeattach/1XKJt/2a3d4d756f8398a8b2103b48eed5a9f1871199ab" width="50"&gt;
+&lt;/div&gt;
 </div>
         </pre>
-        <h4>7) 더보기 기능</h4>
+        <h4>7) 이미지 넣기</h4>
+        <pre>
+(1) html 삽입창에 아래 코드를 입력해주세요.
+<div class="box">&lt;img src="#"&gt;
+</div>
+(2) 'img'태그의 '#'부분에 복사한 이미지 주소를 붙여 넣어주세요.
+        </pre>
+        <h4>8) 더보기 기능</h4>
         <pre>
 (1) html 삽입창에 아래 코드를 입력해주세요.
 <div class="box">&lt;details&gt;
@@ -221,9 +235,11 @@ ex.
     [content]
 &lt;/details&gt;
 </div>
-(2) 'style'태그 안에 아래 코드를 작성해주세요.
-<div class="box"> summary img {pointer-events: none;}
-</div>
+(2) '[summary]'에 제목을 적거나 이미지를 넣고 'style'태그 안에 아래 코드를 넣어주세요.
+<div class="box">summary {list-style:none;}</div>
+(3) 이미지를 넣을 경우 'style'태그 안에 아래 코드를 추가적으로 넣어주세요.
+<div class="box">summary * {pointer-events: none;}</div>
+(4) '[content]'안에 내용을 입력하거나 이미지를 넣어주세요.
         </pre>
     </div><!--content-->
 </body>
