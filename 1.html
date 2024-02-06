@@ -241,6 +241,25 @@ ex.
 <div class="box">summary * {pointer-events: none;}</div>
 (4) '[content]'안에 내용을 입력하거나 이미지를 넣어주세요.
         </pre>
+        <h4>8) 제목에 영상 넣기</h4>
+        <pre>
+(1) 'style'태그 안에 아래 코드를 넣어주세요.
+<div class="box">#mArticle > div:nth-child(1) *:not(.tit_subject) {
+    display: none;
+}
+#mArticle .cafeview_subject .tit_subject {
+    position: absolute;
+    bottom:0;
+    right:0;
+}
+#mArticle > div:nth-child(1) {
+    position: relative;
+    height: calc(100vw / 1.78 );
+    background: url('이미지주소');
+}
+</div>
+(2) '이미지주소'에 복사한 이미지의 주소를 넣어주세요.
+        </pre>
     </div><!--content-->
 </body>
 </html>
