@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>css</title>
+    <style>
+        input {
+            accent-color: magenta;
+        }
+        div:has(.a) {border: 1px solid red;}
+    </style>
+</head>
+<body>
+    <input type="radio">
+    <input type="checkbox">
+    <div>
+        <div class="a">1</div>
+    </div>
+    <div>
+        <div class="a">2</div>
+    </div>
+    <div>
+        <div class="a">3</div>
+    </div>
+    <div>4</div>
+    <div>5</div>
+</body>
+</html>

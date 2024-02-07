@@ -17,6 +17,7 @@
             position: fixed;
             top:0;
             left: 0;
+            z-index: 999;
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,.3);
@@ -27,7 +28,9 @@
             position: fixed;
             top: 50%;
             left: 50%;
+            z-index: 999;
             transform: translate(-50%, -50%);
+            max-width: 500px;
             padding: 30px 15px 55px;
             background: #fff;
             border-radius: 5px;
@@ -46,6 +49,47 @@
         }
         #modalBtn:checked + label[for="modalBtn"]::after,
         #modalBtn:checked + label + .modal-wrap {display: block;}
+
+        /* 탭 메뉴 */
+        .tabWrap {
+            position: relative;
+            max-width: 700px;
+            border: 1px solid;
+        }
+        .tabWrap input {display: none;}
+        .tabWrap ul {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
+        }
+        .tabWrap ul li {
+            flex: 1;
+            text-align: center;
+            line-height: 30px;
+            border-bottom: 1px solid;
+        }
+        .tabWrap ul li:not(li:first-child) {border-left: 1px solid;}
+        .tabWrap label {
+            display: block;
+            cursor: pointer;
+        }
+        .tabWrap .tab-con {
+            position: relative;
+        }
+        .tabWrap .tab-item {
+            display: none;
+            padding: 10px;
+            text-align: center;
+        }
+        #tabBtn1:checked ~ .tab-con .tab-txt1,
+        #tabBtn2:checked ~ .tab-con .tab-txt2,
+        #tabBtn3:checked ~ .tab-con .tab-txt3,
+        #tabBtn4:checked ~ .tab-con .tab-txt4 {display: block;}
     </style>
 </head>
 <body>
@@ -57,5 +101,25 @@
         공지를 입력해주세요!공지를 입력해주세요!공지를 입력해주세요!공지를 입력해주세요!공지를 입력해주세요!공지를 입력해주세요!
         <label for="modalBtn">닫기</label>
     </div><!--modal-wrap-->
+
+    <!--탭메뉴-->
+    <div class="tabWrap">
+        <input type="radio" name="tab-menu" id="tabBtn1" checked>
+        <input type="radio" name="tab-menu" id="tabBtn2">
+        <input type="radio" name="tab-menu" id="tabBtn3">
+        <input type="radio" name="tab-menu" id="tabBtn4">
+        <ul>
+            <li><label for="tabBtn1"><span class="tab-tit">tab1</span></label></li>
+            <li><label for="tabBtn2"><span class="tab-tit">tab2</span></label></li>
+            <li><label for="tabBtn3"><span class="tab-tit">tab3</span></label></li>
+            <li><label for="tabBtn4"><span class="tab-tit">tab4</span></label></li>
+        </ul>
+        <div class="tab-con">
+            <div class="tab-item tab-txt1">1번 내용</div>
+            <div class="tab-item tab-txt2">2번 내용</div>
+            <div class="tab-item tab-txt3">3번 내용</div>
+            <div class="tab-item tab-txt4">4번 내용</div>
+        </div><!--tab-con-->
+    </div><!--tabWrap-->
 </body>
 </html>
