@@ -86,10 +86,40 @@
             padding: 10px;
             text-align: center;
         }
-        #tabBtn1:checked ~ .tab-con .tab-txt1,
-        #tabBtn2:checked ~ .tab-con .tab-txt2,
-        #tabBtn3:checked ~ .tab-con .tab-txt3,
-        #tabBtn4:checked ~ .tab-con .tab-txt4 {display: block;}
+        input[name="tab-menu"]:checked + .tab-item {display: block;}
+
+        /* 아코디언 메뉴 */
+        .accWrap {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .accWrap ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: 1px solid;
+        }
+        .accWrap ul li label {
+            display: block;
+            width: 100%;
+            padding: 15px 0 15px 10px;
+            box-sizing: border-box;
+            border-bottom: 1px solid;
+            cursor: pointer;
+        }
+        .accWrap ul li label:not(li:first-child label) {border-top:1px solid;}
+        .accWrap ul li input {display:none;}
+        .accWrap .acc-con {
+            padding: 0 10px;
+            box-sizing: border-box;
+            height: 0;
+            overflow: hidden;
+            transition: .3s;
+        }
+        input[name="acc-menu"]:checked + .acc-con {
+            height: auto;
+            padding: 15px 10px;
+        }
     </style>
 </head>
 <body>
@@ -104,10 +134,6 @@
 
     <!--탭메뉴-->
     <div class="tabWrap">
-        <input type="radio" name="tab-menu" id="tabBtn1" checked>
-        <input type="radio" name="tab-menu" id="tabBtn2">
-        <input type="radio" name="tab-menu" id="tabBtn3">
-        <input type="radio" name="tab-menu" id="tabBtn4">
         <ul>
             <li><label for="tabBtn1"><span class="tab-tit">tab1</span></label></li>
             <li><label for="tabBtn2"><span class="tab-tit">tab2</span></label></li>
@@ -115,11 +141,51 @@
             <li><label for="tabBtn4"><span class="tab-tit">tab4</span></label></li>
         </ul>
         <div class="tab-con">
+            <input type="radio" name="tab-menu" id="tabBtn1" checked>
             <div class="tab-item tab-txt1">1번 내용</div>
+            <input type="radio" name="tab-menu" id="tabBtn2">
             <div class="tab-item tab-txt2">2번 내용</div>
+            <input type="radio" name="tab-menu" id="tabBtn3">
             <div class="tab-item tab-txt3">3번 내용</div>
+            <input type="radio" name="tab-menu" id="tabBtn4">
             <div class="tab-item tab-txt4">4번 내용</div>
         </div><!--tab-con-->
     </div><!--tabWrap-->
+
+    <!--아코디언-->
+    <div class="accWrap">
+        <ul>
+            <li>
+                <label for="accBtn1"><span class="acc-tit">아코디언 제목1</span></label>
+                <input type="radio" name="acc-menu" id="accBtn1" checked>
+                <div class="acc-con">첫 번째 메뉴 내용입니다.</div>
+            </li>
+            <li>
+                <label for="accBtn2"><span class="acc-tit">아코디언 제목2</span></label>
+                <input type="radio" name="acc-menu" id="accBtn2">
+                <div class="acc-con">두 번째 메뉴 내용입니다.</div>
+            </li>
+            <li>
+                <label for="accBtn3"><span class="acc-tit">아코디언 제목3</span></label>
+                <input type="radio" name="acc-menu" id="accBtn3">
+                <div class="acc-con">세 번째 메뉴 내용입니다.</div>
+            </li>
+            <li>
+                <label for="accBtn4"><span class="acc-tit">아코디언 제목4</span></label>
+                <input type="radio" name="acc-menu" id="accBtn4">
+                <div class="acc-con">네 번째 메뉴 내용입니다.</div>
+            </li>
+            <li>
+                <label for="accBtn5"><span class="acc-tit">아코디언 제목5</span></label>
+                <input type="radio" name="acc-menu" id="accBtn5">
+                <div class="acc-con">다섯 번째 메뉴 내용입니다.</div>
+            </li>
+            <li>
+                <label for="accBtn6"><span class="acc-tit">아코디언 제목6</span></label>
+                <input type="radio" name="acc-menu" id="accBtn6">
+                <div class="acc-con">여섯 번째 메뉴 내용입니다.</div>
+            </li>
+        </ul>
+    </div><!--accWrap-->
 </body>
 </html>
