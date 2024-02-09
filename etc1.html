@@ -97,30 +97,53 @@
             margin: 0;
             padding: 0;
             list-style: none;
-            border: 1px solid;
         }
-        .accWrap ul li label {
-            display: block;
+        .accWrap ul li > label[for^="accBtn"] {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
             width: 100%;
-            padding: 15px 0 15px 10px;
+            padding: 17px 25px;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: bold;
+            background-color: cornflowerblue;
+            border-radius: 100px;
             box-sizing: border-box;
-            border-bottom: 1px solid;
             cursor: pointer;
         }
-        .accWrap ul li label:not(li:first-child label) {border-top:1px solid;}
+        .accWrap label i {display: flex;align-items: center;}
         .accWrap ul li input {display:none;}
+        .accWrap ul .closeBtn {
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display:none;
+            cursor: pointer;
+        }
         .accWrap .acc-con {
-            padding: 0 10px;
+            padding: 0 25px;
             box-sizing: border-box;
             height: 0;
+            opacity: 0;
             overflow: hidden;
-            transition: .3s;
+            transition: padding .3s;
         }
-        input[name="acc-menu"]:checked + .acc-con {
+        input[name="acc-menu"]:checked + label + label .acc-con {
             height: auto;
-            padding: 15px 10px;
+            padding: 15px 25px;
+            margin-bottom: 10px;
+            background-color: aliceblue;
+            border: 2px dashed cornflowerblue;
+            border-radius: 30px;
+            opacity: 1;
         }
+        input[name="acc-menu"]:checked + label label {display:block;}
+        input[name="acc-menu"]:checked + label i {transform: rotate(180deg);}
     </style>
+    <script src="https://kit.fontawesome.com/7c72cc71ff.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <input type="checkbox" id="modalBtn" class="modal-btn">
@@ -156,34 +179,58 @@
     <div class="accWrap">
         <ul>
             <li>
-                <label for="accBtn1"><span class="acc-tit">아코디언 제목1</span></label>
-                <input type="radio" name="acc-menu" id="accBtn1" checked>
-                <div class="acc-con">첫 번째 메뉴 내용입니다.</div>
+                <input type="radio" name="acc-menu" id="accBtn1">
+                <label for="accBtn1">
+                    <span class="acc-tit">아코디언 제목1</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">첫 번째 메뉴 내용입니다.</div></label>
             </li>
             <li>
-                <label for="accBtn2"><span class="acc-tit">아코디언 제목2</span></label>
                 <input type="radio" name="acc-menu" id="accBtn2">
-                <div class="acc-con">두 번째 메뉴 내용입니다.</div>
+                <label for="accBtn2">
+                    <span class="acc-tit">아코디언 제목2</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">두 번째 메뉴 내용입니다.</div></label>
             </li>
             <li>
-                <label for="accBtn3"><span class="acc-tit">아코디언 제목3</span></label>
                 <input type="radio" name="acc-menu" id="accBtn3">
-                <div class="acc-con">세 번째 메뉴 내용입니다.</div>
+                <label for="accBtn3">
+                    <span class="acc-tit">아코디언 제목3</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">세 번째 메뉴 내용입니다.</div></label>
             </li>
             <li>
-                <label for="accBtn4"><span class="acc-tit">아코디언 제목4</span></label>
                 <input type="radio" name="acc-menu" id="accBtn4">
-                <div class="acc-con">네 번째 메뉴 내용입니다.</div>
+                <label for="accBtn4">
+                    <span class="acc-tit">아코디언 제목4</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">네 번째 메뉴 내용입니다.</div></label>
             </li>
             <li>
-                <label for="accBtn5"><span class="acc-tit">아코디언 제목5</span></label>
                 <input type="radio" name="acc-menu" id="accBtn5">
-                <div class="acc-con">다섯 번째 메뉴 내용입니다.</div>
+                <label for="accBtn5">
+                    <span class="acc-tit">아코디언 제목5</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">다섯 번째 메뉴 내용입니다.</div></label>
             </li>
             <li>
-                <label for="accBtn6"><span class="acc-tit">아코디언 제목6</span></label>
                 <input type="radio" name="acc-menu" id="accBtn6">
-                <div class="acc-con">여섯 번째 메뉴 내용입니다.</div>
+                <label for="accBtn6">
+                    <span class="acc-tit">아코디언 제목6</span>
+                    <i class="fa-solid fa-circle-chevron-down"></i>
+                    <label class="closeBtn"><input type="radio" name="acc-menu"></label>
+                </label>
+                <label class="acc-up"><input type="radio" name="acc-menu"><div class="acc-con">여섯 번째 메뉴 내용입니다.</div></label>
             </li>
         </ul>
     </div><!--accWrap-->
