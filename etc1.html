@@ -54,7 +54,7 @@
         .tabWrap {
             position: relative;
             max-width: 700px;
-            border: 1px solid;
+            margin: 0 auto;
         }
         .tabWrap input {display: none;}
         .tabWrap ul {
@@ -70,16 +70,21 @@
         .tabWrap ul li {
             flex: 1;
             text-align: center;
-            line-height: 30px;
-            border-bottom: 1px solid;
+            line-height: 45px;
+            background: powderblue;
+            border-radius: 15px;
         }
-        .tabWrap ul li:not(li:first-child) {border-left: 1px solid;}
+        .tabWrap ul li:nth-child(n+2):nth-child(-n+3) {margin: 0 5px;}
         .tabWrap label {
             display: block;
             cursor: pointer;
         }
         .tabWrap .tab-con {
             position: relative;
+            background: #fff;
+            border: 3px dashed powderblue;
+            margin-top: 10px;
+            border-radius: 15px;
         }
         .tabWrap .tab-item {
             display: none;
@@ -87,6 +92,7 @@
             text-align: center;
         }
         input[name="tab-menu"]:checked + .tab-item {display: block;}
+        #tabBtn1:checked + div {background: lightpink;}
 
         /* 아코디언 메뉴 */
         .accWrap {
