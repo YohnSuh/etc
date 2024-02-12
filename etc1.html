@@ -91,8 +91,18 @@
             padding: 10px;
             text-align: center;
         }
-        input[name="tab-menu"]:checked + .tab-item {display: block;}
-        #tabBtn1:checked + div {background: lightpink;}
+        #tabBtn1:checked ~ .tab-con .tab-txt1,
+        #tabBtn2:checked ~ .tab-con .tab-txt2,
+        #tabBtn3:checked ~ .tab-con .tab-txt3,
+        #tabBtn4:checked ~ .tab-con .tab-txt4 {display: block;}
+        #tabBtn1:checked ~ .tab-con {border-color: lightpink;}
+        #tabBtn2:checked ~ .tab-con {border-color: lightseagreen;}
+        #tabBtn3:checked ~ .tab-con {border-color: lightcoral;}
+        #tabBtn4:checked ~ .tab-con {border-color: lightgreen;}
+        #tabBtn1:checked ~ ul li:nth-child(1) {background: lightpink;}
+        #tabBtn2:checked ~ ul li:nth-child(2) {background: lightseagreen;}
+        #tabBtn3:checked ~ ul li:nth-child(3) {background: lightcoral;}
+        #tabBtn4:checked ~ ul li:nth-child(4) {background: lightgreen;}
 
         /* 아코디언 메뉴 */
         .accWrap {
