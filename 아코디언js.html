@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아코디언js</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style: none;
+        }
+        .acc {
+            max-width: 500px;
+            margin: 0 auto;
+            border: 1px solid cornflowerblue;
+        }
+        .acc h2 {
+            background: aliceblue;
+            padding: 8px 12px;
+        }
+        .acc .item {
+            background: #fff;
+            padding-left: 12px;
+            padding-right: 12px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .5s;
+        }
+        h2.on {background: cornflowerblue;}
+    </style>
+</head>
+<body>
+    <ul class="acc">
+        <li>
+            <h2>1. 제목입니다.</h2>
+            <div class="item">1. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        </li>
+        <li>
+            <h2>2. 제목입니다.</h2>
+            <div class="item">2. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        </li>
+        <li>
+            <h2>3. 제목입니다.</h2>
+            <div class="item">3. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        </li>
+        <li>
+            <h2>4. 제목입니다.</h2>
+            <div class="item">4. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        </li>
+        <li>
+            <h2>5. 제목입니다.</h2>
+            <div class="item">5. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</div>
+        </li>
+    </ul><!--acc-->
+    <script>
+        let btns = document.querySelectorAll("h2");
+        let i;
+        for(i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function(e) {
+                let items = document.querySelectorAll(".item");
+                let content = this.nextElementSibling;
+                items.forEach(item => {
+                    if(item !== content) {
+                        item.style.maxHeight = null;
+                    }
+                });
+                btns.forEach(btn => {
+                    btn.classList.remove("on");
+                });
+                if(content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    this.classList.add("on");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
