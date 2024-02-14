@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ect2</title>
+</head>
+<body>
+    <input type="checkbox" id="allBtn">
+    <input type="checkbox" id="btn1" class="btns">
+    <label for="btn1">apple</label>
+    <input type="checkbox" id="btn2" class="btns">
+    <label for="btn2">banana</label>
+    <input type="checkbox" id="btn3" class="btns">
+    <label for="btn3">grape</label>
+    <input type="checkbox" id="btn4" class="btns">
+    <label for="btn4">strawberry</label>
+    <input type="checkbox" id="btn5" class="btns">
+    <label for="btn5">lemon</label>
+    <script>
+        let arrs = ["apple", "banana", "grape", "strawberry"];
+        arrs.forEach(arr => {
+            console.log(arr);
+        });
+
+        let allBtn = document.querySelector("#allBtn");
+        let btns = document.querySelectorAll(".btns");
+        function allChecked() {
+            let allChecked = true;
+            btns.forEach(btn => {
+                if(!btn.checked) {
+                    allChecked = false;
+                }
+            });
+            allBtn.checked = allChecked;
+        }
+        function btnChecked() {
+            allChecked();
+        }
+        btns.forEach(btn => {
+            btn.addEventListener("click", btnChecked);
+        });
+        allBtn.addEventListener("click", function() {
+            let isChecked = this.checked;
+            for(let i = 0; i < btns.length; i++) {
+                btns[i].checked = isChecked;
+            }
+        });
+        
+    </script>
+</body>
+</html>
