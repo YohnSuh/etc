@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제이쿼리</title>
+    <style>
+        * {margin:0;padding:0;}
+        .checkBox {list-style: none;padding:8px 12px;}
+        input {accent-color: red;}
+    </style>
+</head>
+<body>
+    <ul class="checkBox">
+        <li>
+            <input type="checkbox" name="check-box" id="btnAll" class="all-btn">
+            <label for="btnAll">전체선택</label>
+        </li>
+        <li>
+            <input type="checkbox" name="check-box" id="btn1" class="btns">
+            <label for="btn1">딸기우유</label>
+        </li>
+        <li>
+            <input type="checkbox" name="check-box" id="btn2" class="btns">
+            <label for="btn2">바나나우유</label>
+        </li>
+        <li>
+            <input type="checkbox" name="check-box" id="btn3" class="btns">
+            <label for="btn3">초코우유</label>
+        </li>
+        <li>
+            <input type="checkbox" name="check-box" id="btn4" class="btns">
+            <label for="btn4">커피우유</label>
+        </li>
+    </ul><!--checkBox-->
+
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(".all-btn").click(() => {
+            if($(".all-btn").is(":checked")) {
+                $("input:checkbox").prop("checked", true);
+            } else {
+                $("input:checkbox").prop("checked", false);
+            }
+        });
+        $(".btns").change(() => {
+            if($(".btns:checked").length === $(".btns").length) {
+                $(".all-btn").prop("checked", true);
+            } else {
+                $(".all-btn").prop("checked", false);
+            }
+        });
+    </script>
+</body>
+</html>
