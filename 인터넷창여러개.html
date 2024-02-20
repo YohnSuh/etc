@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인터넷창여러개</title>
+    <style>
+        body {background: url('뼈다귀배경.png');}
+        input[type="checkbox"], input[type="radio"] {display: none;}
+        .iconWrap, .window, .menuWrap {margin: 0; padding:0; box-sizing: border-box;}
+        /* 아이콘 */
+        .iconWrap > .icon-item {display: inline;}
+        .icon-item > label {display:inline-block;width:30px;height:30px;}
+        /* 아이콘 배경 */
+        .iconOpen1 {background: url('logo_m.png') no-repeat center / cover;}
+        .iconOpen2 {background: url('logo_m.png') no-repeat center / cover;}
+        .iconOpen3 {background: url('logo_m.png') no-repeat center / cover;}
+        /* 인터넷 창 */
+        .window {display: none;position: fixed;z-index: 9999;;width: 75%;height: 75vw;max-width: 600px;max-height: 600px;border: 1px solid rgba(0, 0, 0, .2);border-radius: 5px;overflow: hidden;background: #fff;box-shadow: 0 0 20px rgba(0, 0, 0, .05);}
+        .window.windowWrap1 {top:5%;left: 5%;}
+        .window.windowWrap1 .uiWrap {background: pink;}
+        .window.windowWrap2 {bottom:5%; left: 20%;}
+        .window.windowWrap2 .uiWrap {background: powderblue;}
+        .window.windowWrap3 {bottom:10%; right: 15%;}
+        .window.windowWrap3 .uiWrap {background: lightyellow;}
+        .window .uiWrap {position: relative;text-align: right;line-height: 30px;}
+        .window .uiWrap > label {display: inline-block;text-align:center;width: 30px;color: rgba(0, 0, 0, .5);}
+        .window .uiWrap > label[for^="min"] {display: none;}
+        .window .addWrap {position: relative;border-bottom: 1px solid rgba(0, 0, 0, .2);padding:5px;text-align: center;}
+        .window .addWrap > input {padding: 5px 15px;border: 0;border-radius: 100px;background: rgba(0, 0, 0, .1);}
+        /* 메뉴표시줄 */
+        .menuWrap {display: flex;align-items: center;position: fixed;bottom:0;left: 0;width: 100%;height: 50px;background: rgba(255, 255, 255, .8);box-shadow: 0 0 5px rgba(0, 0, 0, .2);}
+        .menuWrap .menu-item > label {display: inline-block;width: 35px;height: 35px;margin-left: 7px;border-radius: 5px;background: rgba(255, 255, 255, .3);box-shadow: 0 0 3px rgba(0, 0, 0, .1);}
+        .menuWrap .menu1 > label {background: url('logo_m.png') no-repeat center / 25px;}
+        .menuWrap .menu2 > label {background: url('logo_m.png') no-repeat center / 25px;}
+        .menuWrap .menu3 > label {background: url('logo_m.png') no-repeat center / 25px;}
+        /* 인터넷창 열기 */
+        #openBtn1:checked ~ .windowWrap1,
+        #openBtn2:checked ~ .windowWrap2,
+        #openBtn3:checked ~ .windowWrap3 {display: block;}
+
+        /* 창 내리기 */
+        input[id^="down"]:checked + input + input + input + div {visibility: hidden;}
+        /* 창 키우기 */
+        input[id="max1"]:checked ~ .windowWrap1 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
+        input[id="max2"]:checked ~ .windowWrap2 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;transform: unset;}
+        input[id="max3"]:checked ~ .windowWrap3 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
+
+        input[id^="max"]:checked + input + input + div label[for^="max"] {display: none;}
+        input[id^="max"]:checked + input + input + div label[for^="min"] {display: inline;}
+        /* :hover */
+        .window:hover {z-index: 99999;}
+    </style>
+</head>
+<body>
+    <!--인터넷창 열기-->
+    <input type="checkbox" id="openBtn1">
+    <input type="checkbox" id="openBtn2">
+    <input type="checkbox" id="openBtn3">
+
+    <!--아이콘-->
+    <div class="iconWrap">
+        <div class="icon-item"><label for="openBtn1" class="iconOpen1"></label></div><!--icon-item-->
+        <div class="icon-item"><label for="openBtn2" class="iconOpen2"></label></div><!--icon-item-->
+        <div class="icon-item"><label for="openBtn3" class="iconOpen3"></label></div><!--icon-item-->
+    </div><!--iconWrap-->
+
+    <input type="radio" name="window1-btn" id="down1">
+    <input type="radio" name="window1-btn" id="max1">
+    <input type="radio" name="window1-btn" id="min1">
+    <input type="radio" name="window1-btn" id="close1">
+    <!--인터넷창1-->
+    <div class="window windowWrap1">
+        <div class="uiWrap">
+            <label for="down1">-</label>
+            <label for="max1">ㅁ</label>
+            <label for="min1">=</label>
+            <label for="close1">X</label>
+        </div><!--uiWrap-->
+        <div class="addWrap">
+            <input type="text" value="www.부속달글.com">
+        </div><!--addWrap-->
+    </div><!--window windowWrap1-->
+
+    <input type="radio" name="window2-btn" id="down2">
+    <input type="radio" name="window2-btn" id="max2">
+    <input type="radio" name="window2-btn" id="min2">
+    <input type="radio" name="window2-btn" id="close2">
+    <!--인터넷창2-->
+    <div class="window windowWrap2">
+        <div class="uiWrap">
+            <label for="down2">-</label>
+            <label for="max2">ㅁ</label>
+            <label for="min2">=</label>
+            <label for="close2">X</label>
+        </div><!--uiWrap-->
+        <div class="addWrap">
+            <input type="text" value="www.사진.com">
+        </div><!--addWrap-->
+    </div><!--window windowWrap2-->
+
+    <input type="radio" name="window3-btn" id="down3">
+    <input type="radio" name="window3-btn" id="max3">
+    <input type="radio" name="window3-btn" id="min3">
+    <input type="radio" name="window3-btn" id="close3">
+    <!--인터넷창3-->
+    <div class="window windowWrap3">
+        <div class="uiWrap">
+            <label for="down3">-</label>
+            <label for="max3">ㅁ</label>
+            <label for="min3">=</label>
+            <label for="close3">X</label>
+        </div><!--uiWrap-->
+        <div class="addWrap">
+            <input type="text" value="www.공지.com">
+        </div><!--addWrap-->
+    </div><!--window windowWrap3-->
+
+    <!--하단 메뉴-->
+    <div class="menuWrap">
+        <div class="menu-item menu1"><label><input type="radio" name="window1-btn"></label></div><!--menu-item menu1-->
+        <div class="menu-item menu2"><label><input type="radio" name="window2-btn"></label></div><!--menu-item menu2-->
+        <div class="menu-item menu3"><label><input type="radio" name="window3-btn"></label></div><!--menu-item menu3-->
+    </div><!--menuWrap-->
+</body>
+</html>
