@@ -6,7 +6,7 @@
     <title>인터넷창여러개</title>
     <style>
         body {background: url('뼈다귀배경.png');}
-        input[type="checkbox"], input[type="radio"] {display: none;}
+        input[type="radio"] {display: none;}
         .iconWrap, .window, .menuWrap {margin: 0; padding:0; box-sizing: border-box;}
         /* 아이콘 */
         .iconWrap > .icon-item {display: inline;}
@@ -16,48 +16,82 @@
         .iconOpen2 {background: url('logo_m.png') no-repeat center / cover;}
         .iconOpen3 {background: url('logo_m.png') no-repeat center / cover;}
         /* 인터넷 창 */
-        .window {display: none;position: fixed;z-index: 9999;;width: 75%;height: 75vw;max-width: 600px;max-height: 600px;border: 1px solid rgba(0, 0, 0, .2);border-radius: 5px;overflow: hidden;background: #fff;box-shadow: 0 0 20px rgba(0, 0, 0, .05);}
+        .window {display: none;position: fixed;z-index: 9999;;width: 75%;height: 75vw;min-width: 280px;min-height: 280px;max-width: 600px;max-height: 600px;border: 1px solid rgba(0, 0, 0, .2);border-radius: 5px;overflow: hidden;background: #fff;box-shadow: 0 0 20px rgba(0, 0, 0, .05);}
         .window.windowWrap1 {top:5%;left: 5%;}
         .window.windowWrap1 .uiWrap {background: pink;}
-        .window.windowWrap2 {bottom:5%; left: 20%;}
+        .window.windowWrap2 {bottom:5%; right: 5%;}
         .window.windowWrap2 .uiWrap {background: powderblue;}
-        .window.windowWrap3 {bottom:10%; right: 15%;}
+        .window.windowWrap3 {top:50%; left: 50%;transform: translate(-50%, -50%);}
         .window.windowWrap3 .uiWrap {background: lightyellow;}
         .window .uiWrap {position: relative;text-align: right;line-height: 30px;}
         .window .uiWrap > label {display: inline-block;text-align:center;width: 30px;color: rgba(0, 0, 0, .5);}
         .window .uiWrap > label[for^="min"] {display: none;}
         .window .addWrap {position: relative;border-bottom: 1px solid rgba(0, 0, 0, .2);padding:5px;text-align: center;}
         .window .addWrap > input {padding: 5px 15px;border: 0;border-radius: 100px;background: rgba(0, 0, 0, .1);}
+        .window .textWrap {height: calc(75vw - 68px);overflow-y: scroll;padding:0 10px;}
         /* 메뉴표시줄 */
-        .menuWrap {display: flex;align-items: center;position: fixed;bottom:0;left: 0;width: 100%;height: 50px;background: rgba(255, 255, 255, .8);box-shadow: 0 0 5px rgba(0, 0, 0, .2);}
-        .menuWrap .menu-item > label {display: inline-block;width: 35px;height: 35px;margin-left: 7px;border-radius: 5px;background: rgba(255, 255, 255, .3);box-shadow: 0 0 3px rgba(0, 0, 0, .1);}
-        .menuWrap .menu1 > label {background: url('logo_m.png') no-repeat center / 25px;}
-        .menuWrap .menu2 > label {background: url('logo_m.png') no-repeat center / 25px;}
-        .menuWrap .menu3 > label {background: url('logo_m.png') no-repeat center / 25px;}
+        .menuWrap {display: flex;align-items: center;position: fixed;bottom:0;left: 0;z-index:9998;width: 100%;height: 50px;background: rgba(255, 255, 255, .7);box-shadow: 0 0 5px rgba(0, 0, 0, .2);}
+        .menuWrap .menu-item > label {display: none;position: relative;;width: 35px;height: 35px;margin-left: 7px;border-radius: 5px;box-shadow: 0 0 3px rgba(0, 0, 0, .1);background-position: center;background-repeat: no-repeat;background-size: 25px;background-color: rgba(255, 255, 255, .5);}
+        .menuWrap .menu-item > label::after {content:'';position: absolute;bottom:0;left: 50%;transform: translateX(-50%);width: 18px;height: 3px;background: rgba(0, 0, 0, .5);border-radius: 5px;transition: width .3s;}
+        .menuWrap .menu1 > label {background-image: url('logo_m.png');border: 2px solid pink;}
+        .menuWrap .menu2 > label {background-image: url('logo_m.png');border: 2px solid powderblue;}
+        .menuWrap .menu3 > label {background-image: url('logo_m.png');border: 2px solid lightyellow;}
         /* 인터넷창 열기 */
         #openBtn1:checked ~ .windowWrap1,
         #openBtn2:checked ~ .windowWrap2,
         #openBtn3:checked ~ .windowWrap3 {display: block;}
 
-        /* 창 내리기 */
-        input[id^="down"]:checked + input + input + input + div {visibility: hidden;}
-        /* 창 키우기 */
-        input[id="max1"]:checked ~ .windowWrap1 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
-        input[id="max2"]:checked ~ .windowWrap2 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;transform: unset;}
-        input[id="max3"]:checked ~ .windowWrap3 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
+        #openBtn1:checked ~ .menuWrap .menu1 > label,
+        #openBtn2:checked ~ .menuWrap .menu2 > label,
+        #openBtn3:checked ~ .menuWrap .menu3 > label {animation: up .6s .3s alternate, scale1 .3s alternate}
 
+        /* 메뉴표시줄 아이콘 */
+        #openBtn1:checked ~ .menuWrap .menu1 > label,
+        #openBtn2:checked ~ .menuWrap .menu2 > label,
+        #openBtn3:checked ~ .menuWrap .menu3 > label {display: inline-block;}
+        
+        /* 창 내리기 */
+        #down1:checked ~ .menuWrap .menu1 > label,
+        #down2:checked ~ .menuWrap .menu2 > label,
+        #down3:checked ~ .menuWrap .menu3 > label
+        {display: inline-block;border-color: transparent; box-shadow: unset;background-color: unset;animation: down .4s .3s alternate, scale2 .3s alternate;}
+        
+        #down1:checked ~ .menuWrap .menu1 > label::after,
+        #down2:checked ~ .menuWrap .menu2 > label::after,
+        #down3:checked ~ .menuWrap .menu3 > label::after {width:10px;background: rgba(0, 0, 0, .35);}
+
+        /* 창 키우기 */
+        #max1:checked ~ .windowWrap1 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
+        #max2:checked ~ .windowWrap2 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;}
+        #max3:checked ~ .windowWrap3 {width:100%;max-width: 100%;height:100%;max-height:calc(100% - 50px);top:0;left: 0;transform: unset;}
+        
         input[id^="max"]:checked + input + input + div label[for^="max"] {display: none;}
         input[id^="max"]:checked + input + input + div label[for^="min"] {display: inline;}
+        input[id^="max"]:checked + input + input + div .textWrap {height: calc(100% - 68px);}
+
         /* :hover */
         .window:hover {z-index: 99999;}
+
+        /* animation */
+        @keyframes up {
+            50% {background-position: center -.5px;}
+        }
+        @keyframes down {
+            50% {background-position: center 10px;}
+        }
+        @keyframes scale1 {
+            50% {background-size: 20px;}
+        }
+        @keyframes scale2 {
+            50% {background-size: 20px;}
+        }
     </style>
 </head>
 <body>
     <!--인터넷창 열기-->
-    <input type="checkbox" id="openBtn1">
-    <input type="checkbox" id="openBtn2">
-    <input type="checkbox" id="openBtn3">
-
+    <input type="radio" name="window1-btn" id="openBtn1">
+    <input type="radio" name="window2-btn" id="openBtn2">
+    <input type="radio" name="window3-btn" id="openBtn3">
     <!--아이콘-->
     <div class="iconWrap">
         <div class="icon-item"><label for="openBtn1" class="iconOpen1"></label></div><!--icon-item-->
@@ -66,8 +100,8 @@
     </div><!--iconWrap-->
 
     <input type="radio" name="window1-btn" id="down1">
-    <input type="radio" name="window1-btn" id="max1">
-    <input type="radio" name="window1-btn" id="min1">
+    <input type="radio" name="window1-size" id="max1">
+    <input type="radio" name="window1-size" id="min1">
     <input type="radio" name="window1-btn" id="close1">
     <!--인터넷창1-->
     <div class="window windowWrap1">
@@ -80,11 +114,21 @@
         <div class="addWrap">
             <input type="text" value="www.부속달글.com">
         </div><!--addWrap-->
+        <div class="textWrap">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div><!--textWrap-->
     </div><!--window windowWrap1-->
 
     <input type="radio" name="window2-btn" id="down2">
-    <input type="radio" name="window2-btn" id="max2">
-    <input type="radio" name="window2-btn" id="min2">
+    <input type="radio" name="window2-size" id="max2">
+    <input type="radio" name="window2-size" id="min2">
     <input type="radio" name="window2-btn" id="close2">
     <!--인터넷창2-->
     <div class="window windowWrap2">
@@ -97,11 +141,18 @@
         <div class="addWrap">
             <input type="text" value="www.사진.com">
         </div><!--addWrap-->
+        <div class="textWrap">
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+        </div><!--textWrap-->
     </div><!--window windowWrap2-->
 
     <input type="radio" name="window3-btn" id="down3">
-    <input type="radio" name="window3-btn" id="max3">
-    <input type="radio" name="window3-btn" id="min3">
+    <input type="radio" name="window3-size" id="max3">
+    <input type="radio" name="window3-size" id="min3">
     <input type="radio" name="window3-btn" id="close3">
     <!--인터넷창3-->
     <div class="window windowWrap3">
@@ -114,13 +165,17 @@
         <div class="addWrap">
             <input type="text" value="www.공지.com">
         </div><!--addWrap-->
+        <div class="textWrap">
+            <p>
+            </p>
+        </div><!--textWrap-->
     </div><!--window windowWrap3-->
 
     <!--하단 메뉴-->
     <div class="menuWrap">
-        <div class="menu-item menu1"><label><input type="radio" name="window1-btn"></label></div><!--menu-item menu1-->
-        <div class="menu-item menu2"><label><input type="radio" name="window2-btn"></label></div><!--menu-item menu2-->
-        <div class="menu-item menu3"><label><input type="radio" name="window3-btn"></label></div><!--menu-item menu3-->
+        <div class="menu-item menu1"><label for="openBtn1"></label></div><!--menu-item menu1-->
+        <div class="menu-item menu2"><label for="openBtn2"></label></div><!--menu-item menu2-->
+        <div class="menu-item menu3"><label for="openBtn3"></label></div><!--menu-item menu3-->
     </div><!--menuWrap-->
 </body>
 </html>
