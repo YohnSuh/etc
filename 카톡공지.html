@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카톡공지</title>
+    <style>
+        input[type="checkbox"] {display: none;}
+        .noticeWrap {position:fixed;top:0;right: 50%;transform: translateX(50%);width: 90%;background: #fff;border-radius: 10px;box-shadow: 0 3px 5px rgba(0,0,0,.1);overflow: hidden;}
+        .noticeWrap .row1 {display: flex;justify-content: space-between;align-items: center;box-sizing: border-box;padding:5px 10px;}
+        .noticeWrap .row1 > .notice-img {display: inline-block;width: 30px;height: 30px;background: url('아이콘이미지.png') no-repeat center / contain;}
+        .noticeWrap .row1 > .notice-txt {display: inline-block;width:100%;box-sizing: border-box;padding:0 5px;text-align: left;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+        .noticeWrap .row1 > .notice-more {display: inline-block;width: 30px;height:30px;background: url('아이콘이미지2.png') no-repeat center / 15px;}
+        .noticeWrap .row2 {display: none;justify-content: space-between;box-sizing: border-box;padding: 5px 10px;}
+        .noticeWrap .row2 > label {display: inline-block;width: calc(50% - 5px);background: #eee;box-sizing: border-box;padding: 3px;text-align: center;border-radius: 5px;}
+        .noticeWrap .row3 {display: none;box-sizing: border-box;padding:5px 10px;}
+        .noticeWrap .row3 > .ntc-max-btn {display: inline-block;width: 30px;height: 30px;background: url('아이콘이미지.png') no-repeat center / contain;}
+
+        /* 공지 더보기 */
+        #txtMoreBtn:checked + .row1 {align-items: start;}
+        #txtMoreBtn:checked + .row1 > .notice-txt {white-space: unset;}
+        /* 버튼 더보기 */
+        #ntcMoreBtn:checked + .row2 {display: flex;}
+        /* 다시 열지 않음 */
+        #ntcCloseBtn:checked + .noticeWrap {display: none;}
+
+        /* 접어두기 */
+        #ntcMinBtn:checked ~ .noticeWrap {width:0;right:60px;transform: unset;overflow:visible;}
+        #ntcMinBtn:checked ~ .noticeWrap > div:not(.row3) {display: none;}
+        #ntcMinBtn:checked ~ .noticeWrap > .row3 {display: inline-block;}
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="ntcMinBtn">
+    <input type="checkbox" name="notice-btn" id="ntcCloseBtn">
+    <div class="noticeWrap">
+        <input type="checkbox" id="txtMoreBtn">
+        <div class="row1">
+            <div class="notice-img"></div><!--notice-img-->
+            <label for="txtMoreBtn" class="notice-txt">
+                공지입니다.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </label><!--notice-txt-->
+            <label for="ntcMoreBtn" class="notice-more"></label>
+        </div><!--row1-->
+        <input type="checkbox" id="ntcMoreBtn">
+        <div class="row2">
+            <label for="ntcCloseBtn">다시 열지 않음</label>
+            <label for="ntcMinBtn">접어두기</label>
+        </div><!--row2-->
+        <div class="row3">
+            <label for="ntcMinBtn" class="ntc-max-btn"></label>
+        </div><!--row3-->
+    </div>
+</body>
+</html>
