@@ -20,7 +20,8 @@
         #txtMoreBtn:checked + .row1 {align-items: start;}
         #txtMoreBtn:checked + .row1 > .notice-txt {white-space: unset;}
         /* 버튼 더보기 */
-        #ntcMoreBtn:checked + .row2 {display: flex;}
+        #ntcMoreBtn:checked ~ .row2 {display: flex;}
+        #ntcMoreBtn:checked ~ .row1 .notice-more {transform: rotate(180deg);}
         /* 다시 열지 않음 */
         #ntcCloseBtn:checked + .noticeWrap {display: none;}
 
@@ -34,6 +35,7 @@
     <input type="checkbox" id="ntcMinBtn">
     <input type="checkbox" name="notice-btn" id="ntcCloseBtn">
     <div class="noticeWrap">
+        <input type="checkbox" id="ntcMoreBtn">
         <input type="checkbox" id="txtMoreBtn">
         <div class="row1">
             <div class="notice-img"></div><!--notice-img-->
@@ -43,7 +45,6 @@
             </label><!--notice-txt-->
             <label for="ntcMoreBtn" class="notice-more"></label>
         </div><!--row1-->
-        <input type="checkbox" id="ntcMoreBtn">
         <div class="row2">
             <label for="ntcCloseBtn">다시 열지 않음</label>
             <label for="ntcMinBtn">접어두기</label>
