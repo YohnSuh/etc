@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐러셀</title>
+    <style>
+        .slideWrap {white-space: nowrap;width: 500px;height:500px;margin: 0 auto;font-size: 0;letter-spacing: 0;word-spacing: 0;overflow: hidden;}
+        .slideWrap input {display: none;}
+        .slideWrap > div {display: inline-block;width: 500px;height: 500px;position: relative;transition: .5s;}
+        .slideWrap .slide1 {background: cornflowerblue;}
+        .slideWrap .slide2 {background: coral;}
+        .slideWrap .slide3 {background: lavender;}
+        .slideWrap .slide4 {background: palevioletred;}
+        .slideWrap .slide5 {background: palegoldenrod;}
+        .slideWrap > div > label {position: absolute;top:50%;transform: translateY(-50%);font-size: 14px;letter-spacing: unset;word-spacing: unset;}
+        .slideWrap .left {left: 30px;}
+        .slideWrap .right {right: 30px;}
+
+        #slideBtn1:checked ~ div {transform: translateX(0%);}
+        #slideBtn2:checked ~ div {transform: translateX(-100%);}
+        #slideBtn3:checked ~ div {transform: translateX(-200%);}
+        #slideBtn4:checked ~ div {transform: translateX(-300%);}
+        #slideBtn5:checked ~ div {transform: translateX(-400%);}
+    </style>
+</head>
+<body>
+    <div class="slideWrap">
+        <input type="radio" name="slide-btn" id="slideBtn1">
+        <input type="radio" name="slide-btn" id="slideBtn2">
+        <input type="radio" name="slide-btn" id="slideBtn3">
+        <input type="radio" name="slide-btn" id="slideBtn4">
+        <input type="radio" name="slide-btn" id="slideBtn5">
+        <div class="slide1">
+            <label for="slideBtn5" class="left">왼</label>
+            <label for="slideBtn2" class="right">오</label>
+        </div><!--slide1-->
+
+        <div class="slide2">
+            <label for="slideBtn1" class="left">왼</label>
+            <label for="slideBtn3" class="right">오</label>
+        </div><!--slide2-->
+
+        <div class="slide3">
+            <label for="slideBtn2" class="left">왼</label>
+            <label for="slideBtn4" class="right">오</label>
+        </div><!--slide3-->
+
+        <div class="slide4">
+            <label for="slideBtn3" class="left">왼</label>
+            <label for="slideBtn5" class="right">오</label>
+        </div><!--slide4-->
+
+        <div class="slide5">
+            <label for="slideBtn4" class="left">왼</label>
+            <label for="slideBtn1" class="right">오</label>
+        </div><!--slide5-->
+    </div><!--slideWrap-->
+</body>
+</html>
