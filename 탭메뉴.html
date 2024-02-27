@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭 메뉴</title>
+    <style>
+        .tabWrap {border: 1px solid;width: 95%;height:70vw;max-width: 700px;max-height: 700px;overflow:hidden;}
+        .tabWrap input {display:none;}
+        .tabWrap .tabBtn {background: pink;display: flex;justify-content: space-between;align-items:center;height: 30px;}
+        .tabWrap .tabBtn > label {width:100%;line-height: 30px;text-align: center;}
+        .tabWrap .tabCon {background: lightblue;overflow-y: scroll;height: calc(100% - 30px);}
+        .tabWrap .tabCon .tab-item {display: none;}
+        .tabWrap .tabCon .item3 img {width: 100%;}
+
+        #tabBtn1:checked ~ .tabCon .item1,
+        #tabBtn2:checked ~ .tabCon .item2,
+        #tabBtn3:checked ~ .tabCon .item3 {display: block;}
+
+        #tabBtn1:checked ~ .tabBtn > label[for="tabBtn1"], 
+        #tabBtn2:checked ~ .tabBtn > label[for="tabBtn2"], 
+        #tabBtn3:checked ~ .tabBtn > label[for="tabBtn3"] {background: lightblue;}
+    </style>
+</head>
+<body>
+    <div class="tabWrap">
+        <input type="radio" name="tab-con" id="tabBtn1" checked>
+        <input type="radio" name="tab-con" id="tabBtn2">
+        <input type="radio" name="tab-con" id="tabBtn3">
+        <div class="tabBtn">
+            <label for="tabBtn1">공지</label>
+            <label for="tabBtn2">부속달글</label>
+            <label for="tabBtn3">기타</label>
+        </div><!--tabBtn-->
+        <div class="tabCon">
+            <div class="tab-item item1">
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+            </div>
+            <div class="tab-item item2">
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+                <a href="#">Lorem Ipsum</a>
+            </div>
+            <div class="tab-item item3">
+                <img src="뼈다귀배경.png">
+                <img src="뼈다귀배경.png">
+                <img src="뼈다귀배경.png">
+            </div>
+        </div><!--tabCon-->
+    </div><!--tabWrap-->
+</body>
+</html>
