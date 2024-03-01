@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탭메뉴 세로</title>
+    <style>
+        @font-face {
+            font-family: 'Ownglyph_meetme-Rg';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2') format('woff2');
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'omyu_pretty';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .tabWrap-v {display:flex;width: 100%;height: 100vw;min-height: 400px;max-width: 700px;max-height:700px;margin: 0 auto;overflow: hidden;}
+        .tabWrap-v > input {display:none;}
+        .tabWrap-v > .tabCon-v {position: relative;z-index: 1;width: 100%;height:100%;box-sizing: border-box;overflow-y: scroll;padding: 10px;border-radius: 10px 0 10px 10px;background: #eee;font-family: 'omyu_pretty';}
+        .tabWrap-v > .tabCon-v .tabItem-v {display: none;}
+        .tabWrap-v > .tabBtn-v > label {display: block;writing-mode: vertical-rl;padding: 20px 5px;margin-bottom: 5px;border-radius:0 15px 15px 0;background: lightsalmon;transform: translateX(-5px);transition: transform .2s;color:white;letter-spacing: 5px;font-family: 'Ownglyph_meetme-Rg';}
+
+        #tabBtnV1:checked ~ .tabCon-v > .item-v1,
+        #tabBtnV2:checked ~ .tabCon-v > .item-v2,
+        #tabBtnV3:checked ~ .tabCon-v > .item-v3 {display:block;}
+
+        #tabBtnV1:checked ~ .tabBtn-v > label[for="tabBtnV1"],
+        #tabBtnV2:checked ~ .tabBtn-v > label[for="tabBtnV2"],
+        #tabBtnV3:checked ~ .tabBtn-v > label[for="tabBtnV3"] {background: #eee;color:lightsalmon;transform: translateX(0);}
+    </style>
+</head>
+<body>
+    <div class="tabWrap-v">
+        <input type="radio" name="vertical-tab" id="tabBtnV1" checked>
+        <input type="radio" name="vertical-tab" id="tabBtnV2">
+        <input type="radio" name="vertical-tab" id="tabBtnV3">
+        <div class="tabCon-v">
+            <div class="tabItem-v item-v1">[ Btn1 ]<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </div>
+            <div class="tabItem-v item-v2">[ Btn2 ]<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+            <div class="tabItem-v item-v3">[ Btn3 ]<br>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</div>
+        </div><!--tabCon-v-->
+        <div class="tabBtn-v">
+            <label for="tabBtnV1">공지필독</label>
+            <label for="tabBtnV2">부속달글</label>
+            <label for="tabBtnV3">기타자료</label>
+        </div><!--tabBtn-v-->
+    </div><!--tabWrap-v-->
+</body>
+</html>
