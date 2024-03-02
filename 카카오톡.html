@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카카오톡</title>
+    <style>
+        @font-face {
+            font-family: 'NIXGONM-Vb';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/NIXGONM-Vb.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        #kakaoTalkOpenBtn, #kakaoTalkWrap input[type="radio"], #kakaoTalkWrap input[type="checkbox"] {display:none;}
+        #kakaoTalkWrap {display:none;position: fixed;top:0;left: 0;z-index: 99999;width: 100%;height: 100%;font-family: 'NIXGONM-Vb';text-align: left;font-size:14px;}
+        #kakaoTalkWrap > div:not(.list-btn-wrap) {display: none;position: absolute;top:0;left:0;width: 100%;height: 100%;}
+        #kakaoTalkWrap > .kakao-main {background: #f0f0f0;}
+        #kakaoTalkWrap > .kakao-main > .main-top {position: absolute;top:0;left: 0;width: 100%;line-height: 50px;box-sizing: border-box;padding:0 20px;background: #fcfcfc;font-weight:bold;color:#88ade4;font-size:18px;}
+        #kakaoTalkWrap > .kakao-main > .main-my {display: flex;align-items: center;margin-top: 50px;padding: 10px 20px; box-sizing: border-box;}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo {display: inline;position: relative;width: 55px;height:50px;border-radius:20px;margin-right: 10px;overflow: hidden;}
+        /* 프로필 사진 슬라이드 */
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo label {position: absolute; top:0; width: 100%;height:100%;background-repeat: no-repeat;background-position: center;background-size: cover;}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo .photo1 {left:0;background-image: url('images/pic-1.jpg');}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo .photo2 {left:100%;background-image: url('images/pic-2.jpg');}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo .photo3 {left:200%;background-image: url('images/pic-3.jpg');}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo .photo4 {left:300%;background-image: url('images/pic-4.jpg');}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-photo .photo5 {left:400%;background-image: url('images/pic-5.jpg');}
+        #kakaoTalkWrap > .kakao-main > .main-my > .my-text {width:100%;}
+        #kakaoTalkWrap > .kakao-main > .main-my .name input {width: calc(100% - 20px);border: 0; background: unset;font-family: 'NIXGONM-Vb';}
+        #kakaoTalkWrap > .kakao-main > .main-my .word input {width: calc(100% - 20px);border: 0; background: unset;margin-top:5px;font-family: 'NIXGONM-Vb';font-size:12px;}
+        #kakaoTalkWrap > .kakao-main > .main-ad {width:calc(100% - 40px); height:100px; margin: 20px auto;border-radius: 10px;background: url('images/banner1.jpg') no-repeat center / cover;}
+        /* 친구 목록 */
+        #kakaoTalkWrap > .kakao-main > .main-fr {padding: 0 20px;box-sizing: border-box;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-top {position: relative;display: flex;justify-content: space-between;align-items: center;padding:10px 0;font-size: 10px;color:#88ade4;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-list {display: flex;align-items: center;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-photo {width: 40px;height: 40px;border-radius: 15px;background: url('images/pic-6.jpg') no-repeat center / cover;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-text {margin-left: 10px;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-text p {margin: 0;font-size:12px;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-text span {font-size: 10px;}
+        /* 친구 프로필 상세 */
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile {position: fixed; top:0;left:0;z-index: 99999; width:100%; height:100%;background:linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,.3)), url('images/banner2.jpg') no-repeat center / cover;color:#fff;}
+        .fr-profile {display: none;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .fr-profile-close {position: absolute; top: 30px; left: 20px;font-size: 24px;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile > div {position: absolute;bottom: 0; left: 0; width: 100%;text-align: center;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .info-photo {text-align: center;margin-bottom: 10px;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .info-photo-btn {display: inline-block;width: 80px;height: 80px;background: url('images/pic-6.jpg') no-repeat center / cover;border-radius: 30px;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .fr-profile-info input {text-align: center;width: calc(100% - 20px);border:0;background: transparent;font-size: 14px;margin-bottom: 5px;color: #fff;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .fr-profile-info p {margin:0;}
+        #kakaoTalkWrap > .kakao-main > .main-fr .fr-profile .fr-profile-chat {box-sizing: border-box;border-top: 1px solid #fff;margin-top: 30px;padding: 30px 0;}
+
+        #kakaoTalkWrap > .list-btn-wrap {display:flex;justify-content: space-between;align-items: center;position: absolute;bottom:0;left:0; width: 100%;height:50px;background:#fff;}
+        #kakaoTalkWrap > .list-btn-wrap > * {width: 100%;height:100%;text-align: center;cursor: default;background-position: center;background-repeat: no-repeat;background-size: 30px;}
+        #kakaoTalkWrap > .list-btn-wrap .list-btn1 {background-image:url('images/카톡1.png');}
+        #kakaoTalkWrap > .list-btn-wrap .list-btn2 {background-image:url('images/카톡2.png');}
+        #kakaoTalkWrap > .list-btn-wrap .list-btn3 {background-image:url('images/카톡3.png');}
+        #kakaoTalkWrap > .list-btn-wrap .list-btn4 {background-image:url('images/카톡4.png');}
+        #kakaoTalkWrap > .list-btn-wrap .list-btn5 {background-image:url('images/카톡5.png');}
+        .kakao-open-btn {position:fixed; top: 20px; right: 20px;z-index: 999;}
+
+        /* 카카오톡 실행 */
+        #kakaoTalkOpenBtn:checked ~ #kakaoTalkWrap {display: block;}
+        /* 내용 실행 */
+        #listBtn1:checked ~ .kakao-main {display: block;}
+        #listBtn2:checked ~ .kakao-chat {display: block;}
+        #listBtn3:checked ~ .kakao-notice {display: block;}
+        #listBtn4:checked ~ .kakao-more {display: block;}
+        #listBtn5:checked ~ .kakao-etc {display: block;}
+        /* 버튼 바꾸기 */
+        #listBtn1:checked ~ .list-btn-wrap .list-btn1 {background-image: url('images/카톡1-1.png');}
+        #listBtn2:checked ~ .list-btn-wrap .list-btn2 {background-image: url('images/카톡2-1.png');}
+        #listBtn3:checked ~ .list-btn-wrap .list-btn3 {background-image: url('images/카톡3-1.png');}
+        #listBtn4:checked ~ .list-btn-wrap .list-btn4 {background-image: url('images/카톡4-1.png');}
+        #listBtn5:checked ~ .list-btn-wrap .list-btn5 {background-image: url('images/카톡5-1.png');}
+        /* 프로필 슬라이드 */
+        #photo-btn1:checked ~ .photo-slide label {transform: translateX(-100%);}
+        #photo-btn2:checked ~ .photo-slide label {transform: translateX(-200%);}
+        #photo-btn3:checked ~ .photo-slide label {transform: translateX(-300%);}
+        #photo-btn4:checked ~ .photo-slide label {transform: translateX(-400%);}
+        #photo-btn5:checked ~ .photo-slide label {transform: translateX(0%);}
+        /* 친구 목록 */
+        #frMoreBtn:checked ~ .fr-list-wrap {display: none;}
+        #frMoreBtn:checked ~ .fr-top .fr-more {transform: rotate(180deg);}
+        /* 프로필 리스트 클릭 */
+        #frListBtn:checked ~ .fr-profile {display: block;}
+        /* 프로필 상세 이미지 클릭 */
+        #infoPhotoBtn:checked + .info-photo-btn {position: fixed;top:0;left:0;width: 100% !important;height: 100% !important;background: url('images/pic-6.jpg') no-repeat center / contain, #000 !important;border-radius: 0 !important;}
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="kakaoTalkOpenBtn" checked>
+    <div id="kakaoTalkWrap">
+        <input type="radio" name="kakao-list" id="listBtn1" checked>
+        <input type="radio" name="kakao-list" id="listBtn2">
+        <input type="radio" name="kakao-list" id="listBtn3">
+        <input type="radio" name="kakao-list" id="listBtn4">
+        <input type="radio" name="kakao-list" id="listBtn5">
+        <div class="kakao-main">
+            <div class="main-top">친구</div><!--main-top-->
+            <div class="main-my">
+                <div class="my-photo">
+                    <input type="radio" name="photo-btn" id="photo-btn1">
+                    <input type="radio" name="photo-btn" id="photo-btn2">
+                    <input type="radio" name="photo-btn" id="photo-btn3">
+                    <input type="radio" name="photo-btn" id="photo-btn4">
+                    <input type="radio" name="photo-btn" id="photo-btn5">
+                    <div class="photo-slide">
+                        <label for="photo-btn1" class="photo1"></label>
+                        <label for="photo-btn2" class="photo2"></label>
+                        <label for="photo-btn3" class="photo3"></label>
+                        <label for="photo-btn4" class="photo4"></label>
+                        <label for="photo-btn5" class="photo5"></label>
+                    </div><!--photo-slide-->
+                </div>
+                <div class="my-text">
+                    <div class="name"><input type="text" placeholder="호박꽃"></div>
+                    <div class="word"><input type="text" placeholder="프로필 메세지를 적어주세요."></div>
+                </div>
+            </div><!--main-my-->
+            <div class="main-ad"></div><!--main-ad-->
+            <div class="main-fr">
+                <input type="checkbox" id="frMoreBtn">
+                <div class="fr-top">
+                    친구 1
+                    <label for="frMoreBtn" class="fr-more">▼</label>
+                </div><!--fr-top-->
+                <div class="fr-list-wrap">
+                    <input type="checkbox" id="frListBtn">
+                    <label for="frListBtn" class="fr-list">
+                        <div class="fr-photo"></div>
+                        <div class="fr-text">
+                            <p>할미꽃</p>
+                            <span>나는 나는 할미꽃이야</span>
+                        </div><!--fr-text-->
+                    </label><!--fr-list-->
+                    <div class="fr-profile">
+                        <label for="frListBtn" class="fr-profile-close">X</label>
+                        <div>
+                            <div class="fr-profile-info">
+                                <div class="info-photo">
+                                    <input type="checkbox" id="infoPhotoBtn">
+                                    <label for="infoPhotoBtn" class="info-photo-btn"></label>
+                                </div><!--info-photo-->
+                                <input type="text" value="할미꽃">
+                                <p>나는 나는 할미꽃이야</p>
+                            </div><!--fr-profile-info-->
+                            <div class="fr-profile-chat">
+                                <label for="kakaoTalkOpenBtn" class="fr-profile-chat-btn">1:1채팅</label>
+                            </div><!--fr-profile-chat-->
+                        </div>
+                    </div><!--fr-profile-->
+                </div><!--fr-listw-wrap-->
+            </div><!--main-fr-->
+        </div><!--kakao-main-->
+        <div class="kakao-chat">
+            <label for="kakaoTalkOpenBtn">닫기</label>
+        </div><!--kakao-chat-->
+        <div class="kakao-notice">
+            공지
+        </div><!--kakao-notice-->
+        <div class="kakao-more">
+            부속
+        </div><!--kakao-notice-->
+        <div class="kakao-etc">
+            기타
+        </div><!--kakao-notice-->
+        <div class="list-btn-wrap">
+            <label for="listBtn1" class="list-btn1"></label>
+            <label for="listBtn2" class="list-btn2"></label>
+            <label for="listBtn3" class="list-btn3"></label>
+            <label for="listBtn4" class="list-btn4"></label>
+            <label for="listBtn5" class="list-btn5"></label>
+        </div><!--list-btn-wrap-->
+    </div><!--kakaoTalkWrap-->
+    <label for="kakaoTalkOpenBtn" class="kakao-open-btn">←</label>
+</body>
+</html>
