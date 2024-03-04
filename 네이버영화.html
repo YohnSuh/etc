@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네이버 영화</title>
+    <style>
+        :root {
+            --color-main: #2a576f;
+            --color-sub: #eef4f8;
+            --color-black: #000;
+            --color-border:#e9e9ec;
+            --color-gray: #aaa;
+            --color-red: #fc4c4e;
+            --color-white: #fff;
+            --rgba-black: rgba(0,0,0,0.1);
+            --rgba-white: rgba(255,255,255,.1);
+            --inner-padding: 20px;
+            --inner-margin: 20px 0;
+            --inner-half: 10px;
+            --font-basic: 14px;
+            --font-big: 18px;
+            --font-medium: 16px;
+            --font-small: 12px;
+            --font-mini: 10px;
+        }
+        * {margin:0;padding:0;list-style: none;text-decoration: none;box-sizing: border-box;}
+        .movieWrap {font-size: var(--font-basic);color: var(--color-black);}
+        /* 영화 상단 */
+        .movieWrap .movie-top {background-color:var(--color-main);overflow: hidden;}
+        .movieWrap .movie-top .title-wrapper {padding:var(--inner-padding);}
+        .movieWrap .movie-top .title-wrapper > div {display: flex;align-items: center;color:var(--color-white);}
+        .movieWrap .movie-top .title-wrapper h2 {font-size: var(--font-big);}
+        .movieWrap .movie-top .title-wrapper span {font-size: var(--font-mini);border: 1px solid var(--color-gray);border-radius: 50px;padding: 2px 5px;margin-left:5px;}
+        .movieWrap .movie-top .title-wrapper > p {color:var(--color-gray);}
+        .movieWrap .movie-top .menu-list {width: 100%;overflow-x: scroll;white-space: nowrap;padding-bottom: 10px;padding-left: var(--inner-half);padding-right: var(--inner-half);}
+        .movieWrap .movie-top .menu-list::-webkit-scrollbar {display: none;}
+        .movieWrap .movie-top .menu-list > li {display: inline-block;line-height: 20px;color:var(--color-white);padding:5px 10px;background-color: var(--rgba-white);border-radius: 100px;}
+        /* 영화 영상 */
+        .movieWrap .cont-wrapper {}
+        .movieWrap .cont-wrapper .info1 .movie-wrapper {position: relative;}
+        .movieWrap .cont-wrapper .info1 .movie-wrapper::after {content:'';position: absolute;top: 0;left: 0;width: 100%;height: 30%;background: linear-gradient(to bottom, var(--color-main) 5%, transparent);}
+        .movieWrap .cont-wrapper .info1 .movie-wrapper > div {position: absolute;bottom:-20px;left: 0;width: 100%;height: 40%;background: linear-gradient(to top, var(--color-main) 25%, transparent);}
+        .movieWrap .cont-wrapper .info1 .movie-wrapper > iframe {width: 100%;height: 56.25vw;border: 0;}
+        .movieWrap .cont-wrapper .info1 .info-wrapper {position: relative;padding: var(--inner-padding);border-radius: 20px 20px 0 0;background-color: var(--color-white);}
+        /* 영화 기본 정보 */
+        .movieWrap .cont-wrapper .info1 .summary-info {position: relative;width: 100%;display: flex;justify-content: space-between;}
+        .movieWrap .cont-wrapper .info1 .summary-info > .text {width: 70%;padding-left:var(--inner-half);border-left: 5px solid var(--color-sub);}
+        .movieWrap .cont-wrapper .info1 .summary-info > .text > p > span {padding-right:5px;color:var(--color-gray);}
+        .movieWrap .cont-wrapper .info1 .summary-info > .poster {position: absolute;bottom:0;right:0;width: 30%;border-radius: 10px;overflow: hidden;}
+        .movieWrap .cont-wrapper .info1 .summary-info > .poster > img {width: 100%;}
+        .movieWrap .cont-wrapper .info1 .details-info {}
+        .movieWrap .cont-wrapper .info1 .details-info > .story {display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient:vertical;margin: var(--inner-half) 0;text-overflow: ellipsis;word-break: break-all;overflow: hidden;}
+        .movieWrap .cont-wrapper .info1 .details-info > .review {display: flex;justify-content: space-between;margin-bottom: var(--inner-half);}
+        .movieWrap .cont-wrapper .info1 .details-info > .review > div {background-color: var(--color-sub);width: 100%;padding: var(--inner-half);text-align: center;font-weight: bold;border-radius:10px;}
+        .movieWrap .cont-wrapper .info1 .details-info > .review > div:not(div:last-child) {margin-right: 5px;}
+        .movieWrap .cont-wrapper .info1 .details-info > .review > div > span {font-size: var(--font-small);color:var(--color-main);}
+        .movieWrap .cont-wrapper .info1 .details-info > .review > div .star {color:var(--color-red);}
+        .movieWrap .cont-wrapper .info1 .details-info > .booking {display: flex;justify-content: space-between;border-top: 1px solid var(--color-border);padding-top: var(--inner-half);}
+        .movieWrap .cont-wrapper .info1 .details-info > .booking > a {width:100%;border:1px solid var(--color-border);padding: var(--inner-half);text-align: center;color:inherit;border-radius: 5px;}
+        .movieWrap .cont-wrapper .info1 .details-info > .booking > a:last-child {width: 20%;margin-left: 5px;color:var(--color-red);}
+        .poster > img,
+        .photo > img {width: 100px;}
+    </style>
+</head>
+<body>
+    <div class="movieWrap">
+        <div class="movie-top">
+            <div class="title-wrapper">
+                <div><h2>파묘</h2><span>상영중</span></div>
+                <p>영화 | Exhuma | 2024</p>
+            </div><!--title-wraper-->
+            <ul class="menu-list">
+                <li class="menu-item">소개</li>
+                <li class="menu-item">기본정보</li>
+                <li class="menu-item">감독/출연</li>
+                <li class="menu-item">상영일정</li>
+                <li class="menu-item">관람평</li>
+                <li class="menu-item">포토</li>
+            </ul><!--menu-list-->
+        </div><!--movie-top-->
+        <div class="cont-wrapper">
+            <div class="cont-item info1">
+                <div class="movie-wrapper">
+                    <iframe src="https://www.youtube.com/embed/rjW9E1BR_30?si=ihgsOueEQ7NsJt4J&amp;controls=0"></iframe>
+                    <div></div><!--txt-->
+                </div><!--movie-wrapper-->
+                <div class="info-wrapper">
+                    <div class="summary-info">
+                        <div class="text">
+                            <p><span>개요</span>미스터리 | 대한민국 | 134분</p>
+                            <p><span>개봉</span>2024.02.22</p>
+                        </div><!--text-->
+                        <div class="poster">
+                            <img src="images/파묘봉길.jpeg">
+                        </div><!--poster-->
+                    </div><!--summary-info-->
+                    <div class="details-info">
+                        <div class="story">
+                            <p>미국 LA, 거액의 의뢰를 받은 무당 ‘화림’(김고은)과 ‘봉길’(이도현)은 기이한 병이 대물림되는 집안의 장손을 만난다. 조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고, 돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사 ‘영근’(유해진)이 합류한다. “전부 잘 알 거야… 묘 하나 잘못 건들면 어떻게 되는지” 절대 사람이 묻힐 수 없는 악지에 자리한 기이한 묘. ‘상덕’은 불길한 기운을 느끼고 제안을 거절하지만, ‘화림’의 설득으로 결국 파묘가 시작되고… 나와서는 안될 것이 나왔다.</p>
+                        </div><!--story-->
+                        <div class="review">
+                            <div>
+                                <span>순위|누적 관객수</span>
+                                <p>1위 / 603만명</p>
+                            </div>
+                            <div>
+                                <span>실관람객 평점</span>
+                                <p><span class="star">★</span>8.24</p>
+                            </div>
+                            <div>
+                                <span>네티즌 평점</span>
+                                <p><span class="star">★</span>8.05</p>
+                            </div>
+                        </div><!--review-->
+                        <div class="booking">
+                            <a href="#">예매하기</a>
+                            <a href="#">♡</a>
+                        </div><!--booking-->
+                    </div><!--details-info-->
+                </div><!--info-wrapper-->
+            </div><!--cont-item-->
+            <div class="cont-item info2">
+                <div class="basic">
+                    <div class="text">
+                        <p><span>개봉</span>2024.02.22</p>
+                        <p><span>등급</span>15세 관람가</p>
+                        <p><span>장르</span>미스터리, 공포</p>
+                        <p><span>국가</span>대한민국</p>
+                        <p><span>러닝타임</span>134분</p>
+                        <p><span>배급</span>(주)쇼박스</p>
+                    </div><!--text-->
+                    <div class="poster">
+                        <img src="images/파묘봉길.jpeg">
+                    </div><!--poster-->
+                </div><!--basic-->
+                <div class="booking">
+                    <a href="#">예매하기</a>
+                    <a href="#">♡</a>
+                </div><!--booking-->
+            </div><!--cont-item-->
+            <div class="cont-item info3">
+                <div>
+                    <p>감독</p>
+                    <div class="people">
+                        <a href="#">
+                            <div class="photo">
+                                <img src="images/파묘프로필.jpeg">
+                            </div><!--photo-->
+                            <div class="txt">
+                                <p>최민식</p>
+                                <span>감독</span>
+                            </div><!--txt-->
+                        </a>
+                    </div><!--people-->
+                </div>
+                <div>
+                    <p>주연</p>
+                    <div class="people">
+                        <a href="#">
+                            <div class="photo">
+                                <img src="images/파묘프로필.jpeg">
+                            </div><!--photo-->
+                            <div class="txt">
+                                <p>최민식</p>
+                            </div><!--txt-->
+                        </a>
+                        <a href="#">
+                            <div class="photo">
+                                <img src="images/파묘프로필.jpeg">
+                            </div><!--photo-->
+                            <div class="txt">
+                                <p>최민식</p>
+                            </div><!--txt-->
+                        </a>
+                        <a href="#">
+                            <div class="photo">
+                                <img src="images/파묘프로필.jpeg">
+                            </div><!--photo-->
+                            <div class="txt">
+                                <p>최민식</p>
+                            </div><!--txt-->
+                        </a>
+                        <a href="#">
+                            <div class="photo">
+                                <img src="images/파묘프로필.jpeg">
+                            </div><!--photo-->
+                            <div class="txt">
+                                <p>최민식</p>
+                            </div><!--txt-->
+                        </a>
+                    </div><!--people-->
+                </div>
+            </div><!--cont-item-->
+            <div class="cont-item info4">
+
+            </div><!--cont-item-->
+            <div class="cont-item info5">
+
+            </div><!--cont-item-->
+            <div class="cont-item info6">
+
+            </div><!--cont-item-->
+        </div><!--cont-wrapper-->
+    </div><!--movieWrap-->
+</body>
+</html>
