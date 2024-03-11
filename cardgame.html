@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cardgame</title>
+    <style>
+        #gameWrap {width: 90%;max-width: 700px;border:1px solid;padding:10px;margin: 0 auto;box-sizing: border-box;}
+        #gameWrap input {display: none;}
+        #gameWrap > .time-wrapper {padding: 5px;box-sizing: border-box;}
+        #gameWrap > .time-wrapper > .time-bar {width: 100%;height: 10px;border-radius: 10px;background:coral;}
+        #gameWrap > .con-wrapper {position: relative;width: 100%;}
+        #gameWrap > .con-wrapper::after {content: '';display: block;padding-bottom:100%;}
+        #gameWrap > .con-wrapper > .card-box {position: absolute;top:0;left: 0;display:grid; grid-template-columns: repeat(4, 1fr);grid-template-rows: repeat(3, 1fr);width: 100%;height: 100%;}
+        #gameWrap > .con-wrapper > .card-box  > .item {display: block;width: 100%;height: 100%;padding:5px;box-sizing: border-box;perspective: 2000px;}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper {position: relative;width: 100%;height: 100%;transition: transform 1s, opacity 1s 2s;transform-style:preserve-3d;}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper > div {display: flex;justify-content: center;align-items: center;background-color: #fff;padding: 10px;box-sizing: border-box;position: absolute;top:0;left:0;width: 100%;height: 100%;backface-visibility: hidden;border:1px solid #eee;border-radius: 10px;box-shadow: 0 0 5px rgba(0, 0, 0, .1);}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper > .back {transform: rotateY(180deg);}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper > .back::after {content: ''; display: block; width: 100%;height: 100%;border-radius: 7.5px;}
+        #gameWrap > .con-wrapper > .card-box .card1 > .back::after {background: lightcoral;}
+        #gameWrap > .con-wrapper > .card-box .card2 > .back::after {background: cornflowerblue;}
+        #gameWrap > .con-wrapper > .card-box .card3 > .back::after {background: pink;}
+        #gameWrap > .con-wrapper > .card-box .card4 > .back::after {background: powderblue;}
+        #gameWrap > .con-wrapper > .card-box .card5 > .back::after {background: palegoldenrod;}
+        #gameWrap > .con-wrapper > .card-box .card6 > .back::after {background: palevioletred;}
+        #gameWrap > .con-wrapper > .card-box .card7 > .back::after {background: palegoldenrod;}
+        #gameWrap > .con-wrapper > .card-box .card8 > .back::after {background: cornflowerblue;}
+        #gameWrap > .con-wrapper > .card-box .card9 > .back::after {background: palevioletred;}
+        #gameWrap > .con-wrapper > .card-box .card10 > .back::after {background: lightcoral;}
+        #gameWrap > .con-wrapper > .card-box .card11 > .back::after {background: powderblue;}
+        #gameWrap > .con-wrapper > .card-box .card12 > .back::after {background: pink;}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper > .front::after {content: ''; display: block; width: 100%;height: 100%;border-radius: 7.5px;background-color: aliceblue;}
+        #gameWrap > .con-wrapper > .card-box .card-wrapper > .hidden {display:none;position: absolute;top:0;left: 0;width: 100%;height: 100%;border: 1px solid;}
+        #gameWrap > .con-wrapper > .card-box > .item:hover .card-wrapper {}
+
+        #flip1:checked ~ .item .card1, #flip2:checked ~ .item .card2,
+        #flip3:checked ~ .item .card3, #flip4:checked ~ .item .card4,
+        #flip5:checked ~ .item .card5, #flip6:checked ~ .item .card6,
+        #flip7:checked ~ .item .card7, #flip8:checked ~ .item .card8,
+        #flip9:checked ~ .item .card9, #flip10:checked ~ .item .card10,
+        #flip11:checked ~ .item .card11, #flip12:checked ~ .item .card12 {transform: rotateY(180deg);}
+        
+        #flip1:checked ~ .item .card10 > .hidden, #flip10:checked ~ .item .card1 > .hidden,
+        #flip2:checked ~ .item .card8 > .hidden, #flip8:checked ~ .item .card2 > .hidden,
+        #flip3:checked ~ .item .card12 > .hidden, #flip12:checked ~ .item .card3 > .hidden,
+        #flip4:checked ~ .item .card11 > .hidden, #flip11:checked ~ .item .card4 > .hidden,
+        #flip5:checked ~ .item .card7 > .hidden, #flip7:checked ~ .item .card5 > .hidden,
+        #flip6:checked ~ .item .card9 > .hidden, #flip9:checked ~ .item .card6 > .hidden {display: block;}
+
+        #set1:checked ~ .con-wrapper > .card-box > .item .card1 {transform: rotateY(180deg);opacity: 0;}
+    </style>
+</head>
+<body>
+    <div id="gameWrap">
+        <div class="time-wrapper">
+            <div class="time-bar"></div><!--time-bar-->
+        </div><!--time-wrapper-->
+        <input type="radio" id="set1">
+        <input type="radio" id="set2">
+        <input type="radio" id="set3">
+        <input type="radio" id="set4">
+        <input type="radio" id="set5">
+        <input type="radio" id="set6">
+        <input type="radio" id="set7">
+        <input type="radio" id="set8">
+        <input type="radio" id="set9">
+        <input type="radio" id="set10">
+        <input type="radio" id="set11">
+        <input type="radio" id="set12">
+        <div class="con-wrapper">
+            <div class="card-box">
+                <input type="radio" name="card-flip" id="flip1">
+                <input type="radio" name="card-flip" id="flip2">
+                <input type="radio" name="card-flip" id="flip3">
+                <input type="radio" name="card-flip" id="flip4">
+                <input type="radio" name="card-flip" id="flip5">
+                <input type="radio" name="card-flip" id="flip6">
+                <input type="radio" name="card-flip" id="flip7">
+                <input type="radio" name="card-flip" id="flip8">
+                <input type="radio" name="card-flip" id="flip9">
+                <input type="radio" name="card-flip" id="flip10">
+                <input type="radio" name="card-flip" id="flip11">
+                <input type="radio" name="card-flip" id="flip12">
+                <!--item1-->
+                <label for="flip1" class="item">
+                    <div class="card-wrapper card1">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set1" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item2-->
+                <label for="flip2" class="item">
+                    <div class="card-wrapper card2">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set2" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item3-->
+                <label for="flip3" class="item">
+                    <div class="card-wrapper card3">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set3" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item4-->
+                <label for="flip4" class="item">
+                    <div class="card-wrapper card4">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set4" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item5-->
+                <label for="flip5" class="item">
+                    <div class="card-wrapper card5">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for=set5" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item6-->
+                <label for="flip6" class="item">
+                    <div class="card-wrapper card6">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set6" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item7-->
+                <label for="flip7" class="item">
+                    <div class="card-wrapper card7">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set7" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item8-->
+                <label for="flip8" class="item">
+                    <div class="card-wrapper card8">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set8" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item9-->
+                <label for="flip9" class="item">
+                    <div class="card-wrapper card9">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set9" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item10-->
+                <label for="flip10" class="item">
+                    <div class="card-wrapper card10">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set10" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item11-->
+                <label for="flip11" class="item">
+                    <div class="card-wrapper card11">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set11" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+                <!--item12-->
+                <label for="flip12" class="item">
+                    <div class="card-wrapper card12">
+                        <div class="back"></div><!--back-->
+                        <div class="front"></div><!--front-->
+                        <label for="set12" class="hidden"></label><!--hidden-->
+                    </div><!--card-wrapper-->
+                </label ><!--item-->
+            </div><!--card-box-->
+        </div><!--con-wrapper-->
+        <div class="fail">
+
+        </div><!--fail-->
+        <div class="success">
+            <span>you win!</span>
+        </div><!--success-->
+    </div><!--gameWrap-->
+</body>
+</html>
