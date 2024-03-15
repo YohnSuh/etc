@@ -25,6 +25,47 @@
         .m_ad_scroll .scroll .item5 > div {background: url('#') no-repeat center / cover;}
         .m_ad_scroll .scroll .item6 > div {background: url('#') no-repeat center / cover;}
         .m_ad_scroll .scroll .scr-item > p {font-size: 16px;word-wrap: break-word;}
+
+        /* 상단 메뉴 */
+        .topMenu {position: fixed;top:0;left: 0;width: 100%;z-index:99999;}
+        .topMenu * {margin: 0;padding: 0;box-sizing: border-box;}
+        .topMenu input {display: none;}
+        .topMenu > .menu-list {display: flex;padding: 10px;width: 100%;}
+        .topMenu > .menu-list > label {flex: 1;margin-right: 10px;font-size: 12px;border-radius: 20px;text-align: center;padding: 10px 0;backdrop-filter: blur(5px);}
+        .topMenu > .menu-list > label:last-child {margin-right: 0;}
+        .topMenu > .menu-list > .menu-btn1 {background: #fcd6df;}
+        .topMenu > .menu-list > .menu-btn2 {background: #d1f3e8;}
+        .topMenu > .menu-list > .menu-btn3 {background: #fef4cd;}
+        .topMenu > .sub-menu-list {padding: 0 10px;text-align: center}
+        .topMenu > .sub-menu-list > div {display: none;border-radius: 20px;margin-bottom: 10px;}
+        .topMenu > .sub-menu-list > .sub1 {background: rgb(244, 119, 148);}
+        .topMenu > .sub-menu-list > .sub2 {background: rgb(102, 216, 180);}
+        .topMenu > .sub-menu-list > .sub3 {background: rgb(252, 217, 88);}
+        .topMenu > .sub-menu-list > div > a {display: block;color:#fff;text-decoration: none;padding: 10px 0;}
+        .topMenu > .sub-menu-list > div > a:hover {background: rgba(0,0,0,.05);}
+        .topMenu > .sub-menu-list > .menu-btn-close {display: none;justify-content: center;align-items: center;margin:0 auto;width: 30px;height: 30px;border-radius: 30px;color:#fff;font-size:12px;}
+        @media all and (min-width:768px) {
+            .topMenu {max-width: 300px;top: 0; left: 50%; transform: translateX(-50%);}
+        }
+
+        #menuBtn1:checked ~ .menu-list > .menu-btn1 {background: rgb(244, 119, 148);}
+        #menuBtn2:checked ~ .menu-list > .menu-btn2 {background: rgb(102, 216, 180);}
+        #menuBtn3:checked ~ .menu-list > .menu-btn3 {background: rgb(252, 217, 88);}
+        #menuBtn1:checked ~ .sub-menu-list .sub1,
+        #menuBtn2:checked ~ .sub-menu-list .sub2,
+        #menuBtn3:checked ~ .sub-menu-list .sub3 {display: block;}
+        input[id^="menuBtn"]:checked ~ .sub-menu-list > .menu-btn-close {display: flex;}
+        #menuBtn1:checked ~ .sub-menu-list > .menu-btn-close {background: rgb(244, 119, 148);}
+        #menuBtn2:checked ~ .sub-menu-list > .menu-btn-close {background: rgb(102, 216, 180);}
+        #menuBtn3:checked ~ .sub-menu-list > .menu-btn-close {background: rgb(252, 217, 88);}
+
+        .box {display:flex;justify-content:center;align-items: center;font-size: 12px;position:absolute;left:0;width: 50px;height: 50px;background-color: pink;transition: 2s;}
+        .box > .item2 {display: none;}
+        @media all and (min-width: 500px) {
+            .box {left:calc(100% - 50px);border-radius: 50px;background-color: powderblue;transform:rotate(360deg);}
+            .box > .item1 {display: none;}
+            .box > .item2 {display: inline;}
+        }
     </style>
 </head>
 <body>
@@ -63,5 +104,42 @@
             </a><!--scr-item-->
         </div><!--scroll-->
     </div><!--m_ad_scroll-->
+
+    <!--상단 메뉴-->
+    <div class="topMenu">
+        <input type="radio" name="menu-btn" id="menuBtn1">
+        <input type="radio" name="menu-btn" id="menuBtn2">
+        <input type="radio" name="menu-btn" id="menuBtn3">
+        <input type="radio" name="menu-btn" id="menuBtnclose">
+        <div class="menu-list">
+            <label for="menuBtn1" class="menu-btn1">menu1</label>
+            <label for="menuBtn2" class="menu-btn2">menu2</label>
+            <label for="menuBtn3" class="menu-btn3">menu3</label>
+        </div><!--menu-list-->
+        <div class="sub-menu-list">
+            <div class="sub1">
+                <a href="#">1-sub-menu1</a>
+                <a href="#">1-sub-menu2</a>
+                <a href="#">1-sub-menu3</a>
+            </div><!--sub1-->
+            <div class="sub2">
+                <a href="#">2-sub-menu1</a>
+                <a href="#">2-sub-menu2</a>
+                <a href="#">2-sub-menu3</a>
+            </div><!--sub1-->
+            <div class="sub3">
+                <a href="#">3-sub-menu1</a>
+                <a href="#">3-sub-menu2</a>
+                <a href="#">3-sub-menu3</a>
+            </div><!--sub1-->
+            <label for="menuBtnclose" class="menu-btn-close">X</label>
+        </div><!--sub-menu-list-->
+    </div><!--topMenu-->
+
+    <!--반응형 테스트-->
+    <div class="box">
+        <span class="item1">Hello</span>
+        <span class="item2">World</span>
+    </div>
 </body>
 </html>
