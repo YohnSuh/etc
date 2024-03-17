@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paintTest</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box;}
+        .paintWrap {display: grid;grid-template-columns: repeat(4,1fr);grid-template-rows: repeat(3, 1fr);width:90%;max-width: 700px;margin: 0 auto;}
+        .paintWrap > label {width: 100%;border: 1px solid;position: relative;}
+        .paintWrap > label::after {content: ''; display: block; padding-bottom: 100%;}
+        .paint1 {background: url('images/43.jpg') no-repeat 0 0 / 400%;}
+        .paint2 {background: url('images/43.jpg') no-repeat calc(100% / 3) 0 / 400%;}
+        .paint3 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) 0 / 400%;}
+        .paint4 {background: url('images/43.jpg') no-repeat 100% 0 / 400%;}
+        .paint5 {background: url('images/43.jpg') no-repeat 0 center / 400%;}
+        .paint6 {background: url('images/43.jpg') no-repeat calc(100% / 3) center / 400%;}
+        .paint7 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) center / 400%;}
+        .paint8 {background: url('images/43.jpg') no-repeat 100% center / 400%;}
+        .paint9 {background: url('images/43.jpg') no-repeat 0 bottom / 400%;}
+        .paint10 {background: url('images/43.jpg') no-repeat calc(100% / 3) bottom / 400%;}
+        .paint11 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) bottom / 400%;}
+        .paint12 {background: url('images/43.jpg') no-repeat 100% bottom / 400%;}
+
+        .item > svg {position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);width: 80%;height:80%;}
+
+        #test:checked ~ .paint4 > svg {fill: red;}
+    </style>
+</head>
+<body>
+    <div class="paintWrap">
+      <input type="checkbox" id="test">
+        <label for="" class="item paint1">
+
+          
+        </label>
+        <label for="" class="item paint2">
+        </label>
+        <label for="test" class="item paint4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.35 212.68">
+            <path d="M72.8,.78c-11.2,16.75-19.45,35.32-25.3,54.57s-9.46,39.74-11.56,60.03c-1.18,11.42-1.91,22.88-2.32,34.34-.07,1.93,2.93,1.93,3,0,.74-20.25,2.41-40.5,5.94-60.46,3.47-19.61,8.71-39.03,16.69-57.32,4.51-10.33,9.87-20.28,16.14-29.65,1.08-1.61-1.52-3.11-2.59-1.51h0Z"/>
+            <path d="M34.93,152.09c12.67,4.31,25.83,7.02,39.16,8.14,1.92,.16,1.91-2.84,0-3-13.06-1.09-25.95-3.81-38.36-8.03-1.83-.62-2.62,2.27-.8,2.89h0Z"/>
+            <path d="M75.66,3.26c.89-.51,1.95-.26,2.9-.09,1.02,.18,2.04,.37,3.05,.58,2.18,.44,4.34,.93,6.49,1.48,4.37,1.11,8.69,2.46,12.92,4.01,8.42,3.1,16.49,7.09,24.1,11.85,1.64,1.03,3.15-1.57,1.51-2.59-12.59-7.87-26.49-13.64-40.97-16.94-2.02-.46-4.05-.87-6.09-1.24-1.86-.33-3.71-.64-5.43,.35s-.16,3.56,1.51,2.59h0Z"/>
+            <path d="M124.32,18.97c-2.45,19.04-6.51,37.87-12.07,56.25-5.56,18.38-12.63,36.3-21.14,53.52-4.79,9.7-10.04,19.16-15.71,28.37-1.02,1.65,1.58,3.16,2.59,1.51,10.17-16.51,18.94-33.86,26.26-51.82,7.32-17.97,13.15-36.55,17.4-55.49,2.4-10.68,4.28-21.48,5.67-32.34,.25-1.91-2.76-1.89-3,0h0Z"/>
+            <path d="M42.48,154.78c.22,2.46-1.75,5.28,1.03,7.02,1.26,.79,3.05,.93,4.47,1.26,1.81,.42,3.61,.84,5.42,1.26,3.39,.79,6.96,1.66,10.42,.78,2.84-.72,5.24-2.64,6.74-5.13,1-1.66-1.59-3.17-2.59-1.51-1.16,1.92-2.98,3.3-5.17,3.8-2.84,.65-5.83-.19-8.6-.83s-5.5-1.23-8.24-1.91c-1.04-.26-1.12-.49-.9-1.52s.53-2.12,.43-3.22c-.17-1.91-3.17-1.93-3,0h0Z"/>
+            <path d="M39.28,95.21c16.66-1.91,34.63-3.45,50.1,4.44,3.88,1.98,7.42,4.5,10.48,7.6,1.36,1.38,3.48-.74,2.12-2.12-12.12-12.31-30.13-15.1-46.67-14.34-5.36,.25-10.7,.81-16.03,1.42-1.9,.22-1.92,3.22,0,3h0Z"/>
+            <path d="M49.66,57.11c17.12-1.09,35.1-2.15,51.16,5.03,4.36,1.95,8.48,4.39,12.35,7.17,1.57,1.13,3.07-1.47,1.51-2.59-7-5.03-14.83-8.85-23.2-10.94s-17.57-2.6-26.42-2.42c-5.14,.11-10.27,.42-15.4,.75-1.92,.12-1.93,3.12,0,3h0Z"/>
+            <path class="cls-1" d="M90.85,174.62c-1.43-5.96-16.53-7.46-33.73-3.34-.22,.05-.43,.11-.65,.16-2.81-6.31-14.93-8.89-30.77-5.1C7.19,170.77-.98,178.83,.72,185.96c1.19,4.97,8.34,7.82,17.82,7.83-7.77,4.16-12.28,8.73-11.39,12.44,1.57,6.54,19.32,7.9,39.66,3.03,20.34-4.87,35.56-14.12,34-20.66-.17-.72-.55-1.38-1.1-1.97,7.55-3.87,12.02-8.35,11.14-12.01Z"/>
+          </svg>
+        </label>
+        <label for="" class="item paint5"></label>
+        <label for="" class="item paint6"></label>
+        <label for="" class="item paint7"></label>
+        <label for="" class="item paint8"></label>
+        <label for="" class="item paint9"></label>
+        <label for="" class="item paint10"></label>
+        <label for="" class="item paint11"></label>
+        <label for="" class="item paint12"></label>
+    </div><!--paintWrap-->
+</body>
+</html>
