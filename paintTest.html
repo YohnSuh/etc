@@ -6,13 +6,14 @@
     <title>paintTest</title>
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
-        .paintWrap {display: grid;grid-template-columns: repeat(4,1fr);grid-template-rows: repeat(3, 1fr);width:90%;max-width: 700px;margin: 0 auto;}
+        .paintWrap {position: relative;display: grid;grid-template-columns: repeat(4,1fr);grid-template-rows: repeat(3, 1fr);width:90%;max-width: 700px;margin: 0 auto;}
         .paintWrap input {display: none;}
-        .paintWrap > label {width: 100%;border: 1px solid;position: relative;}
+        .paintWrap > label {width: 100%;position: relative;}
         .paintWrap > label::after {content: ''; display: block; padding-bottom: 100%;}
         .paintWrap .item > div svg {position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);width: 90%;height:90%;}
-        .paintWrap .item > .on {visibility: hidden;}
-        .paintWrap .item > label {display:none;position: absolute;width: 100%;height: 100%;background: rgba(0, 0, 0, .2);}
+        .paintWrap .item > .on svg {display: none;}
+        .paintWrap .item > label {display:none;position: absolute;width: 100%;height: 100%;}
+        .result {display: none;position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);color: #fff;}
         /* 물감 svg */
         /* 물감 클릭 전 */
         .paint-fill {fill: #fff;}
@@ -35,20 +36,83 @@
         #paintOn9:checked ~ .paint9 > .off, #paintOn10:checked ~ .paint10 > .off,
         #paintOn11:checked ~ .paint11 > .off, #paintOn12:checked ~ .paint12 > .off {display: none;}
 
-        #paintOn1:checked ~ .paint1 > .on, #paintOn2:checked ~ .paint2 > .on,
-        #paintOn3:checked ~ .paint3 > .on, #paintOn4:checked ~ .paint4 > .on,
-        #paintOn5:checked ~ .paint5 > .on, #paintOn6:checked ~ .paint6 > .on,
-        #paintOn7:checked ~ .paint7 > .on, #paintOn8:checked ~ .paint8 > .on,
-        #paintOn9:checked ~ .paint9 > .on, #paintOn10:checked ~ .paint10 > .on,
-        #paintOn11:checked ~ .paint11 > .on, #paintOn12:checked ~ .paint12 > .on {visibility: visible;}
+        #paintOn1:checked ~ .paint1 > .on svg, #paintOn2:checked ~ .paint2 > .on svg,
+        #paintOn3:checked ~ .paint3 > .on svg, #paintOn4:checked ~ .paint4 > .on svg,
+        #paintOn5:checked ~ .paint5 > .on svg, #paintOn6:checked ~ .paint6 > .on svg,
+        #paintOn7:checked ~ .paint7 > .on svg, #paintOn8:checked ~ .paint8 > .on svg,
+        #paintOn9:checked ~ .paint9 > .on svg, #paintOn10:checked ~ .paint10 > .on svg,
+        #paintOn11:checked ~ .paint11 > .on svg, #paintOn12:checked ~ .paint12 > .on svg {display: block;}
 
-        #paintOn1:checked ~ .paint8 > label {display: block;}
-        #paintSet8:checked ~ .paint8 > .off {display: none;}
-        #paintSet8:checked ~ .paint8 > .on {display: block;}
-        #paintSet8:checked ~ .paint1 > .on {display: none;transition: 1s 3s;}
-        /* #paintSet1:checked ~ .paint1, #paintSet8:checked ~ .paint1 {background: url('images/43.jpg') no-repeat 0 0 / 400%;}
-        #paintSet1:checked ~ .paint8, #paintSet8:checked ~ .paint8 {background: url('images/43.jpg') no-repeat 100% center / 400%;} */
         
+        /* 같은 색 위치에 label 띄우기 */
+        #paintOn1:checked ~ .paint8 > label, #paintOn8:checked ~ .paint1 > label,
+        #paintOn2:checked ~ .paint7 > label, #paintOn7:checked ~ .paint2 > label,
+        #paintOn3:checked ~ .paint9 > label, #paintOn9:checked ~ .paint3 > label,
+        #paintOn4:checked ~ .paint10 > label, #paintOn10:checked ~ .paint4 > label,
+        #paintOn5:checked ~ .paint11 > label, #paintOn11:checked ~ .paint5 > label,
+        #paintOn6:checked ~ .paint12 > label, #paintOn12:checked ~ .paint6 > label {display: block;}
+
+        /* 짠 물감 나오게 */
+        #paintSet1:checked ~ .paint1 > .on svg, #paintSet7:checked ~ .paint7 > .on svg,
+        #paintSet2:checked ~ .paint2 > .on svg, #paintSet8:checked ~ .paint8 > .on svg,
+        #paintSet3:checked ~ .paint3 > .on svg, #paintSet9:checked ~ .paint9 > .on svg,
+        #paintSet4:checked ~ .paint4 > .on svg, #paintSet10:checked ~ .paint10 > .on svg,
+        #paintSet5:checked ~ .paint5 > .on svg, #paintSet11:checked ~ .paint11 > .on svg,
+        #paintSet6:checked ~ .paint6 > .on svg, #paintSet12:checked ~ .paint12 > .on svg {display: block;}
+
+        /* 기본 물감 사라지게 */
+        #paintSet1:checked ~ .paint1> .off svg, #paintSet7:checked ~ .paint7 > .off svg,
+        #paintSet2:checked ~ .paint2> .off svg, #paintSet8:checked ~ .paint8 > .off svg,
+        #paintSet3:checked ~ .paint3> .off svg, #paintSet9:checked ~ .paint9 > .off svg,
+        #paintSet4:checked ~ .paint4> .off svg, #paintSet10:checked ~ .paint10 > .off svg,
+        #paintSet5:checked ~ .paint5> .off svg, #paintSet11:checked ~ .paint11 > .off svg,
+        #paintSet6:checked ~ .paint6> .off svg, #paintSet12:checked ~ .paint12 > .off svg {display: none;}
+
+        /* 같은 색 찾으면 사라지게 */
+        #paintSet1:checked ~ .paint1 > div, #paintSet1:checked ~ .paint8 > div,
+        #paintSet2:checked ~ .paint2 > div, #paintSet2:checked ~ .paint7 > div,
+        #paintSet3:checked ~ .paint3 > div, #paintSet3:checked ~ .paint9 > div,
+        #paintSet4:checked ~ .paint4 > div, #paintSet4:checked ~ .paint10 > div,
+        #paintSet5:checked ~ .paint5 > div, #paintSet5:checked ~ .paint11 > div,
+        #paintSet6:checked ~ .paint6 > div, #paintSet6:checked ~ .paint12 > div,
+        #paintSet7:checked ~ .paint7 > div, #paintSet7:checked ~ .paint2 > div,
+        #paintSet8:checked ~ .paint8 > div, #paintSet8:checked ~ .paint1 > div,
+        #paintSet9:checked ~ .paint9 > div, #paintSet9:checked ~ .paint3 > div,
+        #paintSet10:checked ~ .paint10 > div, #paintSet10:checked ~ .paint4 > div,
+        #paintSet11:checked ~ .paint11 > div, #paintSet11:checked ~ .paint5 > div,
+        #paintSet12:checked ~ .paint12 > div, #paintSet12:checked ~ .paint6 > div {visibility: hidden; transition: 0s .5s;}
+
+        /* 색 찾고 클릭 금지 */
+        #paintSet1:checked ~ .paint8, #paintSet1:checked ~ .paint1,
+        #paintSet2:checked ~ .paint7, #paintSet2:checked ~ .paint2,
+        #paintSet3:checked ~ .paint9, #paintSet3:checked ~ .paint3,
+        #paintSet4:checked ~ .paint10, #paintSet4:checked ~ .paint4,
+        #paintSet5:checked ~ .paint11, #paintSet5:checked ~ .paint5,
+        #paintSet6:checked ~ .paint12, #paintSet6:checked ~ .paint6,
+        #paintSet7:checked ~ .paint2, #paintSet7:checked ~ .paint7,
+        #paintSet8:checked ~ .paint1, #paintSet8:checked ~ .paint8,
+        #paintSet9:checked ~ .paint3, #paintSet9:checked ~ .paint9,
+        #paintSet10:checked ~ .paint4, #paintSet10:checked ~ .paint10,
+        #paintSet11:checked ~ .paint5, #paintSet11:checked ~ .paint11,
+        #paintSet12:checked ~ .paint6, #paintSet12:checked ~ .paint12 {pointer-events: none;}
+
+        /* 색 찾고 배경그림 넣기 */
+        #paintSet1:checked ~ .paint1, #paintSet8:checked ~ .paint1 {background: url('images/43.jpg') no-repeat 0 0 / 400%;}
+        #paintSet2:checked ~ .paint2, #paintSet7:checked ~ .paint2 {background: url('images/43.jpg') no-repeat calc(100% / 3) 0 / 400%;}
+        #paintSet3:checked ~ .paint3, #paintSet9:checked ~ .paint3 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) 0 / 400%;}
+        #paintSet4:checked ~ .paint4, #paintSet10:checked ~ .paint4 {background: url('images/43.jpg') no-repeat 100% 0 / 400%;}
+        #paintSet5:checked ~ .paint5, #paintSet11:checked ~ .paint5 {background: url('images/43.jpg') no-repeat 0 center / 400%;}
+        #paintSet6:checked ~ .paint6, #paintSet12:checked ~ .paint6 {background: url('images/43.jpg') no-repeat calc(100% / 3) center / 400%;}
+        #paintSet7:checked ~ .paint7, #paintSet2:checked ~ .paint7 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) center / 400%;}
+        #paintSet8:checked ~ .paint8, #paintSet1:checked ~ .paint8 {background: url('images/43.jpg') no-repeat 100% center / 400%;}
+        #paintSet9:checked ~ .paint9, #paintSet3:checked ~ .paint9 {background: url('images/43.jpg') no-repeat 0 bottom/ 400%;}
+        #paintSet10:checked ~ .paint10, #paintSet4:checked ~ .paint10 {background: url('images/43.jpg') no-repeat calc(100% / 3) bottom / 400%;}
+        #paintSet11:checked ~ .paint11, #paintSet5:checked ~ .paint11 {background: url('images/43.jpg') no-repeat calc(100% / 3 *2) bottom/ 400%;}
+        #paintSet12:checked ~ .paint12, #paintSet6:checked ~ .paint12 {background: url('images/43.jpg') no-repeat 100% bottom / 400%;}
+
+        /* 결과 */
+        input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~
+        input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ .result {display: block;}
         /* 같은 색상 */
         /*
           1, 8
@@ -62,440 +126,441 @@
 </head>
 <body>
     <div class="paintWrap">
-        <!--물감 색 확인-->
-        <input type="radio" name="paint-btn" id="paintOn1">
-        <input type="radio" name="paint-btn" id="paintOn2">
-        <input type="radio" name="paint-btn" id="paintOn3">
-        <input type="radio" name="paint-btn" id="paintOn4">
-        <input type="radio" name="paint-btn" id="paintOn5">
-        <input type="radio" name="paint-btn" id="paintOn6">
-        <input type="radio" name="paint-btn" id="paintOn7">
-        <input type="radio" name="paint-btn" id="paintOn8">
-        <input type="radio" name="paint-btn" id="paintOn9">
-        <input type="radio" name="paint-btn" id="paintOn10">
-        <input type="radio" name="paint-btn" id="paintOn11">
-        <input type="radio" name="paint-btn" id="paintOn12">
-        <!--물감 같은색 성공-->
-        <input type="radio" id="paintSet1">
-        <input type="radio" id="paintSet2">
-        <input type="radio" id="paintSet3">
-        <input type="radio" id="paintSet4">
-        <input type="radio" id="paintSet5">
-        <input type="radio" id="paintSet6">
-        <input type="radio" id="paintSet7">
-        <input type="radio" id="paintSet8">
-        <input type="radio" id="paintSet9">
-        <input type="radio" id="paintSet10">
-        <input type="radio" id="paintSet11">
-        <input type="radio" id="paintSet12">
-        <!--label1-->
-        <label for="paintOn1" class="item paint1">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color1" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color1" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet1" class="paint-set1"></label>
-        </label><!--item pain1-->
-        <!--label2-->
-        <label for="paintOn2" class="item paint2">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color2" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color2" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet2" class="paint-set2"></label>
-        </label><!--item paint2-->
-        <!--label3-->
-        <label for="paintOn3" class="item paint3">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color3" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color3" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet3" class="paint-set3"></label>
-        </label><!--item paint3-->
-        <!--label4-->
-        <label for="paintOn4" class="item paint4">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color4" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color4" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet4" class="paint-set4"></label>
-        </label><!--item paint4-->
-        <!--label5-->
-        <label for="paintOn5" class="item paint5">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color5" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color5" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet5" class="paint-set5"></label>
-        </label><!--item paint5-->
-        <!--label6-->
-        <label for="paintOn6" class="item paint6">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color6" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color6" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet6" class="paint-set6"></label>
-        </label><!--item paint6-->
-        <!--label7-->
-        <label for="paintOn7" class="item paint7">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color7" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color7" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet7" class="paint-set7"></label>
-        </label><!--item paint7-->
-        <!--label8-->
-        <label for="paintOn8" class="item paint8">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color8" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color8" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet8" class="paint-set8"></label>
-        </label><!--item paint8-->
-        <!--label9-->
-        <label for="paintOn9" class="item paint9">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color9" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color9" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet9" class="paint-set9"></label>
-        </label><!--item paint9-->
-        <!--label10-->
-        <label for="paintOn10" class="item paint10">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color10" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color10" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet10" class="paint-set10"></label>
-        </label><!--item paint10-->
-        <!--label11-->
-        <label for="paintOn11" class="item paint11">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color11" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color11" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet11" class="paint-set11"></label>
-        </label><!--item paint11-->
-        <!--label12-->
-        <label for="paintOn12" class="item paint12">
-          <div class="off">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
-              <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
-              <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
-              <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
-              <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
-              <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
-              <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
-              <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
-              <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
-              <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
-              <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
-              <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <div class="on">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
-              <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
-              <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
-              <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
-              <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
-              <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
-              <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
-              <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
-              <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
-              <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
-              <path class="paint-on color12" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
-              <path class="paint-on color12" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
-            </svg>
-          </div>
-          <label for="paintSet12" class="paint-set12"></label>
-        </label><!--item paint12-->
+      <!--물감 같은색 성공-->
+      <input type="radio" id="paintSet1">
+      <input type="radio" id="paintSet2">
+      <input type="radio" id="paintSet3">
+      <input type="radio" id="paintSet4">
+      <input type="radio" id="paintSet5">
+      <input type="radio" id="paintSet6">
+      <input type="radio" id="paintSet7">
+      <input type="radio" id="paintSet8">
+      <input type="radio" id="paintSet9">
+      <input type="radio" id="paintSet10">
+      <input type="radio" id="paintSet11">
+      <input type="radio" id="paintSet12">
+      <!--물감 색 확인-->
+      <input type="radio" name="paint-btn" id="paintOn1">
+      <input type="radio" name="paint-btn" id="paintOn2">
+      <input type="radio" name="paint-btn" id="paintOn3">
+      <input type="radio" name="paint-btn" id="paintOn4">
+      <input type="radio" name="paint-btn" id="paintOn5">
+      <input type="radio" name="paint-btn" id="paintOn6">
+      <input type="radio" name="paint-btn" id="paintOn7">
+      <input type="radio" name="paint-btn" id="paintOn8">
+      <input type="radio" name="paint-btn" id="paintOn9">
+      <input type="radio" name="paint-btn" id="paintOn10">
+      <input type="radio" name="paint-btn" id="paintOn11">
+      <input type="radio" name="paint-btn" id="paintOn12">
+      <!--label1-->
+      <label for="paintOn1" class="item paint1">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color1" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color1" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet1" class="paint-set1"></label>
+      </label><!--item pain1-->
+      <!--label2-->
+      <label for="paintOn2" class="item paint2">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color2" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color2" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet2" class="paint-set2"></label>
+      </label><!--item paint2-->
+      <!--label3-->
+      <label for="paintOn3" class="item paint3">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color3" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color3" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet3" class="paint-set3"></label>
+      </label><!--item paint3-->
+      <!--label4-->
+      <label for="paintOn4" class="item paint4">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color4" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color4" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet4" class="paint-set4"></label>
+      </label><!--item paint4-->
+      <!--label5-->
+      <label for="paintOn5" class="item paint5">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color5" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color5" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet5" class="paint-set5"></label>
+      </label><!--item paint5-->
+      <!--label6-->
+      <label for="paintOn6" class="item paint6">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color6" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color6" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet6" class="paint-set6"></label>
+      </label><!--item paint6-->
+      <!--label7-->
+      <label for="paintOn7" class="item paint7">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color7" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color7" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet7" class="paint-set7"></label>
+      </label><!--item paint7-->
+      <!--label8-->
+      <label for="paintOn8" class="item paint8">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color8" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color8" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet8" class="paint-set8"></label>
+      </label><!--item paint8-->
+      <!--label9-->
+      <label for="paintOn9" class="item paint9">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color9" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color9" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet9" class="paint-set9"></label>
+      </label><!--item paint9-->
+      <!--label10-->
+      <label for="paintOn10" class="item paint10">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color10" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color10" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet10" class="paint-set10"></label>
+      </label><!--item paint10-->
+      <!--label11-->
+      <label for="paintOn11" class="item paint11">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color11" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color11" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet11" class="paint-set11"></label>
+      </label><!--item paint11-->
+      <!--label12-->
+      <label for="paintOn12" class="item paint12">
+        <div class="off">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.8 199.74">
+            <polygon class="paint-fill paint-off" points="93.55 132.48 156.99 31.95 104.62 2.78 100.12 12.16 98.87 14.76 52.85 110.58 56.66 133.57 71.5 142.04 93.55 132.48"/>
+            <polygon class="paint-fill paint-off" points="65.55 153.33 71.71 142.16 56.54 133.78 51.26 144.34 65.55 153.33"/>
+            <line class="paint-fill paint-off" x1="134.72" y1="30.94" x2="140.17" y2="22.58"/>
+            <line class="paint-fill paint-off" x1="125.39" y1="26.85" x2="130.8" y2="17.36"/>
+            <line class="paint-fill paint-off" x1="117.39" y1="21.24" x2="121.63" y2="13.81"/>
+            <line class="paint-fill paint-off" x1="108.4" y1="15.86" x2="113.49" y2="7.72"/>
+            <line class="paint-fill paint-off" x1="143.96" y1="35.71" x2="148.19" y2="27.05"/>
+            <line class="paint-fill paint-off" x1="151.06" y1="41.34" x2="100.12" y2="12.16"/>
+            <line class="paint-fill paint-off" x1="93.55" y1="132.48" x2="52.85" y2="110.58"/>
+            <circle class="paint-circle" cx="97.95" cy="75.67" r="16.6" transform="translate(-3.62 4.93) rotate(-2.83)"/>
+            <path class="paint-off-color" d="M64.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <div class="on">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.18 201.74">
+            <path class="paint-fill paint-on" d="M95.55,132.48c5.89-14.7,13.91-31.63,24.9-49.55,12.89-21.02,26.49-37.91,38.54-50.99-17.46-9.72-34.91-19.44-52.37-29.16l-4.5,9.38-1.25,2.6c-3.82,14.06-9.44,30.6-17.87,48.43-9.08,19.2-19.1,34.98-28.15,47.39,1.27,7.67,2.54,15.33,3.81,23l14.85,8.47,22.04-9.56Z"/>
+            <polygon class="paint-fill paint-on" points="67.55 153.33 73.71 142.16 58.54 133.78 53.26 144.34 67.55 153.33"/>
+            <line class="paint-fill paint-on" x1="136.72" y1="30.94" x2="142.17" y2="22.58"/>
+            <line class="paint-fill paint-on" x1="127.39" y1="26.85" x2="132.8" y2="17.36"/>
+            <line class="paint-fill paint-on" x1="119.39" y1="21.24" x2="123.63" y2="13.81"/>
+            <line class="paint-fill paint-on" x1="110.4" y1="15.86" x2="115.49" y2="7.72"/>
+            <line class="paint-fill paint-on" x1="145.96" y1="35.71" x2="150.19" y2="27.05"/>
+            <line class="paint-fill paint-on" x1="153.06" y1="41.34" x2="102.12" y2="12.16"/>
+            <line class="paint-fill paint-on" x1="95.55" y1="132.48" x2="54.85" y2="110.58"/>
+            <path class="paint-on color12" d="M95.34,59.72c7.74-3.15,19.7,3.86,20.55,11.34,.24,2.1-.71,4.11-2.6,8.13-3.33,7.08-5.1,10.83-8.74,12.42-7.18,3.13-19.08-3.27-20.55-11.34-.75-4.13,1.49-8.03,3.76-11.98,2.2-3.84,4.12-7.16,7.58-8.57Z"/>
+            <path class="paint-on color12" d="M66.11,155.25c5.71,13.24-14.36,33.03-24.61,39-1.2,.7-9.98,5.82-19.4,5.47-.24,0-.55-.02-.97-.05-2.88-.22-10.12-1.27-15-7.38-.99-1.24-4.85-6.08-4.01-12.66,.86-6.72,6.02-10.51,7.03-11.24,3.57-2.62,7.72-3.29,16.03-4.63,4.06-.66,6.53-.76,10.33-2.28,1.53-.61,4.13-1.67,6.72-3.71,6.15-4.84,5.44-9.79,9.01-11.24,4.29-1.74,12.25,2.62,14.88,8.72Z"/>
+          </svg>
+        </div>
+        <label for="paintSet12" class="paint-set12"></label>
+      </label><!--item paint12-->
+      <span class="result">그림 완성</span>
     </div><!--paintWrap-->
 </body>
 </html>
