@@ -12,8 +12,9 @@
         .paintWrap > label::after {content: ''; display: block; padding-bottom: 100%;}
         .paintWrap .item > div svg {position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);width: 90%;height:90%;}
         .paintWrap .item > .on svg {display: none;}
+        .paintWrap .item > span {position: absolute;top:0;left: 0;width: 100%;height: 100%;visibility: hidden;opacity: 0;transition: opacity .5s .5s;}
         .paintWrap .item > label {display:none;position: absolute;width: 100%;height: 100%;}
-        .result {display: none;position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);color: #fff;font-size: 36px;font-weight: bold;}
+        .result {visibility: hidden;position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);transition: opacity .2s .5s;color: #fff;font-size: 36px;font-weight: bold;opacity: 0;}
         /* 물감 svg */
         /* 물감 클릭 전 */
         .paint-fill {fill: #fff;}
@@ -97,22 +98,22 @@
         #paintSet12:checked ~ .paint6, #paintSet12:checked ~ .paint12 {pointer-events: none;}
 
         /* 색 찾고 배경그림 넣기 */
-        #paintSet1:checked ~ .paint1, #paintSet8:checked ~ .paint1 {background: url('images/43.jpg') no-repeat 0 0 / 400%;}
-        #paintSet2:checked ~ .paint2, #paintSet7:checked ~ .paint2 {background: url('images/43.jpg') no-repeat calc(100% / 3) 0 / 400%;}
-        #paintSet3:checked ~ .paint3, #paintSet9:checked ~ .paint3 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) 0 / 400%;}
-        #paintSet4:checked ~ .paint4, #paintSet10:checked ~ .paint4 {background: url('images/43.jpg') no-repeat 100% 0 / 400%;}
-        #paintSet5:checked ~ .paint5, #paintSet11:checked ~ .paint5 {background: url('images/43.jpg') no-repeat 0 center / 400%;}
-        #paintSet6:checked ~ .paint6, #paintSet12:checked ~ .paint6 {background: url('images/43.jpg') no-repeat calc(100% / 3) center / 400%;}
-        #paintSet7:checked ~ .paint7, #paintSet2:checked ~ .paint7 {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) center / 400%;}
-        #paintSet8:checked ~ .paint8, #paintSet1:checked ~ .paint8 {background: url('images/43.jpg') no-repeat 100% center / 400%;}
-        #paintSet9:checked ~ .paint9, #paintSet3:checked ~ .paint9 {background: url('images/43.jpg') no-repeat 0 bottom/ 400%;}
-        #paintSet10:checked ~ .paint10, #paintSet4:checked ~ .paint10 {background: url('images/43.jpg') no-repeat calc(100% / 3) bottom / 400%;}
-        #paintSet11:checked ~ .paint11, #paintSet5:checked ~ .paint11 {background: url('images/43.jpg') no-repeat calc(100% / 3 *2) bottom/ 400%;}
-        #paintSet12:checked ~ .paint12, #paintSet6:checked ~ .paint12 {background: url('images/43.jpg') no-repeat 100% bottom / 400%;}
+        #paintSet1:checked ~ .paint1 > span, #paintSet8:checked ~ .paint1 > span {background: url('images/43.jpg') no-repeat 0 0 / 400%;visibility: visible;opacity: 1;}
+        #paintSet2:checked ~ .paint2 > span, #paintSet7:checked ~ .paint2 > span {background: url('images/43.jpg') no-repeat calc(100% / 3) 0 / 400%;visibility: visible;opacity: 1;}
+        #paintSet3:checked ~ .paint3 > span, #paintSet9:checked ~ .paint3 > span {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) 0 / 400%;visibility: visible;opacity: 1;}
+        #paintSet4:checked ~ .paint4 > span, #paintSet10:checked ~ .paint4 > span {background: url('images/43.jpg') no-repeat 100% 0 / 400%;visibility: visible;opacity: 1;}
+        #paintSet5:checked ~ .paint5 > span, #paintSet11:checked ~ .paint5 > span {background: url('images/43.jpg') no-repeat 0 center / 400%;visibility: visible;opacity: 1;}
+        #paintSet6:checked ~ .paint6 > span, #paintSet12:checked ~ .paint6 > span {background: url('images/43.jpg') no-repeat calc(100% / 3) center / 400%;visibility: visible;opacity: 1;}
+        #paintSet7:checked ~ .paint7 > span, #paintSet2:checked ~ .paint7 > span {background: url('images/43.jpg') no-repeat calc(100% / 3 * 2) center / 400%;visibility: visible;opacity: 1;}
+        #paintSet8:checked ~ .paint8 > span, #paintSet1:checked ~ .paint8 > span {background: url('images/43.jpg') no-repeat 100% center / 400%;visibility: visible;opacity: 1;}
+        #paintSet9:checked ~ .paint9 > span, #paintSet3:checked ~ .paint9 > span {background: url('images/43.jpg') no-repeat 0 bottom/ 400%;visibility: visible;opacity: 1;}
+        #paintSet10:checked ~ .paint10 > span, #paintSet4:checked ~ .paint10 > span {background: url('images/43.jpg') no-repeat calc(100% / 3) bottom / 400%;visibility: visible;opacity: 1;}
+        #paintSet11:checked ~ .paint11 > span, #paintSet5:checked ~ .paint11 > span {background: url('images/43.jpg') no-repeat calc(100% / 3 *2) bottom/ 400%;visibility: visible;opacity: 1;}
+        #paintSet12:checked ~ .paint12 > span, #paintSet6:checked ~ .paint12 > span {background: url('images/43.jpg') no-repeat 100% bottom / 400%;visibility: visible;opacity: 1;}
 
         /* 결과 */
         input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~
-        input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ .result {display: block;}
+        input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ .result {visibility: visible;opacity: 1;}
         /* 같은 색상 */
         /*
           1, 8
@@ -185,6 +186,7 @@
           </svg>
         </div>
         <label for="paintSet1" class="paint-set1"></label>
+        <span></span>
       </label><!--item pain1-->
       <!--label2-->
       <label for="paintOn2" class="item paint2">
@@ -219,6 +221,7 @@
           </svg>
         </div>
         <label for="paintSet2" class="paint-set2"></label>
+        <span></span>
       </label><!--item paint2-->
       <!--label3-->
       <label for="paintOn3" class="item paint3">
@@ -253,6 +256,7 @@
           </svg>
         </div>
         <label for="paintSet3" class="paint-set3"></label>
+        <span></span>
       </label><!--item paint3-->
       <!--label4-->
       <label for="paintOn4" class="item paint4">
@@ -287,6 +291,7 @@
           </svg>
         </div>
         <label for="paintSet4" class="paint-set4"></label>
+        <span></span>
       </label><!--item paint4-->
       <!--label5-->
       <label for="paintOn5" class="item paint5">
@@ -321,6 +326,7 @@
           </svg>
         </div>
         <label for="paintSet5" class="paint-set5"></label>
+        <span></span>
       </label><!--item paint5-->
       <!--label6-->
       <label for="paintOn6" class="item paint6">
@@ -355,6 +361,7 @@
           </svg>
         </div>
         <label for="paintSet6" class="paint-set6"></label>
+        <span></span>
       </label><!--item paint6-->
       <!--label7-->
       <label for="paintOn7" class="item paint7">
@@ -389,6 +396,7 @@
           </svg>
         </div>
         <label for="paintSet7" class="paint-set7"></label>
+        <span></span>
       </label><!--item paint7-->
       <!--label8-->
       <label for="paintOn8" class="item paint8">
@@ -423,6 +431,7 @@
           </svg>
         </div>
         <label for="paintSet8" class="paint-set8"></label>
+        <span></span>
       </label><!--item paint8-->
       <!--label9-->
       <label for="paintOn9" class="item paint9">
@@ -457,6 +466,7 @@
           </svg>
         </div>
         <label for="paintSet9" class="paint-set9"></label>
+        <span></span>
       </label><!--item paint9-->
       <!--label10-->
       <label for="paintOn10" class="item paint10">
@@ -491,6 +501,7 @@
           </svg>
         </div>
         <label for="paintSet10" class="paint-set10"></label>
+        <span></span>
       </label><!--item paint10-->
       <!--label11-->
       <label for="paintOn11" class="item paint11">
@@ -525,6 +536,7 @@
           </svg>
         </div>
         <label for="paintSet11" class="paint-set11"></label>
+        <span></span>
       </label><!--item paint11-->
       <!--label12-->
       <label for="paintOn12" class="item paint12">
@@ -559,6 +571,7 @@
           </svg>
         </div>
         <label for="paintSet12" class="paint-set12"></label>
+        <span></span>
       </label><!--item paint12-->
       <span class="result">그림 완성</span>
     </div><!--paintWrap-->
