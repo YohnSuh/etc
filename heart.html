@@ -11,14 +11,18 @@
         .heartWrap input {display: none;}
         .heartWrap .heart {position: relative;}
         .heartWrap .heart::after {content: ''; display: block; padding-bottom: 100%;}
-        .heartWrap .heart div {position: absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
+        .heartWrap .heart div {position: absolute;top:50%;left:50%;transform:translate(-50%, -50%);animation: scale .5s infinite alternate;}
         .heartWrap .heart .heart-line {width: 90%;height: 90%;}
-        .heartWrap .heart .circle-line {display:none;width: 70%;height: 70%;}
+        .heartWrap .heart .circle-line {display:none;width: 60%;height: 60%;}
         .heartWrap .heart-svg {fill: none;stroke: red;stroke-miterlimit: 10;stroke-width: 10px;}
         .heartWrap .line-svg {fill: none;stroke: red;stroke-miterlimit: 10;stroke-width: 10px;}
         /* 클릭 이벤트 */
         input[id^="heartBtn"]:checked + label .heart-line {display: none;}
         input[id^="heartBtn"]:checked + label .circle-line {display: block;}
+
+        @keyframes scale {
+            100% {transform: translate(-50%, -50%) scale(.9);}
+        }
     </style>
 </head>
 <body>
