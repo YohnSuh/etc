@@ -9,8 +9,8 @@
         #gameWrap input {display: none;}
         #gameWrap > .con-wrapper {position: relative;width: 100%;}
         #gameWrap > .con-wrapper::after {content: '';display: block;padding-bottom:100%;}
-        #gameWrap > .con-wrapper > .card-box {position: absolute;top:0;left: 0;display:grid; grid-template-columns: repeat(4, 1fr);grid-template-rows: repeat(3, 1fr);width: 100%;height: 100%;background: url('banner3.jpg');}
-        #gameWrap > .con-wrapper > .card-box  > .item {display: block;width: 100%;height: 100%;padding:5%;box-sizing: border-box;perspective: 2000px;}
+        #gameWrap > .con-wrapper > .card-box {position: absolute;top:0;left: 0;display:grid; grid-template-columns: repeat(4, 1fr);grid-template-rows: repeat(3, 1fr);width: 100%;height: 100%;}
+        #gameWrap > .con-wrapper > .card-box  > .item {display: block;width: 100%;height: 100%;box-sizing: border-box;perspective: 2000px;border:1px solid #000;}
         #gameWrap > .con-wrapper > .card-box .card-wrapper {position: relative;width: 100%;height: 100%;transition: 1s, visibility 1s .5s;transform-style:preserve-3d;}
         #gameWrap > .con-wrapper > .card-box .card-wrapper > div {display: flex;justify-content: center;align-items: center;background-color: #fff;padding: 7%;box-sizing: border-box;position: absolute;top:0;left:0;width: 100%;height: 100%;backface-visibility: hidden;border:1px solid #eee;border-radius: 10px;box-shadow: 0 0 5px rgba(0, 0, 0, .1);}
         #gameWrap > .con-wrapper > .card-box .card-wrapper > .back {transform: rotateY(180deg);}
@@ -29,6 +29,7 @@
         #gameWrap > .con-wrapper > .card-box .card9 > .back::after {background: palevioletred;}
         #gameWrap > .con-wrapper > .card-box .card-wrapper > .front::after {content: ''; display: block; width: 100%;height: 100%;border-radius: 7.5px;background-color: lemonchiffon;}
         #gameWrap > .con-wrapper > .card-box .card-wrapper > .hidden {display:none;position: absolute;top:0;left: 0;width: 100%;height: 100%;}
+        .result {display: none;position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);color: red;font-weight: bold;}
 
         #flip1:checked ~ .item .card1, #flip2:checked ~ .item .card2,
         #flip3:checked ~ .item .card3, #flip4:checked ~ .item .card4,
@@ -56,6 +57,14 @@
         #set7:checked ~ .item .card5, #set8:checked ~ .item .card2,
         #set9:checked ~ .item .card6, #set10:checked ~ .item .card1,
         #set11:checked ~ .item .card4, #set12:checked ~ .item .card3 {visibility: hidden;transform: rotateY(180deg) translateY(-20px);}
+
+        input[id^="set"]:checked ~ input[id^="set"]:checked ~ input[id^="set"]:checked ~
+        input[id^="set"]:checked ~ input[id^="set"]:checked ~ input[id^="set"]:checked ~ .result {display: block;}
+
+        #set1:checked ~ label[for="flip1"], #set10:checked ~ label[for="flip1"] {background: url('banner3.jpg') no-repeat 0 0 / 400%;}
+        #set1:checked ~ label[for="flip10"], #set10:checked ~ label[for="flip10"] {background: url('banner3.jpg') no-repeat 100% bottom / 400%;}
+        #set2:checked ~ label[for="flip2"], #set8:checked ~ label[for="flip2"] {background: url('banner3.jpg') no-repeat 100% 0 / 400%;}
+        #set2:checked ~ label[for="flip8"], #set8:checked ~ label[for="flip8"] {background: url('banner3.jpg') no-repeat 300% middle / 400%;}
     </style>
 </head>
 <body>
@@ -182,6 +191,7 @@
                         <label for="set12" class="hidden"></label><!--hidden-->
                     </div><!--card-wrapper-->
                 </label ><!--item-->
+                <span class="result">♥성공♥</span>
             </div><!--card-box-->
         </div><!--con-wrapper-->
     </div><!--gameWrap-->
