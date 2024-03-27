@@ -6,7 +6,7 @@
     <title>paintTest</title>
     <style>
         * {margin: 0; padding: 0; box-sizing: border-box;}
-        .paintWrap {position: relative;display: grid;grid-template-columns: repeat(4,1fr);grid-template-rows: repeat(3, 1fr);width:90%;max-width: 700px;margin: 0 auto;}
+        .paintWrap {position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);display: grid;grid-template-columns: repeat(4,1fr);grid-template-rows: repeat(3, 1fr);width:90%;max-width: 700px;}
         .paintWrap input {display: none;}
         .paintWrap > label {width: 100%;position: relative;}
         .paintWrap > label::after {content: ''; display: block; padding-bottom: 100%;}
@@ -43,7 +43,6 @@
         #paintOn7:checked ~ .paint7 > .on svg, #paintOn8:checked ~ .paint8 > .on svg,
         #paintOn9:checked ~ .paint9 > .on svg, #paintOn10:checked ~ .paint10 > .on svg,
         #paintOn11:checked ~ .paint11 > .on svg, #paintOn12:checked ~ .paint12 > .on svg {display: block;}
-
         
         /* 같은 색 위치에 label 띄우기 */
         #paintOn1:checked ~ .paint8 > label, #paintOn8:checked ~ .paint1 > label,
@@ -114,15 +113,6 @@
         /* 결과 */
         input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~
         input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ input[id^="paintSet"]:checked ~ .result {visibility: visible;opacity: 1;}
-        /* 같은 색상 */
-        /*
-          1, 8
-          2, 7
-          3, 9
-          4, 10
-          5, 11
-          6, 12
-        */
     </style>
 </head>
 <body>
