@@ -5,31 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>하트 찾기</title>
     <style>
-        .heartFindBox {position:fixed;top:50%;left:50%;transform: translate(-50%, -50%);width: 100%;max-width: 700px;max-height: 700px;}
+        @font-face {
+            font-family: 'Cafe24ClassicType-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Cafe24ClassicType-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        .heartFindBox {position:fixed;top:50%;left:50%;transform: translate(-50%, -50%);width: 100%;max-width: 700px;max-height: 700px;font-family: 'Cafe24ClassicType-Regular';color: #fd5392;}
         .heartFindBox input {display: none;}
         .heartFindBox .time-bar {position: relative;height: 20px;box-sizing: border-box;margin: 0 10px;}
-        .heartFindBox .time-bar > span {position: absolute;top:0;left: 0;width: 100%;height: 100%;background: linear-gradient(45deg, #d52e04, rgb(255, 187, 0));border-radius: 20px;animation: time 40s linear;}
+        .heartFindBox .time-bar > span {position: absolute;top:0;left: 0;width: 100%;height: 100%;background: linear-gradient(45deg, #fd5392, #f86f64);border-radius: 20px;animation: time 40s linear forwards;}
         .heartWrap {display: grid;grid-template-columns: repeat(10, 1fr);grid-template-rows: repeat(10, 1fr);}
         .heartWrap .heart {position: relative;display: flex;justify-content: center;align-items: center;}
         .heartWrap .heart::after {content: ''; display: block; padding-bottom: 100%;}
-        .heartWrap .heart div {font-size:auto;}
-        .heartWrap .heart .off {display: none;}
-        .heartWrap .result-text {display: none;position: fixed;top:50%;left:50%;transform: translate(-50%, -50%);background: #fff;width: 200px;height: 100px;padding: 50px;text-align: center;box-shadow: 0 0 5px rgba(0,0,0,.4);border-radius: 10px;}
+        .heartWrap .heart div {position: absolute;width: 100%;height: 100%;}
+        .heartWrap .heart .on {background: url('images/하트선.png') no-repeat center / contain;}
+        .heartWrap .heart .off {display: none;background: url('images/꽝.png') no-repeat center / contain;}
+        .heartWrap .heart .result {display: none;background: url('images/하트필.png') no-repeat center / contain;}
+        .heartWrap .result-text {display: none;position: absolute;top:50%;left:50%;transform: translate(-50%, -50%);z-index:999;background: rgba(255,255,255,.4);padding: 50px;text-align: center;box-shadow: 0 0 10px rgba(0,0,0,.2);border-radius: 10px;}
+        .heartWrap .result-bg {display: none;position: absolute;width: 100%;height: 100%;background: rgba(255,255,255,.4);backdrop-filter: blur(5px);}
+        .heartWrap .time-over {display: flex;justify-content: center;align-items: center;position: absolute;width: 100%;height: 100%;background: rgba(255,255,255,.4);backdrop-filter: blur(5px);animation: fail 1s 40s linear forwards;visibility: hidden;}
         /* 클릭 이벤트 */
-        input[id^="heartBtn"]:checked + label .heart-line {display: none;}
-        input[id^="heartBtn"]:checked + label .circle-line {display: block;}
-        #heartResult:checked ~ .heartWrap .h-item82 .heart-line {display: none;}
-        #heartResult:checked ~ .heartWrap .h-item82 .heart-result {display: block;}
-        #heartResult:checked ~ .time-bar > span {animation-play-state: paused;}
-        #heartResult:checked ~ .heartWrap .result-text {display: block;}
-        @keyframes scale {
-            100% {transform: translate(-50%, -50%) scale(.95);}
-        }
-        @keyframes rotate {
-            100% {transform: translate(-50%, -50%) rotate(360deg);}
-        }
+        input[id^="heartBtn"]:checked + label .on {display: none;}
+        input[id^="heartBtn"]:checked + label .off {display: block;}
+        #heartResult:checked ~ .heartWrap .h-item58 .on {display: none;}
+        #heartResult:checked ~ .heartWrap .h-item58 .result {display: block;z-index: 999;}
+        #heartResult:checked ~ .time-bar > span,
+        #heartResult:checked ~ .heartWrap .time-over {animation-play-state: paused;}
+        #heartResult:checked ~ .heartWrap .result-text,
+        #heartResult:checked ~ .heartWrap .result-bg {display: block;}
         @keyframes time {
             100% {width: 0%;}
+        }
+        @keyframes fail {
+            100% {visibility: visible;}
         }
     </style>
 </head>
@@ -42,506 +51,512 @@
         <div class="heartWrap">
             <input type="radio" name="heart-btn" id="heartBtn1">
             <label for="heartBtn1" class="heart h-item1">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn2">
             <label for="heartBtn2" class="heart h-item2">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn3">
             <label for="heartBtn3" class="heart h-item3">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn4">
             <label for="heartBtn4" class="heart h-item4">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn5">
             <label for="heartBtn5" class="heart h-item5">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn6">
             <label for="heartBtn6" class="heart h-item6">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn7">
             <label for="heartBtn7" class="heart h-item7">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn8">
             <label for="heartBtn8" class="heart h-item8">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn9">
             <label for="heartBtn9" class="heart h-item9">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn10">
             <label for="heartBtn10" class="heart h-item10">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn11">
             <label for="heartBtn11" class="heart h-item11">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn12">
             <label for="heartBtn12" class="heart h-item12">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn13">
             <label for="heartBtn13" class="heart h-item13">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn14">
             <label for="heartBtn14" class="heart h-item14">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn15">
             <label for="heartBtn15" class="heart h-item15">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn16">
             <label for="heartBtn16" class="heart h-item16">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn17">
             <label for="heartBtn17" class="heart h-item17">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn18">
             <label for="heartBtn18" class="heart h-item18">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn19">
             <label for="heartBtn19" class="heart h-item19">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn20">
             <label for="heartBtn20" class="heart h-item20">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn21">
             <label for="heartBtn21" class="heart h-item21">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn22">
             <label for="heartBtn22" class="heart h-item22">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn23">
             <label for="heartBtn23" class="heart h-item23">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn24">
             <label for="heartBtn24" class="heart h-item24">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn25">
             <label for="heartBtn25" class="heart h-item25">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn26">
             <label for="heartBtn26" class="heart h-item26">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn27">
             <label for="heartBtn27" class="heart h-item27">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn28">
             <label for="heartBtn28" class="heart h-item28">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn29">
             <label for="heartBtn29" class="heart h-item29">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn30">
             <label for="heartBtn30" class="heart h-item30">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn31">
             <label for="heartBtn31" class="heart h-item31">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn32">
             <label for="heartBtn32" class="heart h-item32">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn33">
             <label for="heartBtn33" class="heart h-item33">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn34">
             <label for="heartBtn34" class="heart h-item34">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn35">
             <label for="heartBtn35" class="heart h-item35">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn36">
             <label for="heartBtn36" class="heart h-item36">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn37">
             <label for="heartBtn37" class="heart h-item37">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn38">
             <label for="heartBtn38" class="heart h-item38">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn39">
             <label for="heartBtn39" class="heart h-item39">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn40">
             <label for="heartBtn40" class="heart h-item40">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn41">
             <label for="heartBtn41" class="heart h-item41">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn42">
             <label for="heartBtn42" class="heart h-item42">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn43">
             <label for="heartBtn43" class="heart h-item43">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn44">
             <label for="heartBtn44" class="heart h-item44">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn45">
             <label for="heartBtn45" class="heart h-item45">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn46">
             <label for="heartBtn46" class="heart h-item46">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn47">
             <label for="heartBtn47" class="heart h-item47">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn48">
             <label for="heartBtn48" class="heart h-item48">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn49">
             <label for="heartBtn49" class="heart h-item49">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn50">
             <label for="heartBtn50" class="heart h-item50">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn51">
             <label for="heartBtn51" class="heart h-item51">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn52">
             <label for="heartBtn52" class="heart h-item52">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn53">
             <label for="heartBtn53" class="heart h-item53">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn54">
             <label for="heartBtn54" class="heart h-item54">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn55">
             <label for="heartBtn55" class="heart h-item55">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn56">
             <label for="heartBtn56" class="heart h-item56">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn57">
             <label for="heartBtn57" class="heart h-item57">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
-            <input type="radio" name="heart-btn" id="heartBtn58">
-            <label for="heartBtn58" class="heart h-item58">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <!--정답 시작-->
+            <label for="heartResult" class="heart h-item58">
+                <div class="on"></div>
+                <div class="result"></div>
             </label>
+            <!--정답 끝--> 
             <input type="radio" name="heart-btn" id="heartBtn59">
             <label for="heartBtn59" class="heart h-item59">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn60">
             <label for="heartBtn60" class="heart h-item60">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn61">
             <label for="heartBtn61" class="heart h-item61">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn62">
             <label for="heartBtn62" class="heart h-item62">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn63">
             <label for="heartBtn63" class="heart h-item63">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn64">
             <label for="heartBtn64" class="heart h-item64">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn65">
             <label for="heartBtn65" class="heart h-item65">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn66">
             <label for="heartBtn66" class="heart h-item66">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn67">
             <label for="heartBtn67" class="heart h-item67">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn68">
             <label for="heartBtn68" class="heart h-item68">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn69">
             <label for="heartBtn69" class="heart h-item69">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn70">
             <label for="heartBtn70" class="heart h-item70">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn71">
             <label for="heartBtn71" class="heart h-item71">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn72">
             <label for="heartBtn72" class="heart h-item72">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn73">
             <label for="heartBtn73" class="heart h-item73">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn74">
             <label for="heartBtn74" class="heart h-item74">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn75">
             <label for="heartBtn75" class="heart h-item75">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn76">
             <label for="heartBtn76" class="heart h-item76">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn77">
             <label for="heartBtn77" class="heart h-item77">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn78">
             <label for="heartBtn78" class="heart h-item78">
-            <div class="on">♡</div>
-            <div class="off">꽝!</div>
+            <div class="on"></div>
+            <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn79">
             <label for="heartBtn79" class="heart h-item79">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn80">
             <label for="heartBtn80" class="heart h-item80">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn81">
             <label for="heartBtn81" class="heart h-item81">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
-            <!--정답 시작-->
-            <label for="heartResult" class="heart h-item82">
-                <div class="on">♡</div>
-            </label>
+            <input type="radio" name="heart-btn" id="heartBtn82">
+            <label for="heartBtn82" class="heart h-item82">
+                <div class="on"></div>
+                <div class="off"></div>
+            </label>   
             <input type="radio" name="heart-btn" id="heartBtn83">
             <label for="heartBtn83" class="heart h-item83">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn84">
             <label for="heartBtn84" class="heart h-item84">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn85">
             <label for="heartBtn85" class="heart h-item85">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn86">
             <label for="heartBtn86" class="heart h-item86">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn87">
             <label for="heartBtn87" class="heart h-item87">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn88">
             <label for="heartBtn88" class="heart h-item88">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn89">
             <label for="heartBtn89" class="heart h-item89">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn90">
             <label for="heartBtn90" class="heart h-item90">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn91">
             <label for="heartBtn91" class="heart h-item91">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn92">
             <label for="heartBtn92" class="heart h-item92">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn93">
             <label for="heartBtn93" class="heart h-item93">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn94">
             <label for="heartBtn94" class="heart h-item94">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn95">
             <label for="heartBtn95" class="heart h-item95">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn96">
             <label for="heartBtn96" class="heart h-item96">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn97">
             <label for="heartBtn97" class="heart h-item97">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn98">
             <label for="heartBtn98" class="heart h-item98">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn99">
             <label for="heartBtn99" class="heart h-item99">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
             <input type="radio" name="heart-btn" id="heartBtn100">
             <label for="heartBtn100" class="heart h-item100">
-                <div class="on">♡</div>
-                <div class="off">꽝!</div>
+                <div class="on"></div>
+                <div class="off"></div>
             </label>
+            <div class="result-bg"></div>
             <div class="result-text">
                 시간 안에 하트를 찾았군요! 축하합니다.
             </div><!--result-text-->
+            <div class="time-over">
+                하트를 찾지 못 하여 게임에 실패했습니다..
+            </div><!--time-over-->
         </div><!--heartWrap-->
     </div><!--heartFindBox-->
 </body>
