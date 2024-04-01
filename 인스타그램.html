@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인스타그램</title>
+    <style>
+        input[name="cont-tab"], input[type="radio"], input[type="checkbox"] {display: none;}
+
+        .on {display: none;}
+        #followBtn:checked + label > .off {display: none;}
+        #followBtn:checked + label > .on {display: block;}
+    </style>
+</head>
+<body>
+    <input type="radio" name="cont-tab" id="contBtn1">
+    <input type="radio" name="cont-tab" id="contBtn2">
+    <input type="radio" name="cont-tab" id="contBtn3">
+
+    <!--인스타 내용-->
+    <div class="instaCont">
+        <div class="cont-item notice"></div>
+        <div class="cont-item link"></div>
+        <div class="cont-item mypage">
+            <div class="my-top">
+                <a href="#">instagram_id</a>
+            </div><!--my-top-->
+            <div class="my-profile">
+                <div></div>
+                <div>
+                    <input type="checkbox" id="followBtn">
+                    <label for="followBtn"><span class="off">팔로우</span><span class="on">팔로잉</span></label>
+                </div>
+            </div><!--my-profile-->
+        </div><!--cont-item mypage-->
+    </div><!--instaCont-->
+    <div class="bottom-nav">
+        <label for="contBtn1">공지</label>
+        <label for="contBtn2">부속</label>
+        <label for="contBtn3">마이페이지</label>
+    </div><!--bottom-nav-->
+</body>
+</html>
