@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인스타그램</title>
     <style>
+        * {margin:0;padding: 0;}
         input[name="cont-tab"], input[type="radio"], input[type="checkbox"] {display: none;}
-
+        .instaCont {position: relative;}
+        .instaCont * {margin: 0; padding: 0;box-sizing: border-box;color: inherit;}
+        .instaCont .mypage {}
+        .instaCont .mypage .my-top {background: #ffded2;}
+        .instaCont .mypage .my-info-wrapper {display: flex;justify-content: space-around;align-items: center;}
+        .instaCont .mypage .profile-wrapper {padding:15px;}
+        .instaCont .mypage .profile-wrapper > div {width: 70px;padding-bottom: 70px;border-radius: 100%;background: #ffded2;}
+        .instaCont .mypage .info-wrapper {display: flex;justify-content:space-around;align-items:center;width:100%; text-align: center;padding: 15px;}
+        .instaCont .mypage .info-wrapper p {font-size: 14px;}
+        .instaCont .mypage .info-wrapper span {font-size: 10px;}
         .on {display: none;}
         #followBtn:checked + label > .off {display: none;}
         #followBtn:checked + label > .on {display: block;}
@@ -26,7 +36,25 @@
                 <a href="#">instagram_id</a>
             </div><!--my-top-->
             <div class="my-profile">
-                <div></div>
+                <div class="my-info-wrapper">
+                    <div class="profile-wrapper">
+                        <div></div>
+                    </div><!--profile-wrapper-->
+                    <div class="info-wrapper">
+                        <div>
+                            <p>10</p>
+                            <span>게시물</span>
+                        </div>
+                        <label>
+                            <p>10</p>
+                            <span>팔로워</span>
+                        </label>
+                        <label>
+                            <p>10</p>
+                            <span>팔로잉</span>
+                        </label>
+                    </div><!--info-wrapper-->
+                </div><!--my-info-wrapper-->
                 <div>
                     <input type="checkbox" id="followBtn">
                     <label for="followBtn"><span class="off">팔로우</span><span class="on">팔로잉</span></label>
