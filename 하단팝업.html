@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하단 팝업</title>
+    <style>
+        .close-modal {display: none;}
+        .modalWrap > .modal-bg {position: fixed;top:0;left: 0;z-index: 999;width: 100%;height: 100%;background: rgba(0,0,0,.5);}
+        .modalWrap > .modal {position: fixed;bottom:0;left: 0;width: 100%;z-index: 999;padding-bottom: 60%;border-radius:20px;background: pink;}
+        .modalWrap > .modal > label {position: absolute;top:-30px;right: 20px;color: #fff;}
+        #closeModal:checked + .modalWrap {display: none;}
+    </style>
+</head>
+<body>
+    <input type="radio" class="close-modal" id="closeModal">
+    <div class="modalWrap">
+        <div class="modal-bg"></div>
+        <div class="modal">
+            <label for="closeModal">닫기</label>
+        </div>
+    </div><!--modalWrap-->
+</body>
+</html>
