@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메뉴 여러개</title>
+    <style>
+        .topMenu {position: fixed; top:0; left: 0; z-index: 999; width: 100%;}
+        .topMenu input {display: none;}
+        .topMenu > .topMenu-bar {position: relative;height:30px;background: #ccccec;padding-top: 10px;padding-bottom: 10px;}
+        .topMenu label {position: absolute;right:10px;width: 35px;height: 30px;}
+        .topMenu label > span {position: absolute;left:0; width: 100%; height: 6px; background: #fff;border-radius: 6px;transition: .5s;}
+        .topMenu label > span:nth-child(1) {top:0;}
+        .topMenu label > span:nth-child(2) {top:calc(50% - 3px);}
+        .topMenu label > span:nth-child(3) {top:calc(100% - 6px);}
+        .topMenu > .topMenu-con {max-height: 0;text-align: center;overflow: hidden;background: #ccccec;border-radius: 0 0 10px 10px;transition: max-height 1s ease-in;}
+        .topMenu > .topMenu-con a {display: block;text-decoration: none;padding: 12px 0;color: #fff;}
+        .topMenu > .topMenu-con a:hover {background: rgba(0, 0, 0, .05);}
+        #topMenuBtn:checked ~ .topMenu-con {max-height:500px;box-shadow: 0 2px 3px rgba(0, 0, 0, .1);}
+        #topMenuBtn:checked ~ .topMenu-bar label > span:nth-child(1) {top:calc(50% - 3px);transform: rotate(45deg);}
+        #topMenuBtn:checked ~ .topMenu-bar label > span:nth-child(2) {opacity: 0;}
+        #topMenuBtn:checked ~ .topMenu-bar label > span:nth-child(3) {top:calc(50% - 3px);transform: rotate(-45deg);}
+        @media (min-width: 768px) {
+            .topMenu > .topMenu-bar {display: none;}
+            .topMenu > .topMenu-con {display: flex;justify-content: space-between;align-items: center;max-height: fit-content;border-radius: 0;}
+            .topMenu > .topMenu-con a {flex: 1;}
+        }
+    </style>
+</head>
+<body>
+    <div class="topMenu">
+        <input type="checkbox" id="topMenuBtn">
+        <div class="topMenu-bar">
+            <label for="topMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div><!--topMenu-bar-->
+        <div class="topMenu-con">
+            <a href="#">메뉴1</a>
+            <a href="#">메뉴2</a>
+            <a href="#">메뉴3</a>
+            <a href="#">메뉴4</a>
+            <a href="#">메뉴5</a>
+        </div><!--topMenu-con-->
+    </div><!--topMenu-->
+</body>
+</html>
