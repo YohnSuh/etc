@@ -7,8 +7,10 @@
     <style>
         .close-modal {display: none;}
         .modalWrap > .modal-bg {position: fixed;top:0;left: 0;z-index: 999;width: 100%;height: 100%;background: rgba(0,0,0,.5);}
-        .modalWrap > .modal {position: fixed;bottom:0;left: 0;width: 100%;z-index: 999;padding-bottom: 60%;border-radius:20px 20px 0 0;background: pink;}
+        .modalWrap > .modal {position: fixed;bottom:0;left: 0;width: 100%;z-index: 999;padding-bottom: 60%;border-radius:20px 20px 0 0;background: #2da353;}
         .modalWrap > .modal > label {position: absolute;top:-30px;right: 20px;color: #fff;}
+        /* 부모요소에 패딩이 들어가 있으면 flex할 때 한 가운데로 안 감 */
+        .modalWrap > .modal > span {position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);width: 100%;text-align: center;}
         #closeModal:checked + .modalWrap {display: none;}
     </style>
 </head>
@@ -17,6 +19,7 @@
     <div class="modalWrap">
         <div class="modal-bg"></div>
         <div class="modal">
+            <span>왜 안 되지ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
             <label for="closeModal">닫기</label>
         </div>
     </div><!--modalWrap-->
