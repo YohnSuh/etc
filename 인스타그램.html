@@ -5,21 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>인스타그램</title>
     <style>
+        /* :root */
+        :root {
+            --color-main: #fff;
+            --color-white: #fff;
+            --color-black: #000;
+            --color-gray: #eee;
+            --color-sub: #458eff;
+            --color-shadow: rgba(0,0,0,.05);
+        }
         * {margin:0;padding: 0;}
         input[name="cont-tab"], input[type="radio"], input[type="checkbox"] {display: none;}
-        .instaCont {position: relative;}
-        .instaCont * {margin: 0; padding: 0;box-sizing: border-box;color: inherit;}
-        .instaCont .mypage {}
-        .instaCont .mypage .my-top {background: #ffded2;}
-        .instaCont .mypage .my-info-wrapper {display: flex;justify-content: space-around;align-items: center;}
-        .instaCont .mypage .profile-wrapper {padding:15px;}
-        .instaCont .mypage .profile-wrapper > div {width: 70px;padding-bottom: 70px;border-radius: 100%;background: #ffded2;}
-        .instaCont .mypage .info-wrapper {display: flex;justify-content:space-around;align-items:center;width:100%; text-align: center;padding: 15px;}
-        .instaCont .mypage .info-wrapper p {font-size: 14px;}
-        .instaCont .mypage .info-wrapper span {font-size: 10px;}
+        .instaCont {position: relative;background: var(--color-main);}
+        .instaCont * {margin: 0; padding: 0;box-sizing: border-box;color:var(--color-black);}
+        .mypage {padding-bottom: 20px;}
+        .mypage .my-top {padding:20px 0 20px 15px; text-align: left;box-shadow: 0 2px 3px var(--color-shadow);}
+        .mypage .my-top a {font-size: 18px;font-weight: bold;text-decoration: none;}
+        .mypage .my-info-wrapper {display: flex;justify-content: space-around;align-items: center;}
+        .mypage .profile-wrapper {padding:15px;}
+        .mypage .profile-wrapper > div {width: 70px;padding-bottom: 70px;border-radius: 100%;background:url('https://t1.daumcdn.net/cafeattach/1XKJt/8649f570e84f92e58bf2bd9be9ed67ecb76706c3') no-repeat center / cover;border: 1px solid var(--color-gray);}
+        .mypage .info-wrapper {display: flex;justify-content:space-around;align-items:center;width:100%; text-align: center;padding: 15px;}
+        .mypage .info-wrapper p {font-size: 16px;font-weight: 600;}
+        .mypage .info-wrapper .after-follower {display: none;}
+        .mypage .info-wrapper span {font-size: 12px;}
+        .mypage .info-text {margin-left: 15px;margin-bottom: 20px; text-align: left;}
+        .mypage .follow-btn {display:block;padding:10px 0; border-radius:5px;background:var(--color-sub);color: var(--color-white);text-align: center;margin: 0 15px;}
+        .off {color: var(--color-white);}
         .on {display: none;}
-        #followBtn:checked + label > .off {display: none;}
-        #followBtn:checked + label > .on {display: block;}
+        .mypage .followerList {display: none;position: fixed;top:0;left: 0;z-index:999;width: 100%;height: 100%;background: var(--color-main);}
+        .mypage .followerList .list-top {text-align: left;padding: 20px 0;box-shadow: 0 2px 5px var(--color-shadow);}
+        .mypage .followerList .list-top * {font-size: 18px;margin-left: 20px;font-weight: bold;}
+        .mypage .followerList .before-list {display: flex;justify-content: center;align-items: center;height:100%;}
+        .mypage .followerList .after-list {display: none;justify-content: space-between;align-items: center;padding: 20px 0;}
+        .mypage .followerList .after-list .list-pf {display: flex;align-items: center;}
+        .mypage .followerList .after-list .profile {display: inline-block;width: 60px;height: 60px;border: 1px solid var(--color-gray);border-radius: 100%;margin:0 20px;background: url('https://t1.daumcdn.net/cafeattach/1XKJt/0baa3a69e05e250e7b84cc2a8e036e502389c638') no-repeat center / cover;}
+        .mypage .followerList .after-list label {display: inline-block;padding:8px 12px; background: var(--color-gray);border-radius: 5px;margin-right: 20px;font-size: 14px;}
+        /* 하단 메뉴 */
+        .bottom-nav {display: flex;justify-content: space-between;align-items: center;position: fixed;bottom:0;left:0;width: 100%;height:50px;background: var(--color-main);box-shadow: 0 -2px 5px var(--color-shadow);}
+        .bottom-nav label {flex:1; text-align: center;}
+        /* 팔로하기 */
+        #followBtn:checked ~ .my-profile .before-follower {display: none;}
+        #followBtn:checked ~ .my-profile .after-follower {display: block;}
+        #followBtn:checked ~ .my-profile .follow-btn > .off {display: none;}
+        #followBtn:checked ~ .my-profile .follow-btn > .on {display: block;}
+        #followBtn:checked ~ .my-profile .follow-btn {background:var(--color-gray);color: var(--color-black);}
+        /* 팔로잉 중 */
+        #followBtn:checked ~ .my-profile .before-list {display: none;}
+        #followBtn:checked ~ .my-profile .after-list {display: flex;}
+        /* 팔로워 클릭 */
+        #followerOpenBtn:checked ~ .followerList {display: block;}
+        #followBtn:checked ~ .my-profile .follow-btn {background:var(--color-gray);border-color: var(--color-gray);}
     </style>
 </head>
 <body>
@@ -35,6 +70,7 @@
             <div class="my-top">
                 <a href="#">instagram_id</a>
             </div><!--my-top-->
+            <input type="checkbox" id="followBtn">
             <div class="my-profile">
                 <div class="my-info-wrapper">
                     <div class="profile-wrapper">
@@ -42,22 +78,40 @@
                     </div><!--profile-wrapper-->
                     <div class="info-wrapper">
                         <div>
-                            <p>10</p>
+                            <p>9</p>
                             <span>게시물</span>
                         </div>
-                        <label>
-                            <p>10</p>
+                        <input type="checkbox" id="followerOpenBtn">
+                        <label for="followerOpenBtn">
+                            <p class="before-follower">0</p>
+                            <p class="after-follower">1</p>
                             <span>팔로워</span>
                         </label>
-                        <label>
-                            <p>10</p>
+                        <div class="followerList">
+                            <div class="list-top">
+                                <label for="followerOpenBtn">←</label>
+                                <span>instagram_id<span>
+                            </div>
+                            <div class="before-list">팔로워가 없습니다.</div>
+                            <div class="after-list">
+                                <div class="list-pf">
+                                    <span class="profile"></span>
+                                    <p>followid</p>
+                                </div><!--list-pf-->
+                                <label for="followBtn">삭제</label>
+                            </div><!--after-list-->
+                        </div><!--followerList-->
+                        <div>
+                            <p>0</p>
                             <span>팔로잉</span>
-                        </label>
+                        </div>
                     </div><!--info-wrapper-->
                 </div><!--my-info-wrapper-->
+                <div class="info-text">
+                    안녕하세요!<br>Hello World!
+                </div><!--info-text-->
                 <div>
-                    <input type="checkbox" id="followBtn">
-                    <label for="followBtn"><span class="off">팔로우</span><span class="on">팔로잉</span></label>
+                    <label for="followBtn" class="follow-btn"><span class="off">팔로우</span><span class="on">팔로잉</span></label>
                 </div>
             </div><!--my-profile-->
         </div><!--cont-item mypage-->
