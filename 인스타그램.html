@@ -18,43 +18,60 @@
         input[name="cont-tab"], input[type="radio"], input[type="checkbox"] {display: none;}
         .instaCont {position: relative;background: var(--color-main);}
         .instaCont * {margin: 0; padding: 0;box-sizing: border-box;color:var(--color-black);}
-        .mypage {padding-bottom: 20px;}
-        .mypage .my-top {padding:20px 0 20px 15px; text-align: left;box-shadow: 0 2px 3px var(--color-shadow);}
-        .mypage .my-top a {font-size: 18px;font-weight: bold;text-decoration: none;}
-        .mypage .my-info-wrapper {display: flex;justify-content: space-around;align-items: center;}
-        .mypage .profile-wrapper {padding:15px;}
-        .mypage .profile-wrapper > div {width: 70px;padding-bottom: 70px;border-radius: 100%;background:url('https://t1.daumcdn.net/cafeattach/1XKJt/8649f570e84f92e58bf2bd9be9ed67ecb76706c3') no-repeat center / cover;border: 1px solid var(--color-gray);}
-        .mypage .info-wrapper {display: flex;justify-content:space-around;align-items:center;width:100%; text-align: center;padding: 15px;}
-        .mypage .info-wrapper p {font-size: 16px;font-weight: 600;}
-        .mypage .info-wrapper .after-follower {display: none;}
-        .mypage .info-wrapper span {font-size: 12px;}
-        .mypage .info-text {margin-left: 15px;margin-bottom: 20px; text-align: left;}
-        .mypage .follow-btn {display:block;padding:10px 0; border-radius:5px;background:var(--color-sub);color: var(--color-white);text-align: center;margin: 0 15px;}
+        .otherPage {padding-bottom: 20px;}
+        /* other, my 공통 영역 */
+        .page-top {padding:20px 0 20px 15px; text-align: left;box-shadow: 0 2px 3px var(--color-shadow);}
+        .page-top a {font-size: 18px;font-weight: bold;text-decoration: none;}
+        .page-info {display: flex;justify-content: space-around;align-items: center;}
+        .profile-wrapper {padding:15px;}
+        .profile-wrapper > div {width: 70px;padding-bottom: 70px;border-radius: 100%;background:url('https://t1.daumcdn.net/cafeattach/1XKJt/8649f570e84f92e58bf2bd9be9ed67ecb76706c3') no-repeat center / cover;border: 1px solid var(--color-gray);}
+        .info-wrapper {display: flex;justify-content:space-around;align-items:center;width:100%; text-align: center;padding: 15px;}
+        .info-wrapper p {font-size: 16px;font-weight: 600;}
+        .info-wrapper .after-follower, .info-wrapper .after-following {display: none;}
+        .info-wrapper span {font-size: 12px;}
+        .info-text {margin-left: 15px;margin-bottom: 20px; text-align: left;}
+        /* otherPage * */
+        .otherPage .follow-btn {display:block;padding:10px 0; border-radius:5px;background:var(--color-sub);color: var(--color-white);text-align: center;margin: 0 15px;}
         .off {color: var(--color-white);}
         .on {display: none;}
-        .mypage .followerList {display: none;position: fixed;top:0;left: 0;z-index:999;width: 100%;height: 100%;background: var(--color-main);}
-        .mypage .followerList .list-top {text-align: left;padding: 20px 0;box-shadow: 0 2px 5px var(--color-shadow);}
-        .mypage .followerList .list-top * {font-size: 18px;margin-left: 20px;font-weight: bold;}
-        .mypage .followerList .before-list {display: flex;justify-content: center;align-items: center;height:100%;}
-        .mypage .followerList .after-list {display: none;justify-content: space-between;align-items: center;padding: 20px 0;}
-        .mypage .followerList .after-list .list-pf {display: flex;align-items: center;}
-        .mypage .followerList .after-list .profile {display: inline-block;width: 60px;height: 60px;border: 1px solid var(--color-gray);border-radius: 100%;margin:0 20px;background: url('https://t1.daumcdn.net/cafeattach/1XKJt/0baa3a69e05e250e7b84cc2a8e036e502389c638') no-repeat center / cover;}
-        .mypage .followerList .after-list label {display: inline-block;padding:8px 12px; background: var(--color-gray);border-radius: 5px;margin-right: 20px;font-size: 14px;}
+        .otherPage .followerList, .my-page .followingList {display: none;position: fixed;top:0;left: 0;z-index:999;width: 100%;height: 100%;background: var(--color-main);}
+        /* 리스트 공통 */
+        .list-top {text-align: left;padding: 20px 0;box-shadow: 0 2px 5px var(--color-shadow);}
+        .list-top * {font-size: 18px;margin-left: 20px;font-weight: bold;}
+        .before-list {display: flex;justify-content: center;align-items: center;height:100%;}
+        .after-list {display: none;justify-content: space-between;align-items: center;padding: 20px 0;}
+        .after-list .list-pf {display: flex;align-items: center;}
+        .after-list .profile {display: inline-block;width: 60px;height: 60px;border: 1px solid var(--color-gray);border-radius: 100%;margin:0 20px;}
+        .after-list label {display: inline-block;padding:8px 12px; background: var(--color-gray);border-radius: 5px;margin-right: 20px;font-size: 14px;}
+        .otherPage .followerList .after-list .profile {background: url('https://t1.daumcdn.net/cafeattach/1XKJt/0baa3a69e05e250e7b84cc2a8e036e502389c638') no-repeat center / cover;}
+        .my-page {display: none;position: fixed;top: 0;left: 0;z-index:999;width: 100%;height: 100%;background: var(--color-main);overflow-y: scroll;}
+        .my-page .feed {display: grid;grid-template-columns: repeat(3, 1fr);width: 100%;margin-bottom: 50px;}
+        .my-page .feed .pic {position: relative;border: 1px solid var(--color-main);}
+        .my-page .feed .pic::before {content: '';display: block;padding-bottom: 100%;}
+        .my-page .feed .pic img {position: absolute;top:0;left: 0;width: 100%;height: 100%;object-fit: cover;}
         /* 하단 메뉴 */
-        .bottom-nav {display: flex;justify-content: space-between;align-items: center;position: fixed;bottom:0;left:0;width: 100%;height:50px;background: var(--color-main);box-shadow: 0 -2px 5px var(--color-shadow);}
+        .bottom-nav {display: flex;justify-content: space-between;align-items: center;position: fixed;bottom:0;left:0;z-index:9999;width: 100%;height:50px;background: var(--color-main);box-shadow: 0 -2px 5px var(--color-shadow);}
         .bottom-nav label {flex:1; text-align: center;}
         /* 팔로하기 */
-        #followBtn:checked ~ .my-profile .before-follower {display: none;}
-        #followBtn:checked ~ .my-profile .after-follower {display: block;}
-        #followBtn:checked ~ .my-profile .follow-btn > .off {display: none;}
-        #followBtn:checked ~ .my-profile .follow-btn > .on {display: block;}
-        #followBtn:checked ~ .my-profile .follow-btn {background:var(--color-gray);color: var(--color-black);}
+        #followBtn:checked ~ .otherPage .page-profile .before-follower {display: none;}
+        #followBtn:checked ~ .otherPage .page-profile .after-follower {display: block;}
+        #followBtn:checked ~ .otherPage .page-profile .follow-btn > .off {display: none;}
+        #followBtn:checked ~ .otherPage .page-profile .follow-btn > .on {display: block;}
+        #followBtn:checked ~ .otherPage .page-profile .follow-btn {background:var(--color-gray);color: var(--color-black);}
         /* 팔로잉 중 */
-        #followBtn:checked ~ .my-profile .before-list {display: none;}
-        #followBtn:checked ~ .my-profile .after-list {display: flex;}
+        #followBtn:checked ~ .otherPage .page-profile .before-list {display: none;}
+        #followBtn:checked ~ .otherPage .page-profile .after-list {display: flex;}
+        #followBtn:checked ~ .my-page .page-profile .before-list {display: none;}
+        #followBtn:checked ~ .my-page .page-profile .after-list {display: flex;}
+        #followBtn:checked ~ .my-page .page-profile .before-following {display: none;}
+        #followBtn:checked ~ .my-page .page-profile .after-following {display: block;}
         /* 팔로워 클릭 */
         #followerOpenBtn:checked ~ .followerList {display: block;}
-        #followBtn:checked ~ .my-profile .follow-btn {background:var(--color-gray);border-color: var(--color-gray);}
+        #followBtn:checked ~ .otherPage .page-profile .follow-btn {background:var(--color-gray);border-color: var(--color-gray);}
+        /* 팔로잉 클릭 */
+        #followingListBtn:checked ~ .followingList {display: block;}
+        /* 하단 메뉴 클릭 */
+        #contBtn3:checked ~ .instaCont .my-page {display: block;}
     </style>
 </head>
 <body>
@@ -64,15 +81,15 @@
 
     <!--인스타 내용-->
     <div class="instaCont">
+        <input type="checkbox" id="followBtn">
+        <div class="cont-item home"></div>
         <div class="cont-item notice"></div>
-        <div class="cont-item link"></div>
-        <div class="cont-item mypage">
-            <div class="my-top">
+        <div class="cont-item otherPage">
+            <div class="page-top">
                 <a href="#">instagram_id</a>
-            </div><!--my-top-->
-            <input type="checkbox" id="followBtn">
-            <div class="my-profile">
-                <div class="my-info-wrapper">
+            </div><!--page-top-->
+            <div class="page-profile">
+                <div class="page-info">
                     <div class="profile-wrapper">
                         <div></div>
                     </div><!--profile-wrapper-->
@@ -106,19 +123,102 @@
                             <span>팔로잉</span>
                         </div>
                     </div><!--info-wrapper-->
-                </div><!--my-info-wrapper-->
+                </div><!--page-info-->
                 <div class="info-text">
                     안녕하세요!<br>Hello World!
                 </div><!--info-text-->
                 <div>
                     <label for="followBtn" class="follow-btn"><span class="off">팔로우</span><span class="on">팔로잉</span></label>
                 </div>
-            </div><!--my-profile-->
-        </div><!--cont-item mypage-->
+            </div><!--page-profile-->
+        </div><!--cont-item otherPage-->
+        <div class="cont-item my-page">
+            <div class="page-top">
+                <a href="#">followid</a>
+            </div><!--page-top-->
+            <div class="page-profile">
+                <div class="page-info">
+                    <div class="profile-wrapper">
+                        <div></div>
+                    </div><!--profile-wrapper-->
+                    <div class="info-wrapper">
+                        <div>
+                            <p>9</p>
+                            <span>게시물</span>
+                        </div>
+                        <div>
+                            <p>0</p>
+                            <span>팔로워</span>
+                        </div>
+                        <input type="checkbox" id="followingListBtn">
+                        <label for="followingListBtn">
+                            <p class="before-following">0</p>
+                            <p class="after-following">1</p>
+                            <span>팔로잉</span>
+                        </label>
+                        <div class="followingList">
+                            <div class="list-top">
+                                <label for="followingListBtn">←</label>
+                                <span>followid<span>
+                            </div>
+                            <div class="before-list">팔로워가 없습니다.</div>
+                            <div class="after-list">
+                                <div class="list-pf">
+                                    <span class="profile"></span>
+                                    <p>instagram_id</p>
+                                </div><!--list-pf-->
+                                <label for="followBtn">삭제</label>
+                            </div><!--after-list-->
+                        </div><!--followingList-->
+                    </div><!--info-wrapper-->
+                </div><!--page-info-->
+                <div class="info-text">
+                    안녕하새요!<br>Hello Bird!
+                </div><!--info-text-->
+            </div><!--page-profile-->
+            <div class="feed">
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+                <div class="pic">
+                    <img src="images/43.jpg" alt="feed-pic">
+                </div>
+            </div><!--feed-->
+        </div><!--cont-item my-page-->
     </div><!--instaCont-->
     <div class="bottom-nav">
-        <label for="contBtn1">공지</label>
-        <label for="contBtn2">부속</label>
+        <label for="contBtn1">홈</label>
+        <label for="contBtn2">공지</label>
         <label for="contBtn3">마이페이지</label>
     </div><!--bottom-nav-->
 </body>
