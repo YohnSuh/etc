@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mp3</title>
+    <style>
+        .mp3 {width: 200px;border-radius: 20px;background: #e8e9ed;margin: 0 auto;}
+        .mp3 .video-wrap {box-sizing: border-box;padding: 20px;}
+        .mp3 .video-wrap iframe {width: 100%;border-radius: 10px;}
+        .mp3 .ui-wrap {display: flex; justify-content: center;align-items: center;}
+        .mp3 .ui-wrap > div {position:relative;width: 120px;height: 120px;border-radius: 100%;margin-bottom:20px;background: #fff;}
+        .mp3 .ui-wrap > div::after {content: '';position: absolute;top: 50%; left: 50%; transform: translate(-50%, -50%);width: 50%;height:50%;border-radius: 100%;background: #e8e9ed;z-index: 99;}
+        .mp3 .ui-wrap span {position: absolute;font-size: 10px;}
+        .mp3 .ui-wrap .btn1 {top: 15px; left: 50%;transform: translate(-50%, -7.5px);}
+        .mp3 .ui-wrap .btn2 {top: 50%; left: 0;transform: translate(5px, -50%);}
+        .mp3 .ui-wrap .btn3 {top: 50%; right: 0;transform: translate(-5px, -50%);}
+        .mp3 .ui-wrap .btn4 {bottom: 15px; left: 50%;transform: translate(-50%, 5px);}
+    </style>
+</head>
+<body>
+    <div class="mp3">
+        <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/0DFH-ObpWuM?si=Xvm-r7HPr1ZBgZOp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div><!--video-wrap-->
+        <div class="ui-wrap">
+            <div>
+                <span class="btn1">MENU</span>
+                <span class="btn2">◀◀</span>
+                <span class="btn3">▶▶</span>
+                <span class="btn4">PLAY</span>
+            </div>
+        </div><!--ui-wrap-->
+    </div><!--mp3-->
+</body>
+</html>
