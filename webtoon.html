@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webtoon</title>
+    <style>
+        .webtoonWrap {width:500px;margin: 0 auto;}
+        .webtoonWrap * {margin: 0;padding: 0;box-sizing: border-box;}
+        .webtoonWrap input {display: none;}
+        .webtoonWrap .info-wrapper {background: #fff;}
+        .webtoonWrap .info-wrapper .poster {position:relative;padding-bottom:60%;border: 1px solid;}
+        .webtoonWrap .info-wrapper .poster .bg1 {position: absolute;top:0;left: 0;width:100%;height:50%;background: #ff60b0;}
+        .webtoonWrap .info-wrapper .poster .bg2 {position:absolute;bottom:0;left:50%;transform: translateX(-50%);width:80%;height:70%;background: #ffcdde;border-radius: 10px;box-shadow: 0 0 5px rgba(0,0,0,.1);}
+        .webtoonWrap .info-wrapper .poster .img {position: absolute;bottom: 0;left:50%;transform: translateX(-50%);width: 80%;height:90%;background: url('images/뿔소라.png') no-repeat bottom center / contain;}
+        .webtoonWrap .info-wrapper .story {padding: 15px 10px;}
+        .webtoonWrap .info-wrapper .story .title {font-size: 16px;}
+        .webtoonWrap .info-wrapper .story > span {font-size: 12px;}
+        .webtoonWrap .info-wrapper .story .more label {display: block;margin: 10px 0;}
+        .webtoonWrap .info-wrapper .story .more p {font-size:12px;color:#a6a6a6;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient:vertical;overflow: hidden;}
+        .webtoonWrap .info-wrapper .story .more > div {}
+        .webtoonWrap .info-wrapper .story .more > div > span {display: inline-block;padding: 5px;background: #ffcdde;font-size: 12px;border-radius: 3px;margin-bottom: 6px;}
+
+        /* 줄거리 더보기 */
+        #moreBtn:checked + label p {display: block;}
+    </style>
+</head>
+<body>
+    <div class="webtoonWrap">
+        <div class="info-wrapper">
+            <div class="poster">
+                <div class="bg1"></div>
+                <div class="bg2"></div>
+                <div class="img"></div>
+            </div><!--poster-->
+            <div class="story">
+                <p class="title">최고의 뿔소라</p>
+                <span>김인정 | 일요웹툰</span>
+                <div class="more">
+                    <input type="checkbox" id="moreBtn">
+                    <label for="moreBtn">
+                        <p>늘 중간은 하는애. 열심히는 하는 애. 결국 뭐든지 그럭저럭인 웹소설 작가 송소라. 만인의 호감픽, 국민MC 온도혁을 만나 예상치 못한 스타덤에 오르게 되는데…! 그토록 바라던 대박인생이 시작될까? 일과 재능, 사랑에 대한 이야기.</p>
+                    </label>
+                    <div>
+                        <span>#로맨스</span>
+                        <span>#무해한</span>
+                        <span>#다정남</span>
+                        <span>#2030연애</span>
+                        <span>#로맨스코미디</span>
+                        <span>#현실로맨스</span>
+                        <span>#연예계</span>
+                        <span>#성장드라마</span>
+                        <span>#구원서사</span>
+                        <span>#감성드라마</span>
+                    </div>
+                </div><!--more-->
+            </div><!--story-->
+        </div><!--info-wrapper-->
+        <div class="cont-wrapper">
+
+        </div><!--cont-wrapper-->
+    </div><!--webtoonWrap-->
+</body>
+</html>
