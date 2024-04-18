@@ -5,27 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>webtoon</title>
     <style>
-        .webtoonWrap {width:500px;margin: 0 auto;}
+        input[type="radio"], input[type="checkbox"] {display: none;}
+        /* 웹툰 레이아웃 */
+        .webtoonWrap {position: relative;;max-width:500px;margin: 0 auto;box-shadow: 5px 5px 5px rgba(0,0,0,.1);}
         .webtoonWrap * {margin: 0;padding: 0;box-sizing: border-box;}
         .webtoonWrap input {display: none;}
         .webtoonWrap .info-wrapper {background: #fff;}
-        .webtoonWrap .info-wrapper .poster {position:relative;padding-bottom:60%;border: 1px solid;}
+        .webtoonWrap .info-wrapper .poster {position:relative;padding-bottom:60%;}
         .webtoonWrap .info-wrapper .poster .bg1 {position: absolute;top:0;left: 0;width:100%;height:50%;background: #ff60b0;}
         .webtoonWrap .info-wrapper .poster .bg2 {position:absolute;bottom:0;left:50%;transform: translateX(-50%);width:80%;height:70%;background: #ffcdde;border-radius: 10px;box-shadow: 0 0 5px rgba(0,0,0,.1);}
         .webtoonWrap .info-wrapper .poster .img {position: absolute;bottom: 0;left:50%;transform: translateX(-50%);width: 80%;height:90%;background: url('images/뿔소라.png') no-repeat bottom center / contain;}
-        .webtoonWrap .info-wrapper .story {padding: 15px 10px;}
+        .webtoonWrap .info-wrapper .story {padding: 15px 10px;text-align: left;}
         .webtoonWrap .info-wrapper .story .title {font-size: 16px;}
         .webtoonWrap .info-wrapper .story > span {font-size: 12px;}
         .webtoonWrap .info-wrapper .story .more label {display: block;margin: 10px 0;}
-        .webtoonWrap .info-wrapper .story .more p {font-size:12px;color:#a6a6a6;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient:vertical;overflow: hidden;}
-        .webtoonWrap .info-wrapper .story .more > div {}
-        .webtoonWrap .info-wrapper .story .more > div > span {display: inline-block;padding: 5px;background: #ffcdde;font-size: 12px;border-radius: 3px;margin-bottom: 6px;}
+        .webtoonWrap .info-wrapper .story .more label > span {font-size:12px;color:#a6a6a6;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient:vertical;overflow: hidden;}
+        .webtoonWrap .info-wrapper .story .more > div > span {display: inline-block;padding: 5px;background: #efefef;font-size: 12px;border-radius: 3px;margin-bottom: 6px;}
+        .webtoonWrap .c-wrapper {display:flex; justify-content: center;align-items:center;margin: 0 10px;padding: 20px 0; background: #00d564;font-size: 14px;color: #fff;border-radius: 5px;margin-bottom: 20px;}
+        .webtoonWrap .c-wrapper .cookie {font-size: 18px;}
+        .webtoonWrap .c-wrapper .basic, .webtoonWrap .c-wrapper .have {margin-left: 5px;}
+        .webtoonWrap .c-wrapper .have {display: none;}
 
+        /* 회차 */
+        .webtoonWrap .cont-wrapper > label {display: flex;align-items: center;height:56px;border-bottom: 1px solid #eee;padding-left:10px;}
+        .webtoonWrap .cont-wrapper > label .thumb {width:76px;height:45px;border-radius: 3px;border: 1px solid #eee;margin-right: 11px;}
+        .webtoonWrap .cont-wrapper > .ep1 .thumb {background: url('images/썸네일1.jpg') no-repeat center / cover;}
+        .webtoonWrap .cont-wrapper > .ep2 .thumb {background: url('images/썸네일2.jpg') no-repeat center / cover;}
+        .webtoonWrap .cont-wrapper > .ep3 .thumb {background: url('images/썸네일3.jpg') no-repeat center / cover;}
+        .webtoonWrap .cont-wrapper > label .ep-tit span {font-size: 14px;}
+        .webtoonWrap .cont-wrapper > label .ep-tit span::after {content:'click!';display: inline-block;font-size: 12px;margin-left: 5px;color:#ff60b0;font-weight: bold;}
+        .webtoonWrap .cont-wrapper > .zweiEp {display: none;}
+
+        /* 3화 감상 */
+        .webtoonWrap .cookieModal {display:none;position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,.5);}
+        .webtoonWrap .cookieModal > div {position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);width: 80%;}
+        .webtoonWrap .cookieModal > div > div {background: #fff;border-radius: 10px;border: 2px solid #00d564;text-align: center;padding-top: 20px;}
+        .webtoonWrap .cookieModal p {text-align: center;font-size: 14px;margin-bottom: 10px;}
+        .webtoonWrap .cookieModal > div > label {display: block;width: 100%;text-align: center;padding: 7px 0; color: #fff;font-size: 14px;}
+        /* if null */
+        .webtoonWrap .null-cookie-wrapper > div > div {padding-bottom: 20px;}
+        .webtoonWrap .null-cookie-wrapper a {margin: 20px 0;}
+        .webtoonWrap .null-cookie-wrapper a img {width: 50%;}
+        /* if zwei */
+        .webtoonWrap .zwei-cookie-wrapper p span {display: inline-block;border: 2px solid #00d564;padding: 5px;border-radius: 5px;font-weight: bold;color: #00d564;margin: 3px 0;}
+        .webtoonWrap .zwei-cookie-wrapper a {display: block;width:100%;background: #00d564;text-align: center;padding: 7px 0; color: #fff;font-size: 14px;text-decoration: none;margin-top: 20px;}
+
+        .webtoonWrap .footer {background: #ff60b0;padding: 15px;font-size: 10px;text-align: center;color:#ffcdde;}
+
+        /* 첫 화면 보너스 쿠키 이벤트 */
+        .bonusWrap {position: fixed;top:0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,.3);backdrop-filter: blur(10px);text-align: center;}
+        .bonusWrap * {margin:0;padding:0;box-sizing: border-box;}
+        .bonusWrap > div {position: absolute;top:50%;left: 50%;transform: translate(-50%, -50%);padding:10px 30px;background:#fff;border-radius: 20px;box-shadow: 0 3px 5px rgba(0,0,0,.2);width:90%;max-width: 400px;}
+        .bonusWrap .event {display: inline-block; font-size: 12px; font-weight:bold;border-radius:20px;border:1px solid #00d564;background:#fff;padding: 2px 10px 4px;color: #00d564;margin: 10px 0;}
+        .bonusWrap   h4 {font-size: 20px;margin: 10px 0;}
+        .bonusWrap p {font-size: 12px;}
+        .bonusWrap .event-box {display: flex;margin:20px 0;}
+        .bonusWrap .event-box > label {flex:1;margin:0 5px;padding:10px;font-size:14px;border-radius:30px;font-weight:bold;}
+        .bonusWrap .event-box > .no-btn {background: #f0f5f3;}
+        .bonusWrap .event-box > .yes-btn {background:#00d564;color: #fff;}
+
+
+
+        .episode {display:none;position: fixed;top:0;left: 0;width: 100%;height: 100%;overflow-y: scroll;background: #fff;}
+
+
+
+        /* 보너스 쿠키 버튼 */
+        #bonusYesBtn:checked ~ .bonusWrap {display: none;}
+        #bonusYesBtn:checked ~ .webtoonWrap .c-wrapper .basic {display: none;}
+        #bonusYesBtn:checked ~ .webtoonWrap .c-wrapper .have {display: block;}
+        #bonusYesBtn:checked ~ .webtoonWrap .cont-wrapper > .nullEp {display: none;}
+        #bonusYesBtn:checked ~ .webtoonWrap .cont-wrapper > .zweiEp {display: flex;}
+        #bonusNoBtn:checked ~ .bonusWrap {display: none;}
         /* 줄거리 더보기 */
-        #moreBtn:checked + label p {display: block;}
+        #moreBtn:checked + label > span {display: block;}
+        /* 쿠키 0개 */
+        #nullCookieBtn:checked ~ .webtoonWrap .null-cookie-wrapper {display: block;}
+        /* 쿠키 2개 */
+        #zweiCookieBtn:checked ~ .webtoonWrap .zwei-cookie-wrapper {display: block;}
+        /* 에피소드 클릭 */
+        #ep1Btn:checked ~ .ep1Wrap,
+        #ep2Btn:checked ~ .ep2Wrap {display: block;}
     </style>
 </head>
 <body>
+    <!--보너스 버튼-->
+    <input type="radio" name="bonus-btn" id="bonusYesBtn">
+    <input type="radio" name="bonus-btn" id="bonusNoBtn">
+    <!--쿠키 0개 버튼-->
+    <input type="radio" name="webtoon-episode" id="nullCookieBtn">
+    <!--쿠키 2개 버튼-->
+    <input type="radio" name="webtoon-episode" id="zweiCookieBtn">
+    <!--에피소트 버튼-->
+    <input type="radio" name="webtoon-episode" id="ep1Btn">
+    <input type="radio" name="webtoon-episode" id="ep2Btn">
+    <input type="radio" name="webtoon-episode" id="closeBtn">
     <div class="webtoonWrap">
         <div class="info-wrapper">
             <div class="poster">
@@ -39,7 +113,7 @@
                 <div class="more">
                     <input type="checkbox" id="moreBtn">
                     <label for="moreBtn">
-                        <p>늘 중간은 하는애. 열심히는 하는 애. 결국 뭐든지 그럭저럭인 웹소설 작가 송소라. 만인의 호감픽, 국민MC 온도혁을 만나 예상치 못한 스타덤에 오르게 되는데…! 그토록 바라던 대박인생이 시작될까? 일과 재능, 사랑에 대한 이야기.</p>
+                        <span>늘 중간은 하는애. 열심히는 하는 애. 결국 뭐든지 그럭저럭인 웹소설 작가 송소라. 만인의 호감픽, 국민MC 온도혁을 만나 예상치 못한 스타덤에 오르게 되는데…! 그토록 바라던 대박인생이 시작될까? 일과 재능, 사랑에 대한 이야기.</span>
                     </label>
                     <div>
                         <span>#로맨스</span>
@@ -55,10 +129,87 @@
                     </div>
                 </div><!--more-->
             </div><!--story-->
+            <div class="c-wrapper">
+                <span class="cookie">🍪</span>보유쿠키<span class="basic">0개</span><span class="have">2개</span>
+            </div><!--c-wrapper-->
         </div><!--info-wrapper-->
         <div class="cont-wrapper">
-
+            <!--쿠키 0개-->
+            <label for="nullCookieBtn" class="ep3 nullEp">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>3화</span>
+                </div>
+            </label>
+            <!--쿠키2개-->
+            <label for="zweiCookieBtn" class="ep3 zweiEp">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>3화</span>
+                </div>
+            </label>
+            <label for="ep2Btn" class="ep2">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>2화</span>
+                </div>
+            </label>
+            <label for="ep1Btn" class="ep1">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>1화</span>
+                </div>
+            </label>
         </div><!--cont-wrapper-->
+        <!--쿠키 0개 모달창-->
+        <div class="null-cookie-wrapper cookieModal">
+            <div>
+                <div>
+                    <p>쿠키가 2개 부족해요ㅠㅠ<br>다음화가 궁금하다면 클릭👇👇</p>
+                    <a href="https://naver.me/xGiB2ZnQ">
+                        <img src="images/표지.jpg">
+                    </a>
+                </div>
+                <label for="closeBtn">취소</label>
+            </div>
+        </div><!--null-cookie-wrapper-->
+        <!--쿠키 2개 모달창-->
+        <div class="zwei-cookie-wrapper cookieModal">
+            <div>
+                <div>
+                    <p>쿠키 2개를 사용하여<br><span>최고의 뿔소라 3화</span><br>를 감상하시겠습니까?</p>
+                    <a href="https://naver.me/xGiB2ZnQ">🍪쿠키로 감상하기</a>
+                </div>
+                <label for="closeBtn">취소</label>
+            </div>
+        </div><!--zwei-cookie-wrapper-->
+        <div class="footer">
+            출처: 네이버 웹툰 '최고의 뿔소라'
+        </div><!--footer-->
     </div><!--webtoonWrap-->
+
+    <!--쿠키-->
+    <div class="bonusWrap">
+        <div>
+            <div>
+                <span class="event">event</span>
+                <h4>🍪무료 쿠키🍪</h4>
+                <p>무료 쿠키 증정 이벤트에 당첨되었습니다!<br>쿠키를 받으시겠습니까?</p>
+            </div>
+            <div class="event-box">
+                <label for="bonusNoBtn" class="no-btn">싫어요.</label>
+                <label for="bonusYesBtn" class="yes-btn">좋아요!</label>
+            </div><!--event-box-->
+        </div>
+    </div><!--bonusWrap-->
+
+    <!--웹툰 1화-->
+    <div class="episode ep1Wrap">
+        <label for="closeBtn" class="close-btn">X</label>
+    </div><!--episode ep1Wrap-->
+    <!--웹툰 2화-->
+    <div class="episode ep2Wrap">
+        <label for="closeBtn" class="close-btn">X</label>
+    </div><!--episode ep2Wrap-->
 </body>
 </html>
