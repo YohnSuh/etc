@@ -37,15 +37,13 @@
         /* 회차 */
         .webtoonWrap .cont-wrapper > label {display: flex;align-items: center;height:56px;border-bottom: 1px solid #eee;padding-left:10px;background: var(--var-basic);}
         .webtoonWrap .cont-wrapper > label .thumb {width:76px;height:45px;border-radius: 3px;border: 1px solid #eee;margin-right: 11px;}
-        .webtoonWrap .cont-wrapper > .ep1 .thumb {background: url('images/썸네일1.jpg') no-repeat center / cover;}
-        .webtoonWrap .cont-wrapper > .ep2 .thumb {background: url('images/썸네일2.jpg') no-repeat center / cover;}
-        .webtoonWrap .cont-wrapper > .ep3 .thumb {background: url('images/썸네일3.jpg') no-repeat center / cover;}
+        
         .webtoonWrap .cont-wrapper > label .ep-tit span {font-size: 14px;}
         .webtoonWrap .cont-wrapper > label .ep-tit span::after {content:'click!';display: inline-block;font-size: 12px;margin-left: 5px;color:var(--var-main);font-weight: bold;}
         .webtoonWrap .cont-wrapper > .zweiEp {display: none;}
 
         /* 3화 감상 */
-        .webtoonWrap .modal-Wrapper {display:none;position: absolute;top:0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,.5);}
+        .webtoonWrap .modal-Wrapper {display:none;position: absolute;top:0;left: 0;z-index:999;width: 100%;height: 100%;background: rgba(0,0,0,.5);}
         .webtoonWrap .modal-Wrapper > div {position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);width: 80%;}
         .webtoonWrap .modal-Wrapper > div > div {background: var(--var-white);border-radius: 10px;border: 2px solid var(--var-acc);text-align: center;padding-top: 20px;}
         .webtoonWrap .modal-Wrapper p {text-align: center;font-size: 14px;margin-bottom: 10px;}
@@ -78,6 +76,15 @@
         .episode .close-btn {display: block;position: absolute;top:90%;left:50%;transform: translateX(-50%);background: var(--var-acc);margin-top: 10px;padding: 5px 20px;border-radius: 20px;color: var(--var-white);font-weight: bold;}
         .episode p {margin: 0 !important;}
         .episode p img {width: 100%;}
+        /* 에피소드 내 다음화 */
+        .episode .nextEpisode {display: flex;align-items: center;margin: 8px 12px;padding: 8px;background: #eee;border-radius: 5px;}
+        .episode .nextEpisode .thumb {width: 106px;height: 62px;margin-right: 16px;border-radius: 5px;border: 1px solid #eee;}
+        .episode .nextEpisode .ep-tit span {font-size: 16px;}
+
+        /* 썸네일 메인화면 + 회차 안 */
+        .ep1 .thumb {background: url('images/썸네일1.jpg') no-repeat center / cover;}
+        .ep2 .thumb {background: url('images/썸네일2.jpg') no-repeat center / cover;}
+        .ep3 .thumb {background: url('images/썸네일3.jpg') no-repeat center / cover;}
 
         /* 보너스 쿠키 버튼 */
         #bonusYesBtn:checked ~ .bonusWrap {display: none;}
@@ -90,11 +97,17 @@
         #moreBtn:checked + label > span {display: block;}
         /* 쿠키 0개 */
         #nullCookieBtn:checked ~ .webtoonWrap .null-cookie-wrapper {display: block;}
+        
         /* 쿠키 2개 */
         #zweiCookieBtn:checked ~ .webtoonWrap .zwei-cookie-wrapper {display: block;}
+        
         /* 에피소드 클릭 */
         #ep1Btn:checked ~ .ep1Wrap,
         #ep2Btn:checked ~ .ep2Wrap {display: block;}
+
+        /* 다음화 */
+        #bonusNoBtn:checked ~ .episode .nxtEp3_2,
+        #bonusYesBtn:checked ~ .episode .nxtEp3_0 {display: none;}
     </style>
 </head>
 <body>
@@ -199,6 +212,177 @@
         </div><!--footer-->
     </div><!--webtoonWrap-->
 
+    <!--웹툰 1화-->
+    <div class="episode ep1Wrap">
+        <div>
+            <p>
+            	<img src="https://t1.daumcdn.net/cafeattach/1XKJt/e963bfc9efd84557a68029d0096e00c09a16976b">
+            </p>
+            <p>
+            	<img src="https://t1.daumcdn.net/cafeattach/1XKJt/add1d86aaffb5f19d22a597d02e239ec9b02354b">
+            </p>
+            <p>
+            	<img src="https://t1.daumcdn.net/cafeattach/1XKJt/117dd3c21c58f18a4aa965f04dbcaf38309386f2">
+            </p>
+            <span>
+                전업 작가인 주인공 송소라. 소라는 두 번째 작품이 소소하게 흥행하면서 운 좋게 예능 프로그램에 출연하게 돼
+            </span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/074641136c3d48edfdafe05bd37c24b0b9a4fda3">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/e50128db9dd252f95f36e8109acbdf5710a35aea">
+            </p>
+            <span>평소라면 거절했을 건데 이런 저런 이유로 방송에 나가게 된 소라.. </span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/18612c612ff3b2e76a7db061355cfff2ff8ac4c0">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/1b6891aacbd215547a3d60b521c9ae440948b410">
+            </p>
+            <span>긴장한 소라한테 인사하는 누군가... 누굴까...</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/9e48a1d5999e35d2417553e21bec8c56e8cb10a5">
+            </p>
+            <span>누구겠어 남주지<br>남주 이름은 온도혁. 국민MC이자 배우야</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/ea8befa7560b36a39b8645b3943e1563ba4d4874">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/97e7ecb8d173b2cfe62581e89a14f24404711dec">
+            </p>
+            <span>센스 구웃</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/c5e6b4e01373de83bf0b8d4b391643297ac0efeb">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/cbe43421add85154d9df9861910448914cefe5de">
+            </p>
+            <span>아무튼 촬영이 무사히 끝나고</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/d5cc59ff74039abddb9fd14e788c075f8795fbb8">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/afb8ed72b73f56443a7c2989bf847a7500c77a97">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/e553f98386ec300cd9b846307e4ff75ad131a1e0">
+            </p>
+            <span>소라는 출연자들에게 자기가 쓴 책을 나눠주는 중</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/93a88b9f2b6b0f4fd3ac7bc6d5df60b7e6cf3813">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/b9f94e17d29e66706ea662a0a4b701856f60595e">
+            </p>
+            <span>흔한 머글의 반응.jpg</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/40320471723e8e6cde00aec01fa6ab072dfebbd6">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/3d1ce0a78a99aec9ef618e851b200db882504e13">
+            </p>
+            <span>도혁과의 첫 만남은 이렇게 끝나고</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/c358202f224f5651736a099455c2ee30e20159d3">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/879183f30e95ccedcbef4fd44ce90d117a8aeb73">
+            </p>
+            <span>소라는 다른 출연자인 가수 수우에게 책을 주려는데</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/a67d11d3f09bb06c35be4731d2ba5c100f7f556c">
+            </p>
+            <span>아..네... 머쓱....</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/eaed77e12f4f0d2ce8391712f21a8fac7b046bf5">
+            </p>
+            <span>소라 반응=내 반응</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/61e5147f68f1cdaa8e33d255134c04085291a6d8">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/3ec488a39bf46fe97289e17901c4259b802b314d">
+            </p>
+            <span>수우야 저기, 다음 뭐야ㅠ 얘기해주고 가ㅠ</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/7f0519b4136111e14567d7b0e44c87c412a791f9">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/ad6d1022b296d4ddbdef14b6c4dc2d00ae0932ba">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/d66f631d9de96b5106d5dfd60ad61f66ff25ff23">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/6fb27b03f699b374c11a31bea4b9005e12d4a92b">
+            </p>
+            <span>칭찬에 들뜬 소라</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/5ea7e02a28b50399f6ed8757c16eac2ee6e4933e">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/df1c45cc5c487577ed2dbd1316b676de4e58b87a">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/80bfc054261a69685662ee62afff4e17afb4fa48">
+            </p>
+            <span>하지만 구남친(공현성)의 연락에 기분이 나빠진 소라..<br>구남친이랑 연락하는 이유는 동거하다 헤어진 상태라 아직 같이 사는 중ㅠㅠ</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/e5e12ed3c6fc6b4904ab5713bcd419b3a146c0c8">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/d5744706311b64c2b193b4123d43c7bb2e3a4ea8">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/9d570a5ec875d1e72173494eaecaa3de8ff1fd4f">
+            </p>
+            <span>들뜬 것도 잠시..소라는 다시 평범한 일상으로 돌아가는 중..인 줄 알았지만</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/695405442eb26ad5f59b3026219775a55c1000ef">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/faa1396f82802f0a0b43cfe64e787ab1f4599509">
+            </p>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/99a5f21c6edf044302425f9eac4e225518eebdf2">
+            </p>
+            <span>소라의 책에 푹 빠진 온도혁!</span>
+            <p>
+                <img src="https://t1.daumcdn.net/cafeattach/1XKJt/85dc49d168ee6c09f75e567ba321231752c4867d">
+            </p>
+            <span>두 사람의 다음 이야기가 궁금하다면 2화 클릭!</span>
+            <!--다음화-->
+            <label for="ep2Btn" class="nextEpisode nxtEp2 ep2">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>2화</span>
+                </div>
+            </label>
+        </div>
+        <label for="closeBtn" class="close-btn">닫기</label>
+    </div><!--episode ep1Wrap-->
+    <!--웹툰 2화-->
+    <div class="episode ep2Wrap">
+        <div>
+            <!--null일 때 다음화-->
+            <label for="nullCookieBtn" class="nextEpisode nxtEp3_0 ep3">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>3화</span>
+                </div>
+            </label>
+            <!--쿠키 있을 때 다음화-->
+            <label for="zweiCookieBtn" class="nextEpisode nxtEp3_2 ep3">
+                <div class="thumb"></div>
+                <div class="ep-tit">
+                    <span>3화</span>
+                </div>
+            </label>
+        </div>
+        <label for="closeBtn" class="close-btn">닫기</label>
+    </div><!--episode ep2Wrap-->
+
     <!--쿠키-->
     <div class="bonusWrap">
         <div>
@@ -213,27 +397,5 @@
             </div><!--event-box-->
         </div>
     </div><!--bonusWrap-->
-
-    <!--웹툰 1화-->
-    <div class="episode ep1Wrap">
-        <div>
-            <p><img src="images/표지.jpg"></p>
-            <span>내용내용내용</span>
-            <p><img src="images/표지.jpg"></p>
-            <p><img src="images/표지.jpg"></p>
-            <p><img src="images/표지.jpg"></p>
-            <p><img src="images/표지.jpg"></p>
-            <p><img src="images/표지.jpg"></p>
-            <p><img src="images/표지.jpg"></p>
-        </div>
-        <label for="closeBtn" class="close-btn">닫기</label>
-    </div><!--episode ep1Wrap-->
-    <!--웹툰 2화-->
-    <div class="episode ep2Wrap">
-        <div>
-            
-        </div>
-        <label for="closeBtn" class="close-btn">닫기</label>
-    </div><!--episode ep2Wrap-->
 </body>
 </html>
