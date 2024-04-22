@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webtoon2</title>
+    <style>
+        .webtoonWrap {}
+        .webtoonWrap .today-tab-wrapper {display: flex;justify-content: left;align-items: center;}
+        .webtoonWrap .today-cont-wrapper > div {display: grid;grid-template-columns: repeat(3, 1fr);}
+        .webtoonWrap .today-cont-wrapper .item {}
+        .webtoonWrap .today-cont-wrapper .item a {display:block;border: 1px solid;}
+        .webtoonWrap .today-cont-wrapper .item img {width: 100%;}
+    </style>
+</head>
+<body>
+    <div class="webtoonWrap">
+        <div class="today-tab-wrapper">
+            <label for="#">월</label>
+            <label for="#">화</label>
+            <label for="#">수</label>
+            <label for="#">목</label>
+            <label for="#">금</label>
+            <label for="#">토</label>
+            <label for="#">일</label>
+            <label for="#">휴재</label>
+            <label for="#">완결</label>
+        </div><!--today-tab-wrapper-->
+        <div class="today-cont-wrapper">
+            <div class="content-month">
+                <div class="item">
+                    <a href="#">
+                        <div>
+                            <img src="https://image-comic.pstatic.net/webtoon/654774/thumbnail/thumbnail_IMAG21_4048794550434817075.jpg">
+                        </div>
+                        <div class="summary">
+                            <p>소녀의 세계</p>
+                        </div><!--summary-->
+                    </a>
+                </div><!--item-->
+                <div class="item">
+                    <a href="#">
+                        <img src="">
+                    </a>
+                </div><!--item-->
+                <div class="item">
+                    <a href="#">
+                        <img src="">
+                    </a>
+                </div><!--item-->
+                <div class="item">
+                    <a href="#">
+                        <img src="">
+                    </a>
+                </div><!--item-->
+                <div class="item">
+                    <a href="#">
+                        <img src="">
+                    </a>
+                </div><!--item-->
+            </div><!--content-month-->
+            <div class="content-tue">
+
+            </div><!--content-tue-->
+            <div class="content-wed">
+
+            </div><!--content-wed-->
+            <div class="content-thu">
+
+            </div><!--content-thu-->
+            <div class="content-fri">
+
+            </div><!--content-fri-->
+            <div class="content-sat">
+
+            </div><!--content-sat-->
+            <div class="content-sun">
+
+            </div><!--content-sun-->
+        </div><!--today-cont-wrapper-->
+    </div><!--webtoonWrap-->
+</body>
+</html>
