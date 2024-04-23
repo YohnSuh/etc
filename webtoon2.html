@@ -6,28 +6,48 @@
     <title>webtoon2</title>
     <style>
         .webtoonWrap {}
+        .webtoonWrap input {display: none;}
         .webtoonWrap .today-tab-wrapper {display: flex;justify-content: left;align-items: center;}
-        .webtoonWrap .today-cont-wrapper > div {display: grid;grid-template-columns: repeat(3, 1fr);}
+        .webtoonWrap .today-cont-wrapper > div {display: none;grid-template-columns: repeat(3, 1fr);}
         .webtoonWrap .today-cont-wrapper .item {}
         .webtoonWrap .today-cont-wrapper .item a {display:block;border: 1px solid;}
         .webtoonWrap .today-cont-wrapper .item img {width: 100%;}
+
+        #todayBtn1:checked ~ .today-cont-wrapper .content-mon,
+        #todayBtn2:checked ~ .today-cont-wrapper .content-tue,
+        #todayBtn3:checked ~ .today-cont-wrapper .content-wed,
+        #todayBtn4:checked ~ .today-cont-wrapper .content-thu,
+        #todayBtn5:checked ~ .today-cont-wrapper .content-fri,
+        #todayBtn6:checked ~ .today-cont-wrapper .content-sat,
+        #todayBtn7:checked ~ .today-cont-wrapper .content-sun,
+        #todayBtn8:checked ~ .today-cont-wrapper .content-pause,
+        #todayBtn9:checked ~ .today-cont-wrapper .content-end {display:grid;}
     </style>
 </head>
 <body>
     <div class="webtoonWrap">
+        <input type="radio" name="today-tab" id="todayBtn1" checked>
+        <input type="radio" name="today-tab" id="todayBtn2">
+        <input type="radio" name="today-tab" id="todayBtn3">
+        <input type="radio" name="today-tab" id="todayBtn4">
+        <input type="radio" name="today-tab" id="todayBtn5">
+        <input type="radio" name="today-tab" id="todayBtn6">
+        <input type="radio" name="today-tab" id="todayBtn7">
+        <input type="radio" name="today-tab" id="todayBtn8">
+        <input type="radio" name="today-tab" id="todayBtn9">
         <div class="today-tab-wrapper">
-            <label for="#">월</label>
-            <label for="#">화</label>
-            <label for="#">수</label>
-            <label for="#">목</label>
-            <label for="#">금</label>
-            <label for="#">토</label>
-            <label for="#">일</label>
-            <label for="#">휴재</label>
-            <label for="#">완결</label>
+            <label for="todayBtn1">월</label>
+            <label for="todayBtn2">화</label>
+            <label for="todayBtn3">수</label>
+            <label for="todayBtn4">목</label>
+            <label for="todayBtn5">금</label>
+            <label for="todayBtn6">토</label>
+            <label for="todayBtn7">일</label>
+            <label for="todayBtn8">휴재</label>
+            <label for="todayBtn9">완결</label>
         </div><!--today-tab-wrapper-->
         <div class="today-cont-wrapper">
-            <div class="content-month">
+            <div class="content-mon">
                 <div class="item">
                     <a href="#">
                         <div>
@@ -58,7 +78,7 @@
                         <img src="">
                     </a>
                 </div><!--item-->
-            </div><!--content-month-->
+            </div><!--content-mon-->
             <div class="content-tue">
 
             </div><!--content-tue-->
